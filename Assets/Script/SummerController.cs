@@ -73,9 +73,9 @@ public class SummerController : MonoBehaviour
         hayLabel.text = string.Format("Haylage {0}/{1} land", haylageCount, landCount);
         fishLabel.text = string.Format("Сodfish {0}/{1} sea", fishCount, seaCount);*/
 
-        sheepLabel.text = string.Format("Sheeps {0}", sheepCount);
-        hayLabel.text = string.Format("Haylage {0}/{1}", haylageCount, sheepCount * 25);
-        fishLabel.text = string.Format("Сodfish {0}/{1}", fishCount, 25);
+        sheepLabel.text = string.Format("{0}", sheepCount);
+        hayLabel.text = string.Format("{0}/{1}", haylageCount, sheepCount * 25);
+        fishLabel.text = string.Format("{0}/{1}", fishCount, 25);
 
         longhouseButton.gameObject.SetActive(dayCount <= 0);
 
