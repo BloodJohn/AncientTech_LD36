@@ -37,11 +37,11 @@ public class WinterController : MonoBehaviour
 
     public void Awake()
     {
-        woolCount = sheepCount;
         feltedCount = PlayerPrefs.GetInt(feltedCountKey);
         sheepCount = PlayerPrefs.GetInt(SummerController.sheepCountKey);
         haylageCount = PlayerPrefs.GetInt(SummerController.haylageCountKey);
         fishCount = PlayerPrefs.GetInt(SummerController.fishCountKey);
+        woolCount = sheepCount;
         ShowStats();
     }
 
@@ -59,12 +59,20 @@ public class WinterController : MonoBehaviour
         woolButton.gameObject.SetActive(isWinter && woolCount > 0);
         idleButton.gameObject.SetActive(isWinter);
         summerButton.gameObject.SetActive(!isWinter);
+
+        if (sheepCount <= 0)
+        {
+            PlayerPrefs.SetInt(feltedCountKey, feltedCount);
+            PlayerPrefs.SetInt(SummerController.sheepCountKey, sheepCount);
+            SceneManager.LoadScene(2);
+        }
     }
 
     public void SlaughterClick()
     {
         sheepCount--;
         meatCount++;
+
         ShowStats();
     }
 
@@ -94,6 +102,7 @@ public class WinterController : MonoBehaviour
             fishCount--;
         else
         {
+            PlayerPrefs.SetInt(feltedCountKey, feltedCount);
             SceneManager.LoadScene(2);
             return;
         }

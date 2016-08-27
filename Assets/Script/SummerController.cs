@@ -38,7 +38,6 @@ public class SummerController : MonoBehaviour
     public void Awake()
     {
         sheepCount = PlayerPrefs.GetInt(sheepCountKey, 12);
-
         ShowStats();
     }
 
@@ -54,6 +53,12 @@ public class SummerController : MonoBehaviour
         haylageButton.gameObject.SetActive(isSummer && landCount > sheepCount);
         fishingButton.gameObject.SetActive(isSummer && seaCount > 0);
         longhouseButton.gameObject.SetActive(!isSummer);
+
+        if (sheepCount <= 0)
+        {
+            PlayerPrefs.SetInt(SummerController.sheepCountKey, sheepCount);
+            SceneManager.LoadScene(2);
+        }
     }
 
     public void DayClick()
@@ -90,7 +95,7 @@ public class SummerController : MonoBehaviour
 
     public void WinterClick()
     {
-        PlayerPrefs.SetInt(sheepCountKey,sheepCount);
+        PlayerPrefs.SetInt(sheepCountKey, sheepCount);
         PlayerPrefs.SetInt(haylageCountKey, haylageCount);
         PlayerPrefs.SetInt(fishCountKey, fishCount);
         SceneManager.LoadScene(1);
