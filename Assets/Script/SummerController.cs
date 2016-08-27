@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class SummerController : MonoBehaviour
 {
     #region variables
+    public const string sceneName = "Summer";
     public const int peopleCount = 12;
     public const string sheepCountKey = "sheep";
     public const string haylageCountKey = "haylage";
@@ -81,7 +82,7 @@ public class SummerController : MonoBehaviour
         if (sheepCount <= 0)
         {
             PlayerPrefs.SetInt(SummerController.sheepCountKey, sheepCount);
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(DefeatController.sceneName);
         }
     }
 
@@ -128,13 +129,13 @@ public class SummerController : MonoBehaviour
         PlayerPrefs.SetInt(sheepCountKey, sheepCount);
         PlayerPrefs.SetInt(haylageCountKey, haylageCount);
         PlayerPrefs.SetInt(fishCountKey, fishCount);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(WinterController.sceneName);
     }
 
     public void RestartClick()
     {
         PlayerPrefs.DeleteAll();
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SummerController.sceneName);
     }
     #endregion
 }

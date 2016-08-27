@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class DefeatController : MonoBehaviour
 {
+    public const string sceneName = "Defeat";
     public Text feltedLabel;
     public Text noFoodLabel;
     public Text noSheepLabel;
@@ -26,6 +27,6 @@ public class DefeatController : MonoBehaviour
     public void RestartClick()
     {
         PlayerPrefs.DeleteAll();
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SummerController.sceneName);
     }
 }

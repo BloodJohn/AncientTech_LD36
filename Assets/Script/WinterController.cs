@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class WinterController : MonoBehaviour
 {
+    public const string sceneName = "Winter";
     public const string feltedCountKey = "felted";
 
     /// <summary>Сколько дней осталось</summary>
@@ -64,7 +65,7 @@ public class WinterController : MonoBehaviour
         {
             PlayerPrefs.SetInt(feltedCountKey, feltedCount);
             PlayerPrefs.SetInt(SummerController.sheepCountKey, sheepCount);
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(DefeatController.sceneName);
         }
     }
 
@@ -103,7 +104,7 @@ public class WinterController : MonoBehaviour
         else
         {
             PlayerPrefs.SetInt(feltedCountKey, feltedCount);
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(DefeatController.sceneName);
             return;
         }
 
@@ -116,12 +117,12 @@ public class WinterController : MonoBehaviour
         PlayerPrefs.SetInt(SummerController.sheepCountKey, sheepCount);
         PlayerPrefs.SetInt(feltedCountKey, feltedCount);
 
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SummerController.sceneName);
     }
 
     public void RestartClick()
     {
         PlayerPrefs.DeleteAll();
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SummerController.sceneName);
     }
 }
