@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class SummerController : MonoBehaviour
 {
+    #region variables
     public const int peopleCount = 12;
     public const string sheepCountKey = "sheep";
     public const string haylageCountKey = "haylage";
@@ -18,9 +19,10 @@ public class SummerController : MonoBehaviour
     /// <summary>сколько рыбы</summary>
     public Text fishLabel;
 
-    public Button haylageButton;
-    public Button fishingButton;
     public Button longhouseButton;
+
+    public GameObject haylagePrefab;
+    public GameObject fishPrefab;
 
     /// <summary>дней</summary>
     public int dayCount;
@@ -34,25 +36,47 @@ public class SummerController : MonoBehaviour
     public int fishCount;
     /// <summary>рыбы в море</summary>
     public int seaCount;
+    #endregion
 
+    #region unity
     public void Awake()
     {
         sheepCount = PlayerPrefs.GetInt(sheepCountKey, 12);
         ShowStats();
     }
 
+    void Update()
+    {
+        if (dayCount <= 0) return;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
+            if (hit != null)
+            {
+                if (hit.transform.name.Contains("sea")) FishingClick(hit.point);
+                if (hit.transform.name.Contains("land")) HaylageClick(hit.point);
+
+                //Debug.Log("Hit Collider: " + hit.transform.name);
+            }
+        }
+    }
+    #endregion
+
+    #region stuff
     public void ShowStats()
     {
         title.text = string.Format("Summer {0}", dayCount);
-        sheepLabel.text = string.Format("Sheeps {0}/{1} land", sheepCount, landCount);
+        /*sheepLabel.text = string.Format("Sheeps {0}/{1} land", sheepCount, landCount);
         hayLabel.text = string.Format("Haylage {0}/{1} land", haylageCount, landCount);
-        fishLabel.text = string.Format("Сodfish {0}/{1} sea", fishCount, seaCount);
+        fishLabel.text = string.Format("Сodfish {0}/{1} sea", fishCount, seaCount);*/
 
-        var isSummer = dayCount > 0;
+        sheepLabel.text = string.Format("Sheeps {0}", sheepCount);
+        hayLabel.text = string.Format("Haylage {0}/{1}", haylageCount, sheepCount * 25);
+        fishLabel.text = string.Format("Сodfish {0}/{1}", fishCount, 25);
 
-        haylageButton.gameObject.SetActive(isSummer && landCount > sheepCount);
-        fishingButton.gameObject.SetActive(isSummer && seaCount > 0);
-        longhouseButton.gameObject.SetActive(!isSummer);
+        longhouseButton.gameObject.SetActive(dayCount <= 0);
 
         if (sheepCount <= 0)
         {
@@ -68,7 +92,7 @@ public class SummerController : MonoBehaviour
         dayCount--;
     }
 
-    public void HaylageClick()
+    public void HaylageClick(Vector2 point)
     {
         DayClick();
 
@@ -79,9 +103,12 @@ public class SummerController : MonoBehaviour
         landCount -= production;
 
         ShowStats();
+
+        var item = (GameObject)Instantiate(haylagePrefab, transform);
+        item.transform.position = new Vector3(point.x, point.y, 0f);
     }
 
-    public void FishingClick()
+    public void FishingClick(Vector2 point)
     {
         DayClick();
 
@@ -91,6 +118,9 @@ public class SummerController : MonoBehaviour
         fishCount += production;
         seaCount -= production;
         ShowStats();
+
+        var item = (GameObject)Instantiate(fishPrefab, transform);
+        item.transform.position = new Vector3(point.x, point.y, 0f);
     }
 
     public void WinterClick()
@@ -106,4 +136,5 @@ public class SummerController : MonoBehaviour
         PlayerPrefs.DeleteAll();
         SceneManager.LoadScene(0);
     }
+    #endregion
 }
