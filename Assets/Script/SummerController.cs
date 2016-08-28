@@ -53,8 +53,8 @@ public class SummerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
-            if (hit != null && hit.transform != null)
+            var hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
+            if (hit.transform != null)
             {
                 if (hit.transform.name.Contains("sea")) FishingClick(hit.point);
                 if (hit.transform.name.Contains("land")) HaylageClick(hit.point);
