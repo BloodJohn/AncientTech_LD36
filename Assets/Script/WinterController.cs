@@ -9,12 +9,18 @@ public class WinterController : MonoBehaviour
 
     /// <summary>Сколько дней осталось</summary>
     public Text title;
+    /// <summary>Сколько сена</summary>
+    public Text haylageLabel;
     /// <summary>Сколько овец</summary>
     public Text sheepLabel;
-    /// <summary>сколько мяса</summary>
+    /// <summary>сколько шерсти</summary>
     public Text woolLabel;
-    /// <summary>сколько еды (мяса и рыбы)</summary>
-    public Text foodLabel;
+    /// <summary>сколько ткани</summary>
+    public Text feltedLabel;
+    /// <summary>сколько мяса</summary>
+    public Text meatLabel;
+    /// <summary>сколько рыбы</summary>
+    public Text fishLabel;
 
     public Button slaughterButton;
     public Button woolButton;
@@ -49,11 +55,20 @@ public class WinterController : MonoBehaviour
     public void ShowStats()
     {
         title.text = string.Format("Winter {0}", dayCount);
-        sheepLabel.text = string.Format("Sheeps {0} hay {1}", sheepCount, haylageCount);
+        /*sheepLabel.text = string.Format("Sheeps {0} hay {1}", sheepCount, haylageCount);
         woolLabel.text = string.Format("Felted {0}/{1} wool", feltedCount, woolCount);
-        foodLabel.text = string.Format("Meat {0}/{1} codfish", meatCount, fishCount);
+        foodLabel.text = string.Format("Meat {0}/{1} codfish", meatCount, fishCount);*/
 
-        var isWinter = dayCount > 0;
+        haylageLabel.text = string.Format("{0}", haylageCount);
+        sheepLabel.text = string.Format("{0}", sheepCount);
+        woolLabel.text = string.Format("{0}", woolCount);
+        feltedLabel.text = string.Format("{0}", feltedCount);
+        meatLabel.text = string.Format("{0}", meatCount);
+        fishLabel.text = string.Format("{0}", fishCount);
+
+
+
+    var isWinter = dayCount > 0;
 
 
         slaughterButton.gameObject.SetActive(isWinter && sheepCount > 0);
