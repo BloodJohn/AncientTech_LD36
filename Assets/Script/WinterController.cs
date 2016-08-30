@@ -6,6 +6,7 @@ public class WinterController : MonoBehaviour
 {
     public const string sceneName = "Winter";
     public const string feltedCountKey = "felted";
+    public const int dayMax = 24;
 
     /// <summary>Сколько дней осталось</summary>
     public Text title;
@@ -44,6 +45,7 @@ public class WinterController : MonoBehaviour
 
     public void Awake()
     {
+        dayCount = dayMax;
         feltedCount = PlayerPrefs.GetInt(feltedCountKey);
         sheepCount = PlayerPrefs.GetInt(SummerController.sheepCountKey);
         haylageCount = PlayerPrefs.GetInt(SummerController.haylageCountKey);

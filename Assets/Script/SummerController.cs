@@ -1,12 +1,15 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class SummerController : MonoBehaviour
 {
     #region variables
     public const string sceneName = "Summer";
     public const int peopleCount = 12;
+    public const int dayMax = 24;
     public const string sheepCountKey = "sheep";
     public const string haylageCountKey = "haylage";
     public const string fishCountKey = "fish";
@@ -22,6 +25,7 @@ public class SummerController : MonoBehaviour
 
     public Button longhouseButton;
 
+    public GameObject shipPrefab;
     public GameObject haylagePrefab;
     public GameObject fishPrefab;
 
@@ -42,8 +46,12 @@ public class SummerController : MonoBehaviour
     #region unity
     public void Awake()
     {
+        dayCount = dayMax;
         sheepCount = PlayerPrefs.GetInt(sheepCountKey, 12);
         ShowStats();
+
+        Random.InitState(DateTime.Now.Second);
+        for (var i = 0; i < sheepCount; i++) CreateShip();
     }
 
     void Update()
@@ -59,7 +67,7 @@ public class SummerController : MonoBehaviour
                 if (hit.transform.name.Contains("sea")) FishingClick(hit.point);
                 if (hit.transform.name.Contains("land")) HaylageClick(hit.point);
 
-                //Debug.Log("Hit Collider: " + hit.transform.name);
+                Debug.Log("Hit Collider: " + hit.point);
             }
         }
     }
@@ -74,8 +82,8 @@ public class SummerController : MonoBehaviour
         fishLabel.text = string.Format("Сodfish {0}/{1} sea", fishCount, seaCount);*/
 
         sheepLabel.text = string.Format("{0}", sheepCount);
-        hayLabel.text = string.Format("{0}/{1}", haylageCount, sheepCount * 25);
-        fishLabel.text = string.Format("{0}/{1}", fishCount, 25);
+        hayLabel.text = string.Format("{0}/{1}", haylageCount, sheepCount * dayMax);
+        fishLabel.text = string.Format("{0}/{1}", fishCount, dayMax);
 
         longhouseButton.gameObject.SetActive(dayCount <= 0);
 
@@ -136,6 +144,32 @@ public class SummerController : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
         SceneManager.LoadScene(SummerController.sceneName);
+    }
+
+    public void CreateShip()
+    {
+        bool isLand = false;
+        int cnt = 0;
+        var height = Camera.allCameras[0].orthographicSize;
+        var width = height*Camera.allCameras[0].aspect*height;
+
+        while (!isLand && cnt < 100)
+        {
+            cnt++;
+            var point = new Vector2(Random.Range(-width, width), Random.Range(-height, height));
+
+            var hit = Physics2D.Raycast(point, Vector2.zero);
+            if (hit.transform != null)
+            {
+                //if (hit.transform.name.Contains("sea")) FishingClick(hit.point);
+                if (hit.transform.name.Contains("land"))
+                {
+                    var item = (GameObject)Instantiate(shipPrefab, transform);
+                    item.transform.position = new Vector3(point.x, point.y, 0f);
+                    return;
+                }
+            }
+        }
     }
     #endregion
 }
