@@ -8,6 +8,14 @@ public class WinterController : MonoBehaviour
     public const string feltedCountKey = "felted";
     public const int dayMax = 24;
 
+    /// <summary>обучающие стрелки производство ткани</summary>
+    public Image woolHelp;
+    /// <summary>обучающие стрелки съесть рыбу</summary>
+    public Image foodHelp;
+    /// <summary>обучающие стрелки расходы за день</summary>
+    public Image dayHelp;
+    /// <summary>обучающие стрелки расходы за день</summary>
+    public Image shipHelp;
     /// <summary>Сколько дней осталось</summary>
     public Text title;
     /// <summary>Сколько сена</summary>
@@ -25,7 +33,7 @@ public class WinterController : MonoBehaviour
 
     public Button slaughterButton;
     public Button woolButton;
-    public Button idleButton;
+    public Button fishButton;
     public Button summerButton;
 
     /// <summary>дней</summary>
@@ -47,20 +55,22 @@ public class WinterController : MonoBehaviour
     {
         dayCount = dayMax;
         feltedCount = PlayerPrefs.GetInt(feltedCountKey);
+        woolHelp.gameObject.SetActive(feltedCount == 0);
+        foodHelp.gameObject.SetActive(false);
+        dayHelp.gameObject.SetActive(false);
+        shipHelp.gameObject.SetActive(false);
+
         sheepCount = PlayerPrefs.GetInt(SummerController.sheepCountKey);
         haylageCount = PlayerPrefs.GetInt(SummerController.haylageCountKey);
         fishCount = PlayerPrefs.GetInt(SummerController.fishCountKey);
         woolCount = sheepCount;
+
         ShowStats();
     }
 
     public void ShowStats()
     {
         title.text = string.Format("Winter {0}", dayCount);
-        /*sheepLabel.text = string.Format("Sheeps {0} hay {1}", sheepCount, haylageCount);
-        woolLabel.text = string.Format("Felted {0}/{1} wool", feltedCount, woolCount);
-        foodLabel.text = string.Format("Meat {0}/{1} codfish", meatCount, fishCount);*/
-
         haylageLabel.text = string.Format("{0}", haylageCount);
         sheepLabel.text = string.Format("{0}", sheepCount);
         woolLabel.text = string.Format("{0}", woolCount);
@@ -75,7 +85,7 @@ public class WinterController : MonoBehaviour
 
         slaughterButton.gameObject.SetActive(isWinter && sheepCount > 0);
         woolButton.gameObject.SetActive(isWinter && woolCount > 0);
-        idleButton.gameObject.SetActive(isWinter);
+        fishButton.gameObject.SetActive(isWinter);
         summerButton.gameObject.SetActive(!isWinter);
 
         if (sheepCount <= 0)
@@ -92,21 +102,43 @@ public class WinterController : MonoBehaviour
         meatCount++;
 
         ShowStats();
+
+        if (shipHelp.isActiveAndEnabled)
+        {
+            shipHelp.gameObject.SetActive(false);
+        }
     }
 
 
     public void WoolClick()
     {
+        if (woolHelp.isActiveAndEnabled)
+        {
+            woolHelp.gameObject.SetActive(false);
+            foodHelp.gameObject.SetActive(true);
+        }
+
         if (woolCount > 0)
         {
             woolCount--;
             feltedCount++;
         }
 
-        DayClick();
+        NextDay();
     }
 
-    public void DayClick()
+    public void FishClick()
+    {
+        NextDay();
+
+        if (foodHelp.isActiveAndEnabled)
+        {
+            foodHelp.gameObject.SetActive(false);
+            dayHelp.gameObject.SetActive(true);
+        }
+    }
+
+    private void NextDay()
     {
         dayCount--;
         //нет сена - забиваем скот
@@ -123,6 +155,12 @@ public class WinterController : MonoBehaviour
             PlayerPrefs.SetInt(feltedCountKey, feltedCount);
             SceneManager.LoadScene(DefeatController.sceneName);
             return;
+        }
+
+        if (dayHelp.isActiveAndEnabled)
+        {
+            dayHelp.gameObject.SetActive(false);
+            shipHelp.gameObject.SetActive(true);
         }
 
         ShowStats();

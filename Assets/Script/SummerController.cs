@@ -14,6 +14,10 @@ public class SummerController : MonoBehaviour
     public const string haylageCountKey = "haylage";
     public const string fishCountKey = "fish";
 
+    /// <summary>обучающие стрелки ловить рыбу</summary>
+    public Image helpFish;
+    /// <summary>обучающие стрелки косить сено</summary>
+    public Image helpHay;
     /// <summary>Сколько дней осталось</summary>
     public Text title;
     /// <summary>Сколько овец</summary>
@@ -47,6 +51,10 @@ public class SummerController : MonoBehaviour
     public void Awake()
     {
         dayCount = dayMax;
+        var feltedCount = PlayerPrefs.GetInt(WinterController.feltedCountKey);
+        helpFish.gameObject.SetActive(feltedCount == 0);
+        helpHay.gameObject.SetActive(feltedCount == 0);
+
         sheepCount = PlayerPrefs.GetInt(sheepCountKey, 12);
         ShowStats();
 
@@ -67,7 +75,7 @@ public class SummerController : MonoBehaviour
                 if (hit.transform.name.Contains("sea")) FishingClick(hit.point);
                 if (hit.transform.name.Contains("land")) HaylageClick(hit.point);
 
-                Debug.Log("Hit Collider: " + hit.point);
+                //Debug.Log("Hit Collider: " + hit.point);
             }
         }
     }
@@ -103,6 +111,7 @@ public class SummerController : MonoBehaviour
 
     public void HaylageClick(Vector2 point)
     {
+        helpHay.gameObject.SetActive(false);
         DayClick();
 
         var production = peopleCount * 2;
@@ -119,6 +128,7 @@ public class SummerController : MonoBehaviour
 
     public void FishingClick(Vector2 point)
     {
+        helpFish.gameObject.SetActive(false);
         DayClick();
 
         var production = seaCount / 1000;
@@ -151,7 +161,7 @@ public class SummerController : MonoBehaviour
         bool isLand = false;
         int cnt = 0;
         var height = Camera.allCameras[0].orthographicSize;
-        var width = height*Camera.allCameras[0].aspect*height;
+        var width = height * Camera.allCameras[0].aspect * height;
 
         while (!isLand && cnt < 100)
         {
