@@ -9,11 +9,28 @@ public class SummerController : MonoBehaviour
     #region variables
     public const string sceneName = "Summer";
     public const int peopleCount = 12;
+    public const int sheepStartCount = 12;
     public const int dayMax = 24;
     public const string sheepCountKey = "sheep";
     public const string haylageCountKey = "haylage";
     public const string fishCountKey = "fish";
 
+    /// <summary>лугов</summary>
+    public int landCount;
+    /// <summary>рыбы в море</summary>
+    public int seaCount;
+
+    /// <summary>дней</summary>
+    private int dayCount;
+    /// <summary>овец</summary>
+    private int sheepCount;
+    /// <summary>сена</summary>
+    private int haylageCount;
+    /// <summary>трески</summary>
+    private int fishCount;
+    #endregion
+
+    #region UI variables
     /// <summary>обучающие стрелки ловить рыбу</summary>
     public Image helpFish;
     /// <summary>обучающие стрелки косить сено</summary>
@@ -32,19 +49,6 @@ public class SummerController : MonoBehaviour
     public GameObject shipPrefab;
     public GameObject haylagePrefab;
     public GameObject fishPrefab;
-
-    /// <summary>дней</summary>
-    public int dayCount;
-    /// <summary>овец</summary>
-    public int sheepCount;
-    /// <summary>лугов</summary>
-    public int landCount;
-    /// <summary>сена</summary>
-    public int haylageCount;
-    /// <summary>трески</summary>
-    public int fishCount;
-    /// <summary>рыбы в море</summary>
-    public int seaCount;
     #endregion
 
     #region unity
@@ -52,10 +56,23 @@ public class SummerController : MonoBehaviour
     {
         dayCount = dayMax;
         var feltedCount = PlayerPrefs.GetInt(WinterController.feltedCountKey);
+        var winterCount = PlayerPrefs.GetInt(WinterController.winterCountKey, 0);
+        //после первой зимовки рыбы в море бывает разное количество (от 1 до 3 рыбин за улов)
+        if (winterCount > 0)
+            seaCount = Random.Range(100, 400);
+        else
+            seaCount = 200;
+
+        //короткое лето после долгой зимы
+        var longWinterCount = PlayerPrefs.GetInt(WinterController.longWinterKey, 0);
+        if (longWinterCount <= 0) dayCount--;
+
+        Debug.LogFormat("seaCount {0} longWinter {1}", seaCount, longWinterCount);
+
         helpFish.gameObject.SetActive(feltedCount == 0);
         helpHay.gameObject.SetActive(feltedCount == 0);
 
-        sheepCount = PlayerPrefs.GetInt(sheepCountKey, 12);
+        sheepCount = PlayerPrefs.GetInt(sheepCountKey, sheepStartCount);
         ShowStats();
 
         Random.InitState(DateTime.Now.Second);
@@ -74,8 +91,6 @@ public class SummerController : MonoBehaviour
             {
                 if (hit.transform.name.Contains("sea")) FishingClick(hit.point);
                 if (hit.transform.name.Contains("land")) HaylageClick(hit.point);
-
-                //Debug.Log("Hit Collider: " + hit.point);
             }
         }
     }
@@ -85,10 +100,6 @@ public class SummerController : MonoBehaviour
     public void ShowStats()
     {
         title.text = string.Format("Summer {0}", dayCount);
-        /*sheepLabel.text = string.Format("Sheeps {0}/{1} land", sheepCount, landCount);
-        hayLabel.text = string.Format("Haylage {0}/{1} land", haylageCount, landCount);
-        fishLabel.text = string.Format("Сodfish {0}/{1} sea", fishCount, seaCount);*/
-
         sheepLabel.text = string.Format("{0}", sheepCount);
         hayLabel.text = string.Format("{0}/{1}", haylageCount, sheepCount * dayMax);
         fishLabel.text = string.Format("{0}/{1}", fishCount, dayMax);
@@ -131,8 +142,8 @@ public class SummerController : MonoBehaviour
         helpFish.gameObject.SetActive(false);
         DayClick();
 
-        var production = seaCount / 1000;
-        if (production > seaCount) production = seaCount;
+        var production = Mathf.RoundToInt((float)seaCount / 100);
+        if (production <= 0) production = 1;
 
         fishCount += production;
         seaCount -= production;
@@ -171,7 +182,6 @@ public class SummerController : MonoBehaviour
             var hit = Physics2D.Raycast(point, Vector2.zero);
             if (hit.transform != null)
             {
-                //if (hit.transform.name.Contains("sea")) FishingClick(hit.point);
                 if (hit.transform.name.Contains("land"))
                 {
                     var item = (GameObject)Instantiate(shipPrefab, transform);

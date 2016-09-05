@@ -4,10 +4,30 @@ using UnityEngine.UI;
 
 public class WinterController : MonoBehaviour
 {
+    #region variables
     public const string sceneName = "Winter";
     public const string feltedCountKey = "felted";
+    public const string longWinterKey = "longWinter";
+    public const string winterCountKey = "winterCount";
     public const int dayMax = 24;
+    
+    /// <summary>дней</summary>
+    private int dayCount;
+    /// <summary>овец</summary>
+    private int sheepCount;
+    /// <summary>сена</summary>
+    private int haylageCount;
+    /// <summary>шерсть</summary>
+    private int woolCount;
+    /// <summary>ткань</summary>
+    private int feltedCount;
+    /// <summary>мяса</summary>
+    private int meatCount;
+    /// <summary>трески</summary>
+    private int fishCount;
+    #endregion
 
+    #region UI variables
     /// <summary>обучающие стрелки производство ткани</summary>
     public Image woolHelp;
     /// <summary>обучающие стрелки съесть рыбу</summary>
@@ -35,26 +55,26 @@ public class WinterController : MonoBehaviour
     public Button woolButton;
     public Button fishButton;
     public Button summerButton;
-
-    /// <summary>дней</summary>
-    public int dayCount;
-    /// <summary>овец</summary>
-    public int sheepCount;
-    /// <summary>сена</summary>
-    public int haylageCount;
-    /// <summary>шерсть</summary>
-    public int woolCount;
-    /// <summary>ткань</summary>
-    public int feltedCount;
-    /// <summary>мяса</summary>
-    public int meatCount;
-    /// <summary>трески</summary>
-    public int fishCount;
+    #endregion
 
     public void Awake()
     {
         dayCount = dayMax;
         feltedCount = PlayerPrefs.GetInt(feltedCountKey);
+        var winterCount = PlayerPrefs.GetInt(winterCountKey, 0);
+        winterCount++;
+        PlayerPrefs.SetInt(winterCountKey,winterCount);
+
+        var longWinterCount = PlayerPrefs.GetInt(longWinterKey, 0);
+        longWinterCount++;
+        if (longWinterCount > 5)
+        {
+            dayCount++;
+            longWinterCount = 0;
+        }
+        PlayerPrefs.SetInt(longWinterKey, longWinterCount);
+
+
         woolHelp.gameObject.SetActive(feltedCount == 0);
         foodHelp.gameObject.SetActive(false);
         dayHelp.gameObject.SetActive(false);
@@ -109,6 +129,33 @@ public class WinterController : MonoBehaviour
         }
     }
 
+    private void NextDay()
+    {
+        dayCount--;
+        //нет сена - забиваем скот
+        while (haylageCount < sheepCount && sheepCount > 0) SlaughterClick();
+        haylageCount -= sheepCount;
+
+        //кормим людей
+        if (meatCount > 0)
+            meatCount--;
+        else if (fishCount > 0)
+            fishCount--;
+        else
+        {
+            PlayerPrefs.SetInt(feltedCountKey, feltedCount);
+            SceneManager.LoadScene(DefeatController.sceneName);
+            return;
+        }
+
+        if (dayHelp.isActiveAndEnabled)
+        {
+            dayHelp.gameObject.SetActive(false);
+            shipHelp.gameObject.SetActive(true);
+        }
+
+        ShowStats();
+    }
 
     public void WoolClick()
     {
@@ -138,39 +185,13 @@ public class WinterController : MonoBehaviour
         }
     }
 
-    private void NextDay()
-    {
-        dayCount--;
-        //нет сена - забиваем скот
-        while (haylageCount < sheepCount && sheepCount > 0) SlaughterClick();
-        haylageCount -= sheepCount;
-
-        //кормим людей
-        if (meatCount > 0)
-            meatCount--;
-        else if (fishCount > 0)
-            fishCount--;
-        else
-        {
-            PlayerPrefs.SetInt(feltedCountKey, feltedCount);
-            SceneManager.LoadScene(DefeatController.sceneName);
-            return;
-        }
-
-        if (dayHelp.isActiveAndEnabled)
-        {
-            dayHelp.gameObject.SetActive(false);
-            shipHelp.gameObject.SetActive(true);
-        }
-
-        ShowStats();
-    }
-
     public void SummerClick()
     {
         if (sheepCount > 1) sheepCount += sheepCount / 2;
         PlayerPrefs.SetInt(SummerController.sheepCountKey, sheepCount);
         PlayerPrefs.SetInt(feltedCountKey, feltedCount);
+
+        var winterCount = PlayerPrefs.GetInt(winterCountKey, 1);
 
         SceneManager.LoadScene(SummerController.sceneName);
     }
