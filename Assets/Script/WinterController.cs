@@ -193,7 +193,7 @@ public class WinterController : MonoBehaviour
 
         var winterCount = PlayerPrefs.GetInt(winterCountKey, 1);
 
-        SceneManager.LoadScene(SummerController.sceneName);
+        SceneManager.LoadScene(SpringController.sceneName);
     }
 
     public void RestartClick()

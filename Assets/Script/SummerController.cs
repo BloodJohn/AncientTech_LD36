@@ -158,7 +158,7 @@ public class SummerController : MonoBehaviour
         PlayerPrefs.SetInt(sheepCountKey, sheepCount);
         PlayerPrefs.SetInt(haylageCountKey, haylageCount);
         PlayerPrefs.SetInt(fishCountKey, fishCount);
-        SceneManager.LoadScene(WinterController.sceneName);
+        SceneManager.LoadScene(AutumnController.sceneName);
     }
 
     public void RestartClick()
