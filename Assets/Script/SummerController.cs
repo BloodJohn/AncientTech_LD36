@@ -113,14 +113,7 @@ public class SummerController : MonoBehaviour
         }
     }
 
-    public void DayClick()
-    {
-        if (landCount < sheepCount) sheepCount = landCount;
-        landCount -= sheepCount;
-        dayCount--;
-    }
-
-    public void HaylageClick(Vector2 point)
+    private void HaylageClick(Vector2 point)
     {
         helpHay.gameObject.SetActive(false);
         DayClick();
@@ -137,7 +130,7 @@ public class SummerController : MonoBehaviour
         item.transform.position = new Vector3(point.x, point.y, 0f);
     }
 
-    public void FishingClick(Vector2 point)
+    private void FishingClick(Vector2 point)
     {
         helpFish.gameObject.SetActive(false);
         DayClick();
@@ -151,6 +144,13 @@ public class SummerController : MonoBehaviour
 
         var item = (GameObject)Instantiate(fishPrefab, transform);
         item.transform.position = new Vector3(point.x, point.y, 0f);
+    }
+
+    private void DayClick()
+    {
+        if (landCount < sheepCount) sheepCount = landCount;
+        landCount -= sheepCount;
+        dayCount--;
     }
 
     public void WinterClick()
@@ -167,7 +167,7 @@ public class SummerController : MonoBehaviour
         SceneManager.LoadScene(SummerController.sceneName);
     }
 
-    public void CreateShip()
+    private void CreateShip()
     {
         bool isLand = false;
         int cnt = 0;

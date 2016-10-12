@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -28,14 +29,11 @@ public class WinterController : MonoBehaviour
     #endregion
 
     #region UI variables
-    /// <summary>обучающие стрелки производство ткани</summary>
-    public Image woolHelp;
     /// <summary>обучающие стрелки съесть рыбу</summary>
     public Image foodHelp;
     /// <summary>обучающие стрелки расходы за день</summary>
-    public Image dayHelp;
-    /// <summary>обучающие стрелки расходы за день</summary>
     public Image shipHelp;
+
     /// <summary>Сколько дней осталось</summary>
     public Text title;
     /// <summary>Сколько сена</summary>
@@ -51,12 +49,17 @@ public class WinterController : MonoBehaviour
     /// <summary>сколько рыбы</summary>
     public Text fishLabel;
 
-    public Button slaughterButton;
-    public Button woolButton;
-    public Button fishButton;
+    public Image slaughterButton;
+    public Image woolButton;
+    public Image fishButton;
     public Button summerButton;
+
+    public GameObject meatPrefab;
+    public GameObject feltedPrefab;
+    public GameObject fishPrefab;
     #endregion
 
+    #region Unity
     public void Awake()
     {
         dayCount = dayMax;
@@ -74,21 +77,95 @@ public class WinterController : MonoBehaviour
         }
         PlayerPrefs.SetInt(longWinterKey, longWinterCount);
 
-
-        woolHelp.gameObject.SetActive(feltedCount == 0);
-        foodHelp.gameObject.SetActive(false);
-        dayHelp.gameObject.SetActive(false);
-        shipHelp.gameObject.SetActive(false);
+        foodHelp.gameObject.SetActive(feltedCount == 0);
+        shipHelp.gameObject.SetActive(feltedCount == 0);
 
         sheepCount = PlayerPrefs.GetInt(SummerController.sheepCountKey);
         haylageCount = PlayerPrefs.GetInt(SummerController.haylageCountKey);
         fishCount = PlayerPrefs.GetInt(SummerController.fishCountKey);
         woolCount = sheepCount;
-
         ShowStats();
     }
 
-    public void ShowStats()
+    void Update()
+    {
+        if (dayCount <= 0) return;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            var hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
+            if (hit.transform != null)
+            {
+                if (hit.transform.name.Contains("sheep")) SheepClick(hit.point);
+                if (hit.transform.name.Contains("day")) DayClick(hit.point);
+            }
+        }
+    }
+
+    #endregion
+
+    private void SheepClick(Vector2 point)
+    {
+        if (sheepCount<=0) return;
+
+        sheepCount--;
+        meatCount++;
+
+        ShowStats();
+
+        var item = (GameObject)Instantiate(meatPrefab, transform);
+        item.transform.position = new Vector3(point.x, point.y, 0f);
+
+        shipHelp.gameObject.SetActive(false);
+    }
+
+    private void DayClick(Vector2 point)
+    {
+        var dayPrefab = fishPrefab;
+
+        dayCount--;
+        //нет сена - забиваем скот
+        while (haylageCount < sheepCount && sheepCount > 0)
+        {
+            sheepCount--;
+            meatCount++;
+        }
+        haylageCount -= sheepCount;
+
+        //кормим людей
+        if (meatCount > 0)
+        {
+            meatCount--;
+            dayPrefab = meatPrefab;
+        }
+        else if (fishCount > 0)
+            fishCount--;
+        else
+        {
+            //нет еды (мясо или рыба)
+            PlayerPrefs.SetInt(feltedCountKey, feltedCount);
+            SceneManager.LoadScene(DefeatController.sceneName);
+            return;
+        }
+
+        //обрабатываем шерсть
+        if (woolCount > 0)
+        {
+            woolCount--;
+            feltedCount++;
+            dayPrefab = feltedPrefab;
+        }
+
+        ShowStats();
+
+        var item = (GameObject)Instantiate(dayPrefab, transform);
+        item.transform.position = new Vector3(point.x, point.y, 0f);
+
+        foodHelp.gameObject.SetActive(false);
+    }
+
+    private void ShowStats()
     {
         title.text = string.Format("Winter {0}", dayCount);
         haylageLabel.text = string.Format("{0}", haylageCount);
@@ -100,7 +177,7 @@ public class WinterController : MonoBehaviour
 
 
 
-    var isWinter = dayCount > 0;
+        var isWinter = dayCount > 0;
 
 
         slaughterButton.gameObject.SetActive(isWinter && sheepCount > 0);
@@ -110,80 +187,14 @@ public class WinterController : MonoBehaviour
 
         if (sheepCount <= 0)
         {
+            //все овцы подохли
             PlayerPrefs.SetInt(feltedCountKey, feltedCount);
             PlayerPrefs.SetInt(SummerController.sheepCountKey, sheepCount);
             SceneManager.LoadScene(DefeatController.sceneName);
         }
     }
 
-    public void SlaughterClick()
-    {
-        sheepCount--;
-        meatCount++;
-
-        ShowStats();
-
-        if (shipHelp.isActiveAndEnabled)
-        {
-            shipHelp.gameObject.SetActive(false);
-        }
-    }
-
-    private void NextDay()
-    {
-        dayCount--;
-        //нет сена - забиваем скот
-        while (haylageCount < sheepCount && sheepCount > 0) SlaughterClick();
-        haylageCount -= sheepCount;
-
-        //кормим людей
-        if (meatCount > 0)
-            meatCount--;
-        else if (fishCount > 0)
-            fishCount--;
-        else
-        {
-            PlayerPrefs.SetInt(feltedCountKey, feltedCount);
-            SceneManager.LoadScene(DefeatController.sceneName);
-            return;
-        }
-
-        if (dayHelp.isActiveAndEnabled)
-        {
-            dayHelp.gameObject.SetActive(false);
-            shipHelp.gameObject.SetActive(true);
-        }
-
-        ShowStats();
-    }
-
-    public void WoolClick()
-    {
-        if (woolHelp.isActiveAndEnabled)
-        {
-            woolHelp.gameObject.SetActive(false);
-            foodHelp.gameObject.SetActive(true);
-        }
-
-        if (woolCount > 0)
-        {
-            woolCount--;
-            feltedCount++;
-        }
-
-        NextDay();
-    }
-
-    public void FishClick()
-    {
-        NextDay();
-
-        if (foodHelp.isActiveAndEnabled)
-        {
-            foodHelp.gameObject.SetActive(false);
-            dayHelp.gameObject.SetActive(true);
-        }
-    }
+    #region UI events
 
     public void SummerClick()
     {
@@ -201,4 +212,5 @@ public class WinterController : MonoBehaviour
         PlayerPrefs.DeleteAll();
         SceneManager.LoadScene(SummerController.sceneName);
     }
+    #endregion
 }
