@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartLocalization;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -77,6 +78,8 @@ public class SummerController : MonoBehaviour
 
         Random.InitState(DateTime.Now.Second);
         for (var i = 0; i < sheepCount; i++) CreateShip();
+
+        longhouseButton.GetComponentInChildren<Text>().text = LanguageManager.Instance.GetTextValue("winter_button");
     }
 
     void Update()
@@ -99,7 +102,7 @@ public class SummerController : MonoBehaviour
     #region stuff
     public void ShowStats()
     {
-        title.text = string.Format("Summer {0}", dayCount);
+        title.text = string.Format(LanguageManager.Instance.GetTextValue("summer_title"), dayCount);
         sheepLabel.text = string.Format("{0}", sheepCount);
         hayLabel.text = string.Format("{0}/{1}", haylageCount, sheepCount * dayMax);
         fishLabel.text = string.Format("{0}/{1}", fishCount, dayMax);

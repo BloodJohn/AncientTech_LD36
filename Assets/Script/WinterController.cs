@@ -1,4 +1,4 @@
-﻿using System;
+﻿using SmartLocalization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -85,6 +85,8 @@ public class WinterController : MonoBehaviour
         fishCount = PlayerPrefs.GetInt(SummerController.fishCountKey);
         woolCount = sheepCount;
         ShowStats();
+
+        summerButton.GetComponentInChildren<Text>().text = LanguageManager.Instance.GetTextValue("summer_button");
     }
 
     void Update()
@@ -167,7 +169,7 @@ public class WinterController : MonoBehaviour
 
     private void ShowStats()
     {
-        title.text = string.Format("Winter {0}", dayCount);
+        title.text = string.Format(LanguageManager.Instance.GetTextValue("winter_title"), dayCount);
         haylageLabel.text = string.Format("{0}", haylageCount);
         sheepLabel.text = string.Format("{0}", sheepCount);
         woolLabel.text = string.Format("{0}", woolCount);

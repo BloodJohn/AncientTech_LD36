@@ -1,11 +1,9 @@
 ﻿
 namespace SmartLocalization.Editor{
-using UnityEngine.UI;
-using UnityEngine;
+    using UnityEngine;
 using UnityEditor;
-using System.Collections;
 
-[CustomEditor(typeof(LocalizedText))]
+    [CustomEditor(typeof(LocalizedText))]
 public class LocalizedTextInspector : Editor 
 {
 	private string selectedKey = null;

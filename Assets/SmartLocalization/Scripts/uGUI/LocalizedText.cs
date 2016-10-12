@@ -2,9 +2,8 @@
 {
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
-[RequireComponent (typeof (Text))]
+    [RequireComponent (typeof (Text))]
 public class LocalizedText : MonoBehaviour 
 {
 	public string localizedKey = "INSERT_KEY_HERE";
