@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class DefeatController : MonoBehaviour
 {
     public const string sceneName = "Defeat";
+    public const string storeURL = "https://play.google.com/store/apps/details?id=com.StarAge.IceLand";
+    public const string voteCountKey = "vote";
+
     public Text feltedLabel;
     public Text noFoodLabel;
 
@@ -35,11 +38,20 @@ public class DefeatController : MonoBehaviour
 
         restartButton.GetComponentInChildren<Text>().text = LanguageManager.Instance.GetTextValue("defeat_restart");
         voteButton.GetComponentInChildren<Text>().text = LanguageManager.Instance.GetTextValue("defeat_vote");
+
+        restartButton.enabled = (feltedCount < 100);
+        voteButton.enabled = (feltedCount >= 100);
     }
 
     public void RestartClick()
     {
         PlayerPrefs.DeleteAll();
         SceneManager.LoadScene(SummerController.sceneName);
+    }
+
+    public void VoteClick()
+    {
+        Application.OpenURL(storeURL);
+        RestartClick();
     }
 }
