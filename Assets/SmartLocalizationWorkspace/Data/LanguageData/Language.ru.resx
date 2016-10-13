@@ -122,6 +122,21 @@
 	<data name="autumn_title" xml:space="preserve">
 		<value>Осенью овец собирают и стригут</value>
 	</data>
+	<data name="defeat_noFood" xml:space="preserve">
+		<value>Еда закончилась. Люди начали умирать от голода.</value>
+	</data>
+	<data name="defeat_noSheep" xml:space="preserve">
+		<value>Сено кончилось. Овцы погибли от голода. Нет шерсти - нечем торговать. Хутор обречен.</value>
+	</data>
+	<data name="defeat_restart" xml:space="preserve">
+		<value>Сыграть снова</value>
+	</data>
+	<data name="defeat_result" xml:space="preserve">
+		<value>Твой результат: {0}шт. ткани.</value>
+	</data>
+	<data name="defeat_vote" xml:space="preserve">
+		<value>Что понравилось в игре?</value>
+	</data>
 	<data name="intro_author" xml:space="preserve">
 		<value>идея BloodJohn, графика Mebemory</value>
 	</data>
@@ -150,6 +165,6 @@
 		<value>Длинный Дом</value>
 	</data>
 	<data name="winter_title" xml:space="preserve">
-		<value>Зима {0}</value>
+		<value>{0} Зима {1}</value>
 	</data>
 </root>

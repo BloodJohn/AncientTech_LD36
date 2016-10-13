@@ -15,6 +15,7 @@ public class SummerController : MonoBehaviour
     public const string sheepCountKey = "sheep";
     public const string haylageCountKey = "haylage";
     public const string fishCountKey = "fish";
+    public const string meatCountKey = "meat";
 
     /// <summary>лугов</summary>
     public int landCount;
@@ -74,6 +75,8 @@ public class SummerController : MonoBehaviour
         helpHay.gameObject.SetActive(feltedCount == 0);
 
         sheepCount = PlayerPrefs.GetInt(sheepCountKey, sheepStartCount);
+        haylageCount = PlayerPrefs.GetInt(haylageCountKey, 0);
+        fishCount = PlayerPrefs.GetInt(fishCountKey, 0);
         ShowStats();
 
         Random.InitState(DateTime.Now.Second);

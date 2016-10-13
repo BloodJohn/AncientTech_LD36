@@ -11,7 +11,8 @@ public class WinterController : MonoBehaviour
     public const string longWinterKey = "longWinter";
     public const string winterCountKey = "winterCount";
     public const int dayMax = 24;
-    
+
+    private int winterCount;
     /// <summary>дней</summary>
     private int dayCount;
     /// <summary>овец</summary>
@@ -64,7 +65,7 @@ public class WinterController : MonoBehaviour
     {
         dayCount = dayMax;
         feltedCount = PlayerPrefs.GetInt(feltedCountKey);
-        var winterCount = PlayerPrefs.GetInt(winterCountKey, 0);
+        winterCount = PlayerPrefs.GetInt(winterCountKey, 0);
         winterCount++;
         PlayerPrefs.SetInt(winterCountKey,winterCount);
 
@@ -169,7 +170,7 @@ public class WinterController : MonoBehaviour
 
     private void ShowStats()
     {
-        title.text = string.Format(LanguageManager.Instance.GetTextValue("winter_title"), dayCount);
+        title.text = string.Format(LanguageManager.Instance.GetTextValue("winter_title"), winterCount, dayCount);
         haylageLabel.text = string.Format("{0}", haylageCount);
         sheepLabel.text = string.Format("{0}", sheepCount);
         woolLabel.text = string.Format("{0}", woolCount);
@@ -202,6 +203,9 @@ public class WinterController : MonoBehaviour
     {
         if (sheepCount > 1) sheepCount += sheepCount / 2;
         PlayerPrefs.SetInt(SummerController.sheepCountKey, sheepCount);
+        PlayerPrefs.SetInt(SummerController.haylageCountKey, haylageCount);
+        PlayerPrefs.SetInt(SummerController.fishCountKey, fishCount);
+
         PlayerPrefs.SetInt(feltedCountKey, feltedCount);
 
         var winterCount = PlayerPrefs.GetInt(winterCountKey, 1);

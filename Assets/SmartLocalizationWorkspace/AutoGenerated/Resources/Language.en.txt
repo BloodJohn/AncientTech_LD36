@@ -122,6 +122,21 @@
 	<data name="autumn_title" xml:space="preserve">
 		<value>Sheep are sheared in the autumn</value>
 	</data>
+	<data name="defeat_noFood" xml:space="preserve">
+		<value>Winter on the house run out of food. The Vikings began to die from hunger.</value>
+	</data>
+	<data name="defeat_noSheep" xml:space="preserve">
+		<value>Hay ended. Sheep died of starvation. Without wool for trade, the village is doomed.</value>
+	</data>
+	<data name="defeat_restart" xml:space="preserve">
+		<value>Restart Game</value>
+	</data>
+	<data name="defeat_result" xml:space="preserve">
+		<value>Your score: {0} Felted Wool</value>
+	</data>
+	<data name="defeat_vote" xml:space="preserve">
+		<value>Comment in Store!</value>
+	</data>
 	<data name="intro_author" xml:space="preserve">
 		<value>design by BloodJohn, art by Mebemory</value>
 	</data>
@@ -151,6 +166,6 @@ Shear more wool!
 		<value>LongHouse</value>
 	</data>
 	<data name="winter_title" xml:space="preserve">
-		<value>Winter {0}</value>
+		<value>{0} Winter {1}</value>
 	</data>
 </root>
