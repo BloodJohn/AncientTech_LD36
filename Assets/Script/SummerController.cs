@@ -9,30 +9,7 @@ public class SummerController : MonoBehaviour
 {
     #region variables
     public const string sceneName = "Summer";
-    public const int peopleCount = 12;
-    public const int sheepStartCount = 12;
-    public const int dayMax = 24;
-    public const string sheepCountKey = "sheep";
-    public const string haylageCountKey = "haylage";
-    public const string fishCountKey = "fish";
-    public const string meatCountKey = "meat";
 
-    /// <summary>лугов</summary>
-    public int landCount;
-    /// <summary>рыбы в море</summary>
-    public int seaCount;
-
-    /// <summary>дней</summary>
-    private int dayCount;
-    /// <summary>овец</summary>
-    private int sheepCount;
-    /// <summary>сена</summary>
-    private int haylageCount;
-    /// <summary>трески</summary>
-    private int fishCount;
-    #endregion
-
-    #region UI variables
     /// <summary>обучающие стрелки ловить рыбу</summary>
     public Image helpFish;
     /// <summary>обучающие стрелки косить сено</summary>
@@ -56,38 +33,22 @@ public class SummerController : MonoBehaviour
     #region unity
     public void Awake()
     {
-        dayCount = dayMax;
-        var feltedCount = PlayerPrefs.GetInt(WinterController.feltedCountKey);
-        var winterCount = PlayerPrefs.GetInt(WinterController.winterCountKey, 0);
-        //после первой зимовки рыбы в море бывает разное количество (от 1 до 3 рыбин за улов)
-        if (winterCount > 0)
-            seaCount = Random.Range(100, 400);
-        else
-            seaCount = 200;
+        CoreGame.instance.StartSummer();
 
-        //короткое лето после долгой зимы
-        var longWinterCount = PlayerPrefs.GetInt(WinterController.longWinterKey, 0);
-        if (longWinterCount <= 0) dayCount--;
+        helpFish.gameObject.SetActive(CoreGame.instance.feltedCount == 0);
+        helpHay.gameObject.SetActive(CoreGame.instance.feltedCount == 0);
 
-        Debug.LogFormat("seaCount {0} longWinter {1}", seaCount, longWinterCount);
-
-        helpFish.gameObject.SetActive(feltedCount == 0);
-        helpHay.gameObject.SetActive(feltedCount == 0);
-
-        sheepCount = PlayerPrefs.GetInt(sheepCountKey, sheepStartCount);
-        haylageCount = PlayerPrefs.GetInt(haylageCountKey, 0);
-        fishCount = PlayerPrefs.GetInt(fishCountKey, 0);
         ShowStats();
 
         Random.InitState(DateTime.Now.Second);
-        for (var i = 0; i < sheepCount; i++) CreateShip();
+        for (var i = 0; i < CoreGame.instance.sheepCount; i++) CreateSheep();
 
         longhouseButton.GetComponentInChildren<Text>().text = LanguageManager.Instance.GetTextValue("winter_button");
     }
 
     void Update()
     {
-        if (dayCount <= 0) return;
+        if (CoreGame.instance.dayCount <= 0) return;
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -100,21 +61,30 @@ public class SummerController : MonoBehaviour
             }
         }
     }
+
+    public void WinterClick()
+    {
+        SceneManager.LoadScene(AutumnController.sceneName);
+    }
+
+    public void RestartClick()
+    {
+        CoreGame.instance.RestartGame();
+    }
     #endregion
 
     #region stuff
-    public void ShowStats()
+    private void ShowStats()
     {
-        title.text = string.Format(LanguageManager.Instance.GetTextValue("summer_title"), dayCount);
-        sheepLabel.text = string.Format("{0}", sheepCount);
-        hayLabel.text = string.Format("{0}/{1}", haylageCount, sheepCount * dayMax);
-        fishLabel.text = string.Format("{0}/{1}", fishCount, dayMax);
+        title.text = string.Format(LanguageManager.Instance.GetTextValue("summer_title"), CoreGame.instance.dayCount);
+        sheepLabel.text = string.Format("{0}", CoreGame.instance.sheepCount);
+        hayLabel.text = string.Format("{0}/{1}", CoreGame.instance.haylageCount, CoreGame.instance.sheepCount * CoreGame.seasonDays);
+        fishLabel.text = string.Format("{0}/{1}", CoreGame.instance.fishCount, CoreGame.seasonDays);
 
-        longhouseButton.gameObject.SetActive(dayCount <= 0);
+        longhouseButton.gameObject.SetActive(CoreGame.instance.dayCount <= 0);
 
-        if (sheepCount <= 0)
+        if (CoreGame.instance.sheepCount <= 0)
         {
-            PlayerPrefs.SetInt(SummerController.sheepCountKey, sheepCount);
             SceneManager.LoadScene(DefeatController.sceneName);
         }
     }
@@ -122,14 +92,8 @@ public class SummerController : MonoBehaviour
     private void HaylageClick(Vector2 point)
     {
         helpHay.gameObject.SetActive(false);
-        DayClick();
-
-        var production = peopleCount * 2;
-        if (production > landCount) production = landCount;
-
-        haylageCount += production;
-        landCount -= production;
-
+        
+        CoreGame.instance.HaylageSummer();
         ShowStats();
 
         var item = (GameObject)Instantiate(haylagePrefab, transform);
@@ -139,41 +103,15 @@ public class SummerController : MonoBehaviour
     private void FishingClick(Vector2 point)
     {
         helpFish.gameObject.SetActive(false);
-        DayClick();
-
-        var production = Mathf.RoundToInt((float)seaCount / 100);
-        if (production <= 0) production = 1;
-
-        fishCount += production;
-        seaCount -= production;
+        
+        CoreGame.instance.FishingSummer();
         ShowStats();
 
         var item = (GameObject)Instantiate(fishPrefab, transform);
         item.transform.position = new Vector3(point.x, point.y, 0f);
     }
 
-    private void DayClick()
-    {
-        if (landCount < sheepCount) sheepCount = landCount;
-        landCount -= sheepCount;
-        dayCount--;
-    }
-
-    public void WinterClick()
-    {
-        PlayerPrefs.SetInt(sheepCountKey, sheepCount);
-        PlayerPrefs.SetInt(haylageCountKey, haylageCount);
-        PlayerPrefs.SetInt(fishCountKey, fishCount);
-        SceneManager.LoadScene(AutumnController.sceneName);
-    }
-
-    public void RestartClick()
-    {
-        PlayerPrefs.DeleteAll();
-        SceneManager.LoadScene(SummerController.sceneName);
-    }
-
-    private void CreateShip()
+    private void CreateSheep()
     {
         bool isLand = false;
         int cnt = 0;

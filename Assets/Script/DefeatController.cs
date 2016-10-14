@@ -15,19 +15,13 @@ public class DefeatController : MonoBehaviour
     public Button restartButton;
     public Button voteButton;
 
-    /// <summary>ткань</summary>
-    private int feltedCount;
-    /// <summary>овец</summary>
-    private int sheepCount;
-
     public void Awake()
     {
-        feltedCount = PlayerPrefs.GetInt(WinterController.feltedCountKey);
-        sheepCount = PlayerPrefs.GetInt(SummerController.sheepCountKey, 0);
 
-        feltedLabel.text = string.Format(LanguageManager.Instance.GetTextValue("defeat_result"), feltedCount);
 
-        if (sheepCount > 0)
+        feltedLabel.text = string.Format(LanguageManager.Instance.GetTextValue("defeat_result"), CoreGame.instance.feltedCount);
+
+        if (CoreGame.instance.sheepCount > 0)
         {
             noFoodLabel.text = LanguageManager.Instance.GetTextValue("defeat_noFood");
         }
@@ -39,19 +33,21 @@ public class DefeatController : MonoBehaviour
         restartButton.GetComponentInChildren<Text>().text = LanguageManager.Instance.GetTextValue("defeat_restart");
         voteButton.GetComponentInChildren<Text>().text = LanguageManager.Instance.GetTextValue("defeat_vote");
 
-        restartButton.enabled = (feltedCount < 100);
-        voteButton.enabled = (feltedCount >= 100);
+        var showVoteBtn = CoreGame.instance.feltedCount >= 100 && !PlayerPrefs.HasKey(voteCountKey);
+
+        restartButton.gameObject.SetActive(!showVoteBtn);
+        voteButton.gameObject.SetActive(showVoteBtn);
     }
 
     public void RestartClick()
     {
-        PlayerPrefs.DeleteAll();
-        SceneManager.LoadScene(SummerController.sceneName);
+        CoreGame.instance.RestartGame();
     }
 
     public void VoteClick()
     {
         Application.OpenURL(storeURL);
-        RestartClick();
+        PlayerPrefs.SetInt(voteCountKey, 1);
+        CoreGame.instance.RestartGame();
     }
 }

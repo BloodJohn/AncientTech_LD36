@@ -33,8 +33,7 @@ public class IntroductionController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            PlayerPrefs.DeleteAll();
-            SceneManager.LoadScene(SummerController.sceneName);
+            CoreGame.instance.RestartGame();
         }
     }
 }
