@@ -1,4 +1,4 @@
-//
+﻿//
 //  LoadAllLanguages.cs
 //
 //
@@ -22,7 +22,7 @@ public class LoadAllLanguages : MonoBehaviour
 	{
 		languageManager = LanguageManager.Instance;
 		
-		SmartCultureInfo deviceCulture = languageManager.GetDeviceCultureIfSupported();
+		var deviceCulture = languageManager.GetDeviceCultureIfSupported();
 		if(deviceCulture != null)
 		{
 			languageManager.ChangeLanguage(deviceCulture);	
@@ -83,7 +83,7 @@ public class LoadAllLanguages : MonoBehaviour
 			GUILayout.EndScrollView();
 			
 			languagesScrollPosition = GUILayout.BeginScrollView (languagesScrollPosition);
-			foreach(SmartCultureInfo language in availableLanguages)
+			foreach(var language in availableLanguages)
 			{
 				if(GUILayout.Button(language.nativeName, GUILayout.Width(960)))
 				{

@@ -14,7 +14,7 @@ public class LocalizedText : MonoBehaviour
 		textObject = this.GetComponent<Text>();
 	
 		//Subscribe to the change language event
-		LanguageManager languageManager = LanguageManager.Instance;
+		var languageManager = LanguageManager.Instance;
 		languageManager.OnChangeLanguage += OnChangeLanguage;
 		
 		//Run the method one first time

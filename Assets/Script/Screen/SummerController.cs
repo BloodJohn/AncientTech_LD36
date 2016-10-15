@@ -109,8 +109,8 @@ public class SummerController : MonoBehaviour
 
     private void CreateSheep()
     {
-        bool isLand = false;
-        int cnt = 0;
+        var isLand = false;
+        var cnt = 0;
         var height = Camera.allCameras[0].orthographicSize;
         var width = height * Camera.allCameras[0].aspect * height;
 

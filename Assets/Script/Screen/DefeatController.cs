@@ -50,6 +50,8 @@ public class DefeatController : MonoBehaviour
     {
         Application.OpenURL(storeURL);
         PlayerPrefs.SetInt(voteCountKey, 1);
-        RestartClick();
+
+        restartButton.gameObject.SetActive(true);
+        voteButton.gameObject.SetActive(false);
     }
 }
