@@ -1,6 +1,5 @@
 ﻿using SmartLocalization;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class DefeatController : MonoBehaviour
@@ -17,11 +16,9 @@ public class DefeatController : MonoBehaviour
 
     public void Awake()
     {
+        feltedLabel.text = string.Format(LanguageManager.Instance.GetTextValue("defeat_result"), CoreGame.Instance.FeltedCount);
 
-
-        feltedLabel.text = string.Format(LanguageManager.Instance.GetTextValue("defeat_result"), CoreGame.instance.feltedCount);
-
-        if (CoreGame.instance.sheepCount > 0)
+        if (CoreGame.Instance.SheepCount > 0)
         {
             noFoodLabel.text = LanguageManager.Instance.GetTextValue("defeat_noFood");
         }
@@ -33,21 +30,26 @@ public class DefeatController : MonoBehaviour
         restartButton.GetComponentInChildren<Text>().text = LanguageManager.Instance.GetTextValue("defeat_restart");
         voteButton.GetComponentInChildren<Text>().text = LanguageManager.Instance.GetTextValue("defeat_vote");
 
-        var showVoteBtn = CoreGame.instance.feltedCount >= 100 && !PlayerPrefs.HasKey(voteCountKey);
+        var showVoteBtn = CoreGame.Instance.FeltedCount >= 100 && !PlayerPrefs.HasKey(voteCountKey);
 
         restartButton.gameObject.SetActive(!showVoteBtn);
         voteButton.gameObject.SetActive(showVoteBtn);
     }
 
+    void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Escape)) Application.Quit();
+    }
+
     public void RestartClick()
     {
-        CoreGame.instance.RestartGame();
+        CoreGame.Instance.RestartGame();
     }
 
     public void VoteClick()
     {
         Application.OpenURL(storeURL);
         PlayerPrefs.SetInt(voteCountKey, 1);
-        CoreGame.instance.RestartGame();
+        RestartClick();
     }
 }

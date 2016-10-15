@@ -1,6 +1,5 @@
 ﻿using SmartLocalization;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class IntroductionController : MonoBehaviour
@@ -33,7 +32,9 @@ public class IntroductionController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            CoreGame.instance.RestartGame();
+            CoreGame.Instance.RestartGame();
         }
+
+        if (Input.GetKeyUp(KeyCode.Escape)) Application.Quit();
     }
 }

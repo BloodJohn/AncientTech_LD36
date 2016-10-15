@@ -20,6 +20,7 @@ public class AutumnController : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyUp(KeyCode.Escape)) Application.Quit();
         if (Input.GetMouseButtonDown(0))
         {
             SceneManager.LoadScene(WinterController.sceneName);

@@ -33,22 +33,23 @@ public class SummerController : MonoBehaviour
     #region unity
     public void Awake()
     {
-        CoreGame.instance.StartSummer();
+        CoreGame.Instance.StartSummer();
 
-        helpFish.gameObject.SetActive(CoreGame.instance.feltedCount == 0);
-        helpHay.gameObject.SetActive(CoreGame.instance.feltedCount == 0);
+        helpFish.gameObject.SetActive(CoreGame.Instance.FeltedCount == 0);
+        helpHay.gameObject.SetActive(CoreGame.Instance.FeltedCount == 0);
 
         ShowStats();
 
         Random.InitState(DateTime.Now.Second);
-        for (var i = 0; i < CoreGame.instance.sheepCount; i++) CreateSheep();
+        for (var i = 0; i < CoreGame.Instance.SheepCount; i++) CreateSheep();
 
         longhouseButton.GetComponentInChildren<Text>().text = LanguageManager.Instance.GetTextValue("winter_button");
     }
 
     void Update()
     {
-        if (CoreGame.instance.dayCount <= 0) return;
+        if (Input.GetKeyUp(KeyCode.Escape)) Application.Quit();
+        if (CoreGame.Instance.DayCount <= 0) return;
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -69,31 +70,26 @@ public class SummerController : MonoBehaviour
 
     public void RestartClick()
     {
-        CoreGame.instance.RestartGame();
+        CoreGame.Instance.RestartGame();
     }
     #endregion
 
     #region stuff
     private void ShowStats()
     {
-        title.text = string.Format(LanguageManager.Instance.GetTextValue("summer_title"), CoreGame.instance.dayCount);
-        sheepLabel.text = string.Format("{0}", CoreGame.instance.sheepCount);
-        hayLabel.text = string.Format("{0}/{1}", CoreGame.instance.haylageCount, CoreGame.instance.sheepCount * CoreGame.seasonDays);
-        fishLabel.text = string.Format("{0}/{1}", CoreGame.instance.fishCount, CoreGame.seasonDays);
+        title.text = string.Format(LanguageManager.Instance.GetTextValue("summer_title"), CoreGame.Instance.DayCount);
+        sheepLabel.text = string.Format("{0}", CoreGame.Instance.SheepCount);
+        hayLabel.text = string.Format("{0}/{1}", CoreGame.Instance.HaylageCount, CoreGame.Instance.SheepCount * CoreGame.SeasonDays);
+        fishLabel.text = string.Format("{0}/{1}", CoreGame.Instance.FishCount, CoreGame.SeasonDays);
 
-        longhouseButton.gameObject.SetActive(CoreGame.instance.dayCount <= 0);
-
-        if (CoreGame.instance.sheepCount <= 0)
-        {
-            SceneManager.LoadScene(DefeatController.sceneName);
-        }
+        longhouseButton.gameObject.SetActive(CoreGame.Instance.DayCount <= 0);
     }
 
     private void HaylageClick(Vector2 point)
     {
         helpHay.gameObject.SetActive(false);
         
-        CoreGame.instance.HaylageSummer();
+        CoreGame.Instance.HaylageSummer();
         ShowStats();
 
         var item = (GameObject)Instantiate(haylagePrefab, transform);
@@ -104,7 +100,7 @@ public class SummerController : MonoBehaviour
     {
         helpFish.gameObject.SetActive(false);
         
-        CoreGame.instance.FishingSummer();
+        CoreGame.Instance.FishingSummer();
         ShowStats();
 
         var item = (GameObject)Instantiate(fishPrefab, transform);
