@@ -4,16 +4,20 @@ using UnityEngine.UI;
 
 public class DefeatController : MonoBehaviour
 {
+    #region variables
     public const string sceneName = "Defeat";
     public const string storeURL = "https://play.google.com/store/apps/details?id=com.StarAge.IceLand";
     public const string voteCountKey = "vote";
+    public const string woolenFabricID = "CgkIp6SwmNsTEAIQAQ";
 
     public Text feltedLabel;
     public Text noFoodLabel;
 
     public Button restartButton;
     public Button voteButton;
+    #endregion
 
+    #region Unity
     public void Awake()
     {
         feltedLabel.text = string.Format(LanguageManager.Instance.GetTextValue("defeat_result"), CoreGame.Instance.FeltedCount);
@@ -36,11 +40,18 @@ public class DefeatController : MonoBehaviour
         voteButton.gameObject.SetActive(showVoteBtn);
     }
 
+    public void Start()
+    {
+        LeaderBoard();
+    }
+
     void Update()
     {
         if (Input.GetKeyUp(KeyCode.Escape)) Application.Quit();
     }
+    #endregion
 
+    #region buttons UI
     public void RestartClick()
     {
         CoreGame.Instance.RestartGame();
@@ -54,4 +65,17 @@ public class DefeatController : MonoBehaviour
         restartButton.gameObject.SetActive(true);
         voteButton.gameObject.SetActive(false);
     }
+
+    public void LeaderBoard()
+    {
+        Social.ReportScore(CoreGame.Instance.FeltedCount, woolenFabricID,
+            (bool success) =>
+            {
+                if (success)
+                {
+                    Social.ShowLeaderboardUI();
+                }
+            });
+    }
+    #endregion
 }

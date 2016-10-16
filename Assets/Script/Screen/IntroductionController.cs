@@ -71,8 +71,11 @@ public class IntroductionController : MonoBehaviour
         Social.localUser.Authenticate((bool success) =>
         {
             // handle success or failure
-            Debug.LogError("Social.localUser.Authenticate - failed");
-            author.text = "Social.localUser.Authenticate - failed";
+            if (!success)
+            {
+                //пишем для отладки, потом надо убрать.
+                author.text = "Social.localUser.Authenticate - failed";
+            }
         });
     }
 }

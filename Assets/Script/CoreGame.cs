@@ -75,6 +75,7 @@ public class CoreGame : MonoBehaviour
 
 
         DayCount = SeasonDays;
+        LandCount = LandMax;
         //после первой зимовки рыбы в море бывает разное количество (от 1 до 3 рыбин за улов)
         if (WinterCount > 0)
             SeaCount = Random.Range(100, 400);
