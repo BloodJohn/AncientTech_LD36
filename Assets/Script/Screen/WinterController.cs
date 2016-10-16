@@ -7,7 +7,7 @@ public class WinterController : MonoBehaviour
 {
     #region variables
     public const string sceneName = "Winter";
-    
+
     public const int dayMax = 24;
     #endregion
 
@@ -93,14 +93,17 @@ public class WinterController : MonoBehaviour
         {
             case 0: dayPrefab = fishPrefab; break;
             case 1: dayPrefab = meatPrefab; break;
-            case 2: dayPrefab = feltedPrefab; break;
+            case 2:
+                dayPrefab = feltedPrefab;
+                FeltedWoolAchievement();
+                break;
         }
 
         ShowStats();
 
         if (dayPrefab != null)
         {
-            var item = (GameObject) Instantiate(dayPrefab, transform);
+            var item = (GameObject)Instantiate(dayPrefab, transform);
             item.transform.position = new Vector3(point.x, point.y, 0f);
         }
 
@@ -129,6 +132,13 @@ public class WinterController : MonoBehaviour
             //все овцы подохли
             SceneManager.LoadScene(DefeatController.sceneName);
         }
+
+        //зима закончилась
+        if (summerButton.IsActive())
+        {
+            FirstWinterAchievement();
+            LongWinterAchievement();
+        }
     }
 
     public void SummerClick()
@@ -139,6 +149,60 @@ public class WinterController : MonoBehaviour
     public void RestartClick()
     {
         CoreGame.Instance.RestartGame();
+    }
+    #endregion
+
+    #region achievements
+
+    /// <summary>первая зима</summary>
+    private void FirstWinterAchievement()
+    {
+        if (CoreGame.Instance.WinterCount != 1) return;
+        if (PlayerPrefs.HasKey(GPGSIds.achievement_first_winter)) return;
+
+        // unlock achievement (achievement ID "Cfjewijawiu_QA")
+        Social.ReportProgress(GPGSIds.achievement_first_winter, 100.0f, (bool success) =>
+        {
+            // handle success or failure
+            if (success)
+            {
+                PlayerPrefs.SetInt(GPGSIds.achievement_first_winter, 100);
+            }
+        });
+    }
+
+    /// <summary>партия из 50 шерсти</summary>
+    private void FeltedWoolAchievement()
+    {
+        if (CoreGame.Instance.FeltedCount != 50) return;
+        if (PlayerPrefs.HasKey(GPGSIds.achievement_first_batch_of_fabric)) return;
+
+        // unlock achievement (achievement ID "Cfjewijawiu_QA")
+        Social.ReportProgress(GPGSIds.achievement_first_batch_of_fabric, 100.0f, (bool success) =>
+        {
+            // handle success or failure
+            if (success)
+            {
+                PlayerPrefs.SetInt(GPGSIds.achievement_first_batch_of_fabric, 100);
+            }
+        });
+    }
+
+    /// <summary>длинная зима</summary>
+    private void LongWinterAchievement()
+    {
+        if (CoreGame.Instance.LongWinterCount > 0) return;
+        if (PlayerPrefs.HasKey(GPGSIds.achievement_long_winter)) return;
+
+        // unlock achievement (achievement ID "Cfjewijawiu_QA")
+        Social.ReportProgress(GPGSIds.achievement_long_winter, 100.0f, (bool success) =>
+        {
+            // handle success or failure
+            if (success)
+            {
+                PlayerPrefs.SetInt(GPGSIds.achievement_long_winter, 100);
+            }
+        });
     }
     #endregion
 }

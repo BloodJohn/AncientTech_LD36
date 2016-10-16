@@ -94,7 +94,7 @@ public class CoreGame : MonoBehaviour
         DayCount--;
     }
 
-    public void FishingSummer()
+    public int FishingSummer()
     {
         TurnSummerDay();
 
@@ -103,6 +103,8 @@ public class CoreGame : MonoBehaviour
 
         FishCount += production;
         SeaCount -= production;
+
+        return production;
     }
 
     public void HaylageSummer()

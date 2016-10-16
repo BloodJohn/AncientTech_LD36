@@ -8,7 +8,6 @@ public class DefeatController : MonoBehaviour
     public const string sceneName = "Defeat";
     public const string storeURL = "https://play.google.com/store/apps/details?id=com.StarAge.IceLand";
     public const string voteCountKey = "vote";
-    public const string woolenFabricID = "CgkIp6SwmNsTEAIQAQ";
 
     public Text feltedLabel;
     public Text noFoodLabel;
@@ -66,9 +65,9 @@ public class DefeatController : MonoBehaviour
         voteButton.gameObject.SetActive(false);
     }
 
-    public void LeaderBoard()
+    private void LeaderBoard()
     {
-        Social.ReportScore(CoreGame.Instance.FeltedCount, woolenFabricID,
+        Social.ReportScore(CoreGame.Instance.FeltedCount, GPGSIds.leaderboard_woolen_fabric,
             (bool success) =>
             {
                 if (success)

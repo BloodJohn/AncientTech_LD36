@@ -24,7 +24,12 @@
 
 public static class GPGSIds
 {
+        public const string achievement_first_batch_of_fabric = "CgkIp6SwmNsTEAIQBg"; // <GPGSID>
         public const string leaderboard_woolen_fabric = "CgkIp6SwmNsTEAIQAQ"; // <GPGSID>
+        public const string achievement_big_fish = "CgkIp6SwmNsTEAIQBA"; // <GPGSID>
+        public const string achievement_first_winter = "CgkIp6SwmNsTEAIQAg"; // <GPGSID>
+        public const string achievement_big_flock = "CgkIp6SwmNsTEAIQBQ"; // <GPGSID>
+        public const string achievement_long_winter = "CgkIp6SwmNsTEAIQAw"; // <GPGSID>
 
 }
 

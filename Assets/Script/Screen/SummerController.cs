@@ -46,6 +46,11 @@ public class SummerController : MonoBehaviour
         longhouseButton.GetComponentInChildren<Text>().text = LanguageManager.Instance.GetTextValue("winter_button");
     }
 
+    void Start()
+    {
+        BigFlockAchievement();
+    }
+
     void Update()
     {
         if (Input.GetKeyUp(KeyCode.Escape)) Application.Quit();
@@ -100,7 +105,8 @@ public class SummerController : MonoBehaviour
     {
         helpFish.gameObject.SetActive(false);
         
-        CoreGame.Instance.FishingSummer();
+        var fishing = CoreGame.Instance.FishingSummer();
+        BigFishAchievement(fishing);
         ShowStats();
 
         var item = (GameObject)Instantiate(fishPrefab, transform);
@@ -131,5 +137,43 @@ public class SummerController : MonoBehaviour
             }
         }
     }
+    #endregion
+
+    #region achievements
+
+    /// <summary>большой улов</summary>
+    private void BigFishAchievement(int fishing)
+    {
+        if (PlayerPrefs.HasKey(GPGSIds.achievement_big_fish)) return;
+        if (fishing < 3) return;
+
+        // unlock achievement (achievement ID "Cfjewijawiu_QA")
+        Social.ReportProgress(GPGSIds.achievement_big_fish, 100.0f, (bool success) =>
+        {
+            // handle success or failure
+            if (success)
+            {
+                PlayerPrefs.SetInt(GPGSIds.achievement_big_fish, 100);
+            }
+        });
+    }
+
+    /// <summary>Стадо из 20 овец</summary>
+    private void BigFlockAchievement()
+    {
+        if (CoreGame.Instance.SheepCount < 20) return;
+        if (PlayerPrefs.HasKey(GPGSIds.achievement_big_flock)) return;
+
+        // unlock achievement (achievement ID "Cfjewijawiu_QA")
+        Social.ReportProgress(GPGSIds.achievement_big_flock, 100.0f, (bool success) =>
+        {
+            // handle success or failure
+            if (success)
+            {
+                PlayerPrefs.SetInt(GPGSIds.achievement_big_flock, 100);
+            }
+        });
+    }
+
     #endregion
 }
