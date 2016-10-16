@@ -128,7 +128,7 @@ namespace GooglePlayGames.Native.PInvoke
         {
             Logger.d("Entering internal callback for InternalLeaveRoomCallback");
 
-            var callback =
+            Action<Status.ResponseStatus> callback =
                 Callbacks.IntPtrToTempCallback<Action<Status.ResponseStatus>>(data);
 
             if (callback == null)
@@ -184,7 +184,7 @@ namespace GooglePlayGames.Native.PInvoke
         {
             Logger.d("Entering internal callback for InternalSendReliableMessageCallback " + response);
 
-            var callback =
+            Action<Status.MultiplayerStatus> callback =
                 Callbacks.IntPtrToTempCallback<Action<Status.MultiplayerStatus>>(data);
 
             if (callback == null)

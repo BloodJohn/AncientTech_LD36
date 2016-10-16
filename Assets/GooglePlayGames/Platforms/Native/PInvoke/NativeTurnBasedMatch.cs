@@ -113,7 +113,7 @@ namespace GooglePlayGames.Native.PInvoke
 
         internal bool HasRematchId()
         {
-            var rematchId = RematchId();
+            string rematchId = RematchId();
             return string.IsNullOrEmpty(rematchId) ||  !rematchId.Equals("(null)");
         }
 
@@ -157,7 +157,7 @@ namespace GooglePlayGames.Native.PInvoke
 
         internal TBM AsTurnBasedMatch(string selfPlayerId)
         {
-            var participants = new List<Participant>();
+            List<Participant> participants = new List<Participant>();
             string selfParticipantId = null;
             string pendingParticipantId = null;
 
@@ -186,7 +186,7 @@ namespace GooglePlayGames.Native.PInvoke
             }
 
             // A match can be rematched if it's complete, and it hasn't already been rematched.
-            var canRematch = MatchStatus() == Types.MatchStatus.COMPLETED && !HasRematchId();
+            bool canRematch = MatchStatus() == Types.MatchStatus.COMPLETED && !HasRematchId();
 
             return new GooglePlayGames.BasicApi.Multiplayer.TurnBasedMatch(
                 Id(),

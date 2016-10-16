@@ -35,7 +35,7 @@ namespace GooglePlayGames.Native.PInvoke
 
         internal MultiplayerParticipant Inviter()
         {
-            var participant =
+            MultiplayerParticipant participant =
                 new MultiplayerParticipant(C.MultiplayerInvitation_InvitingParticipant(SelfPtr()));
 
             if (!participant.Valid())
@@ -97,7 +97,7 @@ namespace GooglePlayGames.Native.PInvoke
         {
             var type = ToInvType(Type());
             var invitationId = Id();
-            var variant = (int)Variant();
+            int variant = (int)Variant();
             Participant inviter;
 
             using (var nativeInviter = Inviter())

@@ -127,7 +127,7 @@ namespace GooglePlayGames
         {
             get
             {
-                var retval = string.Empty;
+                string retval = string.Empty;
                 if (authenticated)
                 {
                     retval = mPlatform.GetUserDisplayName();
@@ -155,7 +155,7 @@ namespace GooglePlayGames
         {
             get
             {
-                var retval = string.Empty;
+                string retval = string.Empty;
                 if (authenticated)
                 {
                     retval = mPlatform.GetUserId();
@@ -212,7 +212,7 @@ namespace GooglePlayGames
         {
             get
             {
-                var retval = string.Empty;
+                string retval = string.Empty;
                 if (authenticated)
                 {
                     retval = mPlatform.GetUserImageUrl();

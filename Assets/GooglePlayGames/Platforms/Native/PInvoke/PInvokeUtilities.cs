@@ -60,13 +60,13 @@ namespace GooglePlayGames.Native.PInvoke
 
         internal static String OutParamsToString(OutStringMethod outStringMethod)
         {
-            var requiredSize = outStringMethod(null, UIntPtr.Zero);
+            UIntPtr requiredSize = outStringMethod(null, UIntPtr.Zero);
             if (requiredSize.Equals(UIntPtr.Zero))
             {
                 return null;
             }
             
-            var sizedBuilder = new StringBuilder((int)requiredSize.ToUInt32());
+            StringBuilder sizedBuilder = new StringBuilder((int)requiredSize.ToUInt32());
             outStringMethod(sizedBuilder, requiredSize);
             return sizedBuilder.ToString();
         }
@@ -75,14 +75,14 @@ namespace GooglePlayGames.Native.PInvoke
 
         internal static T[] OutParamsToArray<T>(OutMethod<T> outMethod)
         {
-            var requiredSize = outMethod(null, UIntPtr.Zero);
+            UIntPtr requiredSize = outMethod(null, UIntPtr.Zero);
             
             if (requiredSize.Equals(UIntPtr.Zero))
             {
                 return new T[0];
             }
             
-            var array = new T[requiredSize.ToUInt64()];
+            T[] array = new T[requiredSize.ToUInt64()];
             outMethod(array, requiredSize);
             return array;
         }
@@ -112,7 +112,7 @@ namespace GooglePlayGames.Native.PInvoke
 
         internal static long ToMilliseconds(TimeSpan span)
         {
-            var millis = span.TotalMilliseconds;
+            double millis = span.TotalMilliseconds;
             
             if (millis > long.MaxValue)
             {

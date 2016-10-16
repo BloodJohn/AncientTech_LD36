@@ -194,10 +194,10 @@ namespace GooglePlayGames.Editor
 
         private static string GetReverseClientId()
         {
-            var clientId = GPGSProjectSettings.Instance.Get(GPGSUtil.IOSCLIENTIDKEY);
-            var parts = clientId.Split ('.');
-            var revClientId = "";
-            foreach (var p in parts)
+            string clientId = GPGSProjectSettings.Instance.Get(GPGSUtil.IOSCLIENTIDKEY);
+            string[] parts = clientId.Split ('.');
+            string revClientId = "";
+            foreach (string p in parts)
             {
                 if (revClientId.Length == 0)
                 {

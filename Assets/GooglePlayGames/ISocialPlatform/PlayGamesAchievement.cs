@@ -116,7 +116,7 @@ namespace GooglePlayGames
                 // return null, we dont have images for hidden achievements.
                 return null;
             }
-            var url = completed ? mUnlockedImageUrl : mRevealedImageUrl;
+            string url = completed ? mUnlockedImageUrl : mRevealedImageUrl;
 
             // the url can be null if the image is not configured.
             if (!string.IsNullOrEmpty(url))

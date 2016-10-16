@@ -117,7 +117,7 @@ namespace GooglePlayGames.Native.PInvoke
 
             internal NativeAchievement Achievement()
             {
-                var p =  C.AchievementManager_FetchResponse_GetData(SelfPtr());
+                IntPtr p =  C.AchievementManager_FetchResponse_GetData(SelfPtr());
                 return new NativeAchievement(p);
             }
 

@@ -104,13 +104,13 @@ namespace GooglePlayGames.Native.PInvoke
 
         internal Achievement AsAchievement()
         {
-            var achievement = new Achievement();
+            Achievement achievement = new Achievement();
 
             achievement.Id = Id();
             achievement.Name = Name();
             achievement.Description = Description();
-            var UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            var val = LastModifiedTime();
+            DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            ulong val = LastModifiedTime();
             if (val == MinusOne)
             {
                 val = 0;

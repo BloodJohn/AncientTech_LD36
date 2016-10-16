@@ -62,7 +62,7 @@ namespace GooglePlayGames.Native.PInvoke
 
         internal ConnectionRequest AsRequest()
         {
-            var req = new ConnectionRequest(
+            ConnectionRequest req = new ConnectionRequest(
                                         RemoteEndpointId(),
                                         RemoteDeviceId(),
                                         RemoteEndpointName(),

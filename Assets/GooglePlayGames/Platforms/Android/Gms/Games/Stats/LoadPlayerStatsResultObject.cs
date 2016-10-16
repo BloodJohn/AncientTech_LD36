@@ -34,12 +34,12 @@ namespace Com.Google.Android.Gms.Games.Stats
         }
         public PlayerStats getPlayerStats()
         {
-            var obj = InvokeCall<IntPtr>("getPlayerStats", "()Lcom/google/android/gms/games/stats/PlayerStats;");
+            IntPtr obj = InvokeCall<IntPtr>("getPlayerStats", "()Lcom/google/android/gms/games/stats/PlayerStats;");
             return new PlayerStatsObject(obj);
         }
         public Status getStatus()
         {
-            var obj = InvokeCall<IntPtr>("getStatus", "()Lcom/google/android/gms/common/api/Status;");
+            IntPtr obj = InvokeCall<IntPtr>("getStatus", "()Lcom/google/android/gms/common/api/Status;");
             return new Status(obj);
         }
     }

@@ -122,7 +122,7 @@ namespace GooglePlayGames.Native
 
             public void ChooseMetadata(ISavedGameMetadata chosenMetadata)
             {
-                var convertedMetadata = chosenMetadata as NativeSnapshotMetadata;
+                NativeSnapshotMetadata convertedMetadata = chosenMetadata as NativeSnapshotMetadata;
 
                 if (convertedMetadata != mOriginal && convertedMetadata != mUnmerged)
                 {
@@ -202,8 +202,8 @@ namespace GooglePlayGames.Native
                           Status.SnapshotOpenStatus.VALID_WITH_CONFLICT)
                     {
                         // If we get here, manual conflict resolution is required.
-                        var original = response.ConflictOriginal();
-                        var unmerged = response.ConflictUnmerged();
+                        NativeSnapshotMetadata original = response.ConflictOriginal();
+                        NativeSnapshotMetadata unmerged = response.ConflictUnmerged();
 
                         // Instantiate the conflict resolver. Note that the retry callback closes over
                         // all the parameters we need to retry the open attempt. Once the conflict is
@@ -211,7 +211,7 @@ namespace GooglePlayGames.Native
                         // NativeConflictResolver, the resolver will invoke this callback, which will
                         // result in this method being re-executed. This recursion will continue until
                         // all conflicts are resolved or an error occurs.
-                        var resolver = new NativeConflictResolver(
+                        NativeConflictResolver resolver = new NativeConflictResolver(
                                                           mSnapshotManager,
                                                           response.ConflictId(),
                                                           original,
@@ -234,7 +234,7 @@ namespace GooglePlayGames.Native
                         // If we have to prefetch the data, we delegate invoking the conflict resolution
                         // callback to the joiner instance (once both callbacks resolve, the joiner will
                         // invoke the lambda that we declare here, using the fetched data).
-                        var joiner = new Prefetcher((originalData, unmergedData) =>
+                        Prefetcher joiner = new Prefetcher((originalData, unmergedData) =>
                         conflictCallback(resolver, original, originalData, unmerged, unmergedData),
                                             completedCallback);
 
@@ -257,7 +257,7 @@ namespace GooglePlayGames.Native
             Misc.CheckNotNull(completedCallback);
             completedCallback = ToOnGameThread(completedCallback);
 
-            var convertedMetadata = metadata as NativeSnapshotMetadata;
+            NativeSnapshotMetadata convertedMetadata = metadata as NativeSnapshotMetadata;
 
             if (convertedMetadata == null)
             {
@@ -320,7 +320,7 @@ namespace GooglePlayGames.Native
 
             callback = ToOnGameThread(callback);
 
-            var convertedMetadata = metadata as NativeSnapshotMetadata;
+            NativeSnapshotMetadata convertedMetadata = metadata as NativeSnapshotMetadata;
 
             if (convertedMetadata == null)
             {

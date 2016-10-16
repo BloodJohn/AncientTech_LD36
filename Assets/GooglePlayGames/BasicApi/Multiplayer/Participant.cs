@@ -154,7 +154,7 @@ namespace GooglePlayGames.BasicApi.Multiplayer
                 return false;
             }
 
-            var other = (Participant)obj;
+            Participant other = (Participant)obj;
             return mParticipantId.Equals(other.mParticipantId);
         }
 

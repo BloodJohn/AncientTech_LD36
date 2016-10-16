@@ -94,14 +94,14 @@ namespace GooglePlayGames.Native.PInvoke
         {
 
             //Create a token we'll use to load scores later.
-            var nativeToken = new NativeScorePageToken(
+            NativeScorePageToken nativeToken = new NativeScorePageToken(
                                              C.LeaderboardManager_ScorePageToken(
                                                  mServices.AsHandle(),
                                                  leaderboardId,
                                                  (Types.LeaderboardStart)start,
                                                  (Types.LeaderboardTimeSpan)timeSpan,
                                                  (Types.LeaderboardCollection)collection));
-            var token = new ScorePageToken(nativeToken, leaderboardId,
+            ScorePageToken token = new ScorePageToken(nativeToken, leaderboardId,
                                        collection, timeSpan);
 
            // First fetch the leaderboard to get the title
@@ -139,7 +139,7 @@ namespace GooglePlayGames.Native.PInvoke
             Action<LeaderboardScoreData> callback)
         {
 
-            var data =
+            LeaderboardScoreData data =
                 new LeaderboardScoreData(
                     token.LeaderboardId, (ResponseStatus)response.GetStatus());
 
@@ -189,7 +189,7 @@ namespace GooglePlayGames.Native.PInvoke
                 return;
             }
 
-            var summary = response.GetScoreSummary();
+            NativeScoreSummary summary = response.GetScoreSummary();
             data.ApproximateCount = summary.ApproximateResults();
             data.PlayerScore = summary.LocalUserScore().AsScore(data.Id, selfPlayerId);
 
@@ -222,7 +222,7 @@ namespace GooglePlayGames.Native.PInvoke
                 data = new LeaderboardScoreData(token.LeaderboardId);
             }
 
-            var nativeToken = (NativeScorePageToken)token.InternalObject;
+            NativeScorePageToken nativeToken = (NativeScorePageToken)token.InternalObject;
             C.LeaderboardManager_FetchScorePage(mServices.AsHandle(),
                 Types.DataSource.CACHE_OR_NETWORK,
                 nativeToken.AsPointer(),
@@ -253,7 +253,7 @@ namespace GooglePlayGames.Native.PInvoke
                 callback(data);
             }
 
-            var page = rsp.GetScorePage();
+            NativeScorePage page = rsp.GetScorePage();
 
             if (!page.Valid())
             {
@@ -278,7 +278,7 @@ namespace GooglePlayGames.Native.PInvoke
                     token.TimeSpan);
             }
 
-            foreach (var ent in page)
+            foreach (NativeScoreEntry ent in page)
             {
                 data.AddScore(ent.AsScore(data.Id));
             }

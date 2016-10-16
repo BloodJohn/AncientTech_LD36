@@ -159,8 +159,8 @@ namespace GooglePlayGames.Android
         internal static void FetchToken(string scope, string playerId, string rationale, bool fetchEmail,
                                         bool fetchAccessToken, bool fetchIdToken, Action<int, string, string, string> callback)
         {
-            var objectArray = new object[7];
-            var jArgs = AndroidJNIHelper.CreateJNIArgArray(objectArray);
+            object[] objectArray = new object[7];
+            jvalue[] jArgs = AndroidJNIHelper.CreateJNIArgArray(objectArray);
             try
             {
                 using (var bridgeClass = new AndroidJavaClass(TokenFragmentClass))
@@ -169,7 +169,7 @@ namespace GooglePlayGames.Android
                     {
                         // Unity no longer supports constructing an AndroidJavaObject using an IntPtr,
                         // so I have to manually munge with JNI here.
-                        var methodId = AndroidJNI.GetStaticMethodID(bridgeClass.GetRawClass(),
+                        IntPtr methodId = AndroidJNI.GetStaticMethodID(bridgeClass.GetRawClass(),
                                               FetchTokenMethod,
                                               FetchTokenSignature);
                         jArgs[0].l = currentActivity.GetRawObject();
@@ -180,10 +180,10 @@ namespace GooglePlayGames.Android
                         jArgs[5].z = fetchIdToken;
                         jArgs[6].l = AndroidJNI.NewStringUTF(scope);
 
-                        var ptr =
+                        IntPtr ptr =
                             AndroidJNI.CallStaticObjectMethod(bridgeClass.GetRawClass(), methodId, jArgs);
 
-                        var pr = new PendingResult<TokenResult>(ptr);
+                        PendingResult<TokenResult> pr = new PendingResult<TokenResult>(ptr);
                         pr.setResultCallback(new TokenResultCallback(callback));
                     }
                 }
@@ -293,7 +293,7 @@ namespace GooglePlayGames.Android
                 idTokenCallback(null);
                 return;
             }
-            var newScope = "audience:server:client_id:" + serverClientId;
+            string newScope = "audience:server:client_id:" + serverClientId;
             if (string.IsNullOrEmpty(idToken) || (newScope != idTokenScope))
             {
                 if (!fetchingIdToken)
@@ -334,7 +334,7 @@ namespace GooglePlayGames.Android
 
         public Status getStatus()
         {
-            var obj = InvokeCall<IntPtr>("getStatus", "()Lcom/google/android/gms/common/api/Status;");
+            IntPtr obj = InvokeCall<IntPtr>("getStatus", "()Lcom/google/android/gms/common/api/Status;");
             return new Status(obj);
         }
 

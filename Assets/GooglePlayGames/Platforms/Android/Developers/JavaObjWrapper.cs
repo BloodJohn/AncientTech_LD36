@@ -102,8 +102,8 @@ namespace Google.Developers
 
             // TODO: use a specific signature. This could be problematic when
             // using arguments that are subclasses of the declared parameter types.
-            var method = AndroidJNIHelper.GetConstructorID(RawClass, args);
-            var jArgs = ConstructArgArray(args);
+            IntPtr method = AndroidJNIHelper.GetConstructorID(RawClass, args);
+            jvalue[] jArgs = ConstructArgArray(args);
 
             // assign the raw object.
             raw = AndroidJNI.NewObject(RawClass, method, jArgs);
@@ -120,8 +120,8 @@ namespace Google.Developers
         protected static jvalue[] ConstructArgArray(object[] theArgs)
         {
 
-            var a = new object[theArgs.Length];
-            for (var i = 0; i < theArgs.Length; i++)
+            object[] a = new object[theArgs.Length];
+            for (int i = 0; i < theArgs.Length; i++)
             {
                 if (theArgs[i] is JavaObjWrapper)
                 {
@@ -133,9 +133,9 @@ namespace Google.Developers
                 }
             }
 
-            var args = AndroidJNIHelper.CreateJNIArgArray(a);
+            jvalue[] args = AndroidJNIHelper.CreateJNIArgArray(a);
 
-            for (var i = 0; i < theArgs.Length; i++)
+            for (int i = 0; i < theArgs.Length; i++)
             {
                 if (theArgs[i] is JavaObjWrapper)
                 {
@@ -143,7 +143,7 @@ namespace Google.Developers
                 }
                 else if (theArgs[i] is JavaInterfaceProxy)
                 {
-                    var v = AndroidJNIHelper.CreateJavaProxy(
+                    IntPtr v = AndroidJNIHelper.CreateJavaProxy(
                         (AndroidJavaProxy)theArgs[i]);
                     args[i].l = v;
                 }
@@ -151,7 +151,7 @@ namespace Google.Developers
 
             if (args.Length == 1)
             {
-                for (var i = 0; i < args.Length; i++)
+                for (int i = 0; i < args.Length; i++)
                 {
                     Debug.Log("---- [" + i + "] -- " + args[i].l);
                 }
@@ -171,12 +171,12 @@ namespace Google.Developers
         public static T StaticInvokeObjectCall<T>(
             string type, string name, string sig, params object[] args)
         {
-            var rawClass = AndroidJNI.FindClass(type);
-            var method = AndroidJNI.GetStaticMethodID(rawClass, name, sig);
-            var jArgs = ConstructArgArray(args);
-            var val = AndroidJNI.CallStaticObjectMethod(rawClass, method, jArgs);
+            IntPtr rawClass = AndroidJNI.FindClass(type);
+            IntPtr method = AndroidJNI.GetStaticMethodID(rawClass, name, sig);
+            jvalue[] jArgs = ConstructArgArray(args);
+            IntPtr val = AndroidJNI.CallStaticObjectMethod(rawClass, method, jArgs);
 
-            var c = typeof(T).GetConstructor(new Type[] { val.GetType() });
+            ConstructorInfo c = typeof(T).GetConstructor(new Type[] { val.GetType() });
             if (c != null)
             {
                 return (T)c.Invoke(new object[] { val });
@@ -188,7 +188,7 @@ namespace Google.Developers
                 return AndroidJNIHelper.ConvertFromJNIArray<T>(val);
             }
             Debug.Log("Trying cast....");
-            var t = typeof(T);
+            Type t = typeof(T);
             return (T)Marshal.PtrToStructure(val, t);
         }
 
@@ -202,9 +202,9 @@ namespace Google.Developers
         public static void StaticInvokeCallVoid(
             string type, string name, string sig, params object[] args)
         {
-            var rawClass = AndroidJNI.FindClass(type);
-            var method = AndroidJNI.GetStaticMethodID(rawClass, name, sig);
-            var jArgs = ConstructArgArray(args);
+            IntPtr rawClass = AndroidJNI.FindClass(type);
+            IntPtr method = AndroidJNI.GetStaticMethodID(rawClass, name, sig);
+            jvalue[] jArgs = ConstructArgArray(args);
             AndroidJNI.CallStaticVoidMethod(rawClass, method, jArgs);
         }
 
@@ -218,17 +218,17 @@ namespace Google.Developers
         /// <typeparam name="T">The 1st type parameter.</typeparam>
         public static T GetStaticObjectField<T>(string clsName, string name, string sig)
         {
-            var rawClass = AndroidJNI.FindClass(clsName);
-            var id = AndroidJNI.GetStaticFieldID(rawClass, name, sig);
-            var val = AndroidJNI.GetStaticObjectField(rawClass, id);
+            IntPtr rawClass = AndroidJNI.FindClass(clsName);
+            IntPtr id = AndroidJNI.GetStaticFieldID(rawClass, name, sig);
+            IntPtr val = AndroidJNI.GetStaticObjectField(rawClass, id);
 
-            var c = typeof(T).GetConstructor(new Type[] { val.GetType() });
+            ConstructorInfo c = typeof(T).GetConstructor(new Type[] { val.GetType() });
             if (c != null)
             {
                 return (T)c.Invoke(new object[] { val });
             }
 
-            var t = typeof(T);
+            Type t = typeof(T);
             return (T)Marshal.PtrToStructure(val, t);
         }
 
@@ -240,8 +240,8 @@ namespace Google.Developers
         /// <param name="name">Name.</param>
         public static int GetStaticIntField(string clsName, string name)
         {
-            var rawClass = AndroidJNI.FindClass(clsName);
-            var method = AndroidJNI.GetStaticFieldID(rawClass, name, "I");
+            IntPtr rawClass = AndroidJNI.FindClass(clsName);
+            IntPtr method = AndroidJNI.GetStaticFieldID(rawClass, name, "I");
             return AndroidJNI.GetStaticIntField(rawClass, method);
         }
 
@@ -253,8 +253,8 @@ namespace Google.Developers
         /// <param name="name">Name.</param>
         public static string GetStaticStringField(string clsName, string name)
         {
-            var rawClass = AndroidJNI.FindClass(clsName);
-            var method = AndroidJNI.GetStaticFieldID(rawClass, name, "Ljava/lang/String;");
+            IntPtr rawClass = AndroidJNI.FindClass(clsName);
+            IntPtr method = AndroidJNI.GetStaticFieldID(rawClass, name, "Ljava/lang/String;");
             return AndroidJNI.GetStaticStringField(rawClass, method);
         }
 
@@ -266,8 +266,8 @@ namespace Google.Developers
         /// <param name="name">Name.</param>
         public static float GetStaticFloatField(string clsName, string name)
         {
-            var rawClass = AndroidJNI.FindClass(clsName);
-            var method = AndroidJNI.GetStaticFieldID(rawClass, name, "F");
+            IntPtr rawClass = AndroidJNI.FindClass(clsName);
+            IntPtr method = AndroidJNI.GetStaticFieldID(rawClass, name, "F");
             return AndroidJNI.GetStaticFloatField(rawClass, method);
         }
 
@@ -279,17 +279,17 @@ namespace Google.Developers
         /// <param name="args">Arguments.</param>
         public void InvokeCallVoid(string name, string sig, params object[] args)
         {
-            var method = AndroidJNI.GetMethodID(RawClass, name, sig);
+            IntPtr method = AndroidJNI.GetMethodID(RawClass, name, sig);
 
-            var jArgs = ConstructArgArray(args);
+            jvalue[] jArgs = ConstructArgArray(args);
             AndroidJNI.CallVoidMethod(raw, method, jArgs);
         }
 
         public T InvokeCall<T>(string name, string sig, params object[] args)
         {
-            var t = typeof(T);
-            var method = AndroidJNI.GetMethodID(RawClass, name, sig);
-            var jArgs = ConstructArgArray(args);
+            Type t = typeof(T);
+            IntPtr method = AndroidJNI.GetMethodID(RawClass, name, sig);
+            jvalue[] jArgs = ConstructArgArray(args);
 
             if (method == IntPtr.Zero)
             {
@@ -341,10 +341,10 @@ namespace Google.Developers
 
         public static T StaticInvokeCall<T>(string type, string name, string sig, params object[] args)
         {
-            var t = typeof(T);
-            var rawClass = AndroidJNI.FindClass(type);
-            var method = AndroidJNI.GetStaticMethodID(rawClass, name, sig);
-            var jArgs = ConstructArgArray(args);
+            Type t = typeof(T);
+            IntPtr rawClass = AndroidJNI.FindClass(type);
+            IntPtr method = AndroidJNI.GetStaticMethodID(rawClass, name, sig);
+            jvalue[] jArgs = ConstructArgArray(args);
 
             if (t == typeof(bool))
             {
@@ -408,24 +408,24 @@ namespace Google.Developers
         public T InvokeObjectCall<T>(string name, string sig,
             params object[] theArgs)
         {
-            var methodId = AndroidJNI.GetMethodID(RawClass, name, sig);
+            IntPtr methodId = AndroidJNI.GetMethodID(RawClass, name, sig);
 
-            var jArgs = ConstructArgArray(theArgs);
+            jvalue[] jArgs = ConstructArgArray(theArgs);
 
-            var val = AndroidJNI.CallObjectMethod(raw, methodId, jArgs);
+            IntPtr val = AndroidJNI.CallObjectMethod(raw, methodId, jArgs);
 
             if (val.Equals(IntPtr.Zero))
             {
                 return default(T);
             }
 
-            var ctor = typeof(T).GetConstructor(new Type[] { val.GetType() });
+            ConstructorInfo ctor = typeof(T).GetConstructor(new Type[] { val.GetType() });
             if (ctor != null)
             {
                 return (T)ctor.Invoke(new object[] { val });
             }
 
-            var t = typeof(T);
+            Type t = typeof(T);
             return (T)Marshal.PtrToStructure(val, t);
         }
     }

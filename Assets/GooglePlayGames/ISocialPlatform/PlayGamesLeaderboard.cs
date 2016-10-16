@@ -133,7 +133,7 @@ namespace GooglePlayGames
         {
             get
             {
-                var arr = new PlayGamesScore[mScoreList.Count];
+                PlayGamesScore[] arr = new PlayGamesScore[mScoreList.Count];
                 mScoreList.CopyTo(arr);
                 return arr;
             }
@@ -157,7 +157,7 @@ namespace GooglePlayGames
                 SetMaxRange(data.ApproximateCount);
                 SetTitle(data.Title);
                 SetLocalUserScore((PlayGamesScore)data.PlayerScore);
-                foreach (var score in data.Scores)
+                foreach (IScore score in data.Scores)
                 {
                     AddScore((PlayGamesScore)score);
                 }
@@ -190,7 +190,7 @@ namespace GooglePlayGames
             }
             else
             {
-                foreach (var fid in mFilteredUserIds)
+                foreach (string fid in mFilteredUserIds)
                 {
                     if (fid.Equals(score.userID))
                     {

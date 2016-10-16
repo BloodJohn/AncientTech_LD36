@@ -48,7 +48,7 @@ namespace GooglePlayGames.Native.PInvoke
                                                                  IntPtr userData)
         {
 
-            var callback =
+            Action<S.InitializationStatus> callback =
                 Callbacks.IntPtrToPermanentCallback<Action<S.InitializationStatus>>(userData);
 
             if (callback == null)

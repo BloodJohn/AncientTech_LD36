@@ -53,11 +53,11 @@ public class NativeNearbyConnectionClientFactory {
             //Read the Service ID
             NearbyConnectionsManager.ReadServiceId();
 
-            var sBuilder = new NearbyConnectionsManagerBuilder();
+            NearbyConnectionsManagerBuilder sBuilder = new NearbyConnectionsManagerBuilder();
             // The connection manager needs to be initialized before using it, so
             // wait for initialization.
             sBuilder.SetOnInitializationFinished(OnManagerInitialized);
-            var cfg = new AndroidClient().CreatePlatformConfiguration();
+            PlatformConfiguration cfg = new AndroidClient().CreatePlatformConfiguration();
             Debug.Log("Building manager Now");
             sManager = sBuilder.Build(cfg);
         }

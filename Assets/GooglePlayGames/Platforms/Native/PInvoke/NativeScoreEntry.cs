@@ -58,15 +58,15 @@ namespace GooglePlayGames.Native.PInvoke
         internal PlayGamesScore AsScore(string leaderboardId)
         {
             DateTime date;
-            var UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            var val = GetLastModifiedTime();
+            DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            ulong val = GetLastModifiedTime();
             if (val == MinusOne)
             {
                 val = 0;
             }
             date = UnixEpoch.AddMilliseconds(val);
 
-            var score = new PlayGamesScore(
+            PlayGamesScore score = new PlayGamesScore(
                                        date,
                 leaderboardId,
                             GetScore().GetRank(),

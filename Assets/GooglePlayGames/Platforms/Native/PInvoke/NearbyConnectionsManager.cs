@@ -180,7 +180,7 @@ namespace GooglePlayGames.Native.PInvoke
 #if UNITY_ANDROID
                 using (var jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
                 {
-                    var activity = jc.GetStatic<AndroidJavaObject>("currentActivity");
+                    AndroidJavaObject activity = jc.GetStatic<AndroidJavaObject>("currentActivity");
                     return activity.Call<string>("getPackageName");
                    
                 }

@@ -63,7 +63,7 @@ namespace GooglePlayGames.Native.PInvoke
 
             internal NativePlayerStats PlayerStats()
             {
-                var p = C.StatsManager_FetchForPlayerResponse_GetData(SelfPtr());
+                IntPtr p = C.StatsManager_FetchForPlayerResponse_GetData(SelfPtr());
                 return new NativePlayerStats(p);
             }
 

@@ -107,8 +107,8 @@ namespace GooglePlayGames.BasicApi.Multiplayer
 
         public override string ToString()
         {
-            var s = "[MatchOutcome";
-            foreach (var pid in mParticipantIds)
+            string s = "[MatchOutcome";
+            foreach (string pid in mParticipantIds)
             {
                 s += string.Format(" {0}->({1},{2})", pid,
                     GetResultFor(pid), GetPlacementFor(pid));

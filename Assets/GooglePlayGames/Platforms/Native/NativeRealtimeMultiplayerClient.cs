@@ -202,7 +202,7 @@ namespace GooglePlayGames.Native
                         return;
                     }
 
-                    var invites = new List<Invitation>();
+                    List<Invitation> invites = new List<Invitation>();
                     foreach (var invitation in response.Invitations())
                     {
                         using (invitation)
@@ -1070,7 +1070,7 @@ namespace GooglePlayGames.Native
 
             internal override void HandleConnectedSetChanged(NativeRealTimeRoom room)
             {
-                var newConnectedSet = new HashSet<string>();
+                HashSet<string> newConnectedSet = new HashSet<string>();
 
                 // handle when an invitation is received, so number of total
                 // participants is not known.
@@ -1242,8 +1242,8 @@ namespace GooglePlayGames.Native
 
             internal override void HandleConnectedSetChanged(NativeRealTimeRoom room)
             {
-                var newlyConnected = new List<string>();
-                var newlyLeft = new List<string>();
+                List<string> newlyConnected = new List<string>();
+                List<string> newlyLeft = new List<string>();
 
                 var updatedParticipants = room.Participants().ToDictionary(p => p.Id());
 

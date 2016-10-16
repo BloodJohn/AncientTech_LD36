@@ -99,7 +99,7 @@ namespace GooglePlayGames.Native.PInvoke
         {
             get
             {
-                var acceptedTime = C.Quest_AcceptedTime(SelfPtr());
+                long acceptedTime = C.Quest_AcceptedTime(SelfPtr());
 
                 if (acceptedTime == 0)
                 {

@@ -46,7 +46,7 @@ namespace GooglePlayGames.Editor
 
         private GPGSProjectSettings()
         {
-            var ds = Path.DirectorySeparatorChar.ToString();
+            string ds = Path.DirectorySeparatorChar.ToString();
             mFile = "ProjectSettings/GooglePlayGameSettings.txt".Replace("/", ds);
 
             StreamReader rd = null;
@@ -59,7 +59,7 @@ namespace GooglePlayGames.Editor
                     "Assets/Editor/projsettings.txt".Replace("/", ds)
                 };
             
-            foreach (var f in fileLocations)
+            foreach (string f in fileLocations)
             {
                 if (File.Exists(f))
                 {
@@ -73,14 +73,14 @@ namespace GooglePlayGames.Editor
             {
                 while (!rd.EndOfStream)
                 {
-                    var line = rd.ReadLine();
+                    string line = rd.ReadLine();
                     if (line == null || line.Trim().Length == 0)
                     {
                         break;
                     }
 
                     line = line.Trim();
-                    var p = line.Split(new char[] { '=' }, 2);
+                    string[] p = line.Split(new char[] { '=' }, 2);
                     if (p.Length >= 2)
                     {
                         mDict[p[0].Trim()] = p[1].Trim();
@@ -111,7 +111,7 @@ namespace GooglePlayGames.Editor
         {
             if (mDict.ContainsKey(key))
             {
-                var val = WWW.UnEscapeURL(mDict[key]);
+                string val = WWW.UnEscapeURL(mDict[key]);
                 return val;
             }
             else
@@ -137,7 +137,7 @@ namespace GooglePlayGames.Editor
 
         public void Set(string key, string val)
         {
-            var escaped = WWW.EscapeURL(val);
+            string escaped = WWW.EscapeURL(val);
             mDict[key] = escaped;
             mDirty = true;
         }
@@ -150,8 +150,8 @@ namespace GooglePlayGames.Editor
         public void Save()
         {
             // See if we are building the plugin, and don't write the settings file
-            var args = System.Environment.GetCommandLineArgs();
-            foreach (var a in args)
+            string[] args = System.Environment.GetCommandLineArgs();
+            foreach (string a in args)
             {
                 if (a == "-g.building")
                 {
@@ -165,8 +165,8 @@ namespace GooglePlayGames.Editor
                 return;
             }
 
-            var wr = new StreamWriter(mFile, false);
-            foreach (var key in mDict.Keys)
+            StreamWriter wr = new StreamWriter(mFile, false);
+            foreach (string key in mDict.Keys)
             {
                 wr.WriteLine(key + "=" + mDict[key]);
             }

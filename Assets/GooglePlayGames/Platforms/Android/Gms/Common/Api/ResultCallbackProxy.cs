@@ -38,9 +38,9 @@ namespace Com.Google.Android.Gms.Common.Api
         }
         public void onResult(AndroidJavaObject arg_Result_1)
         {
-            var ptr = arg_Result_1.GetRawObject();
+            IntPtr ptr = arg_Result_1.GetRawObject();
             R mapped_arg_Result_1;
-            var c = typeof(R).GetConstructor(new Type[] { ptr.GetType() });
+            System.Reflection.ConstructorInfo c = typeof(R).GetConstructor(new Type[] { ptr.GetType() });
             if (c != null)
             {
                 mapped_arg_Result_1 = (R)c.Invoke(new object[] { ptr });
@@ -48,7 +48,7 @@ namespace Com.Google.Android.Gms.Common.Api
             else
             {
                 // check for no arg ctor
-                var c0 = typeof(R).GetConstructor(new Type[0]);
+                System.Reflection.ConstructorInfo c0 = typeof(R).GetConstructor(new Type[0]);
                 mapped_arg_Result_1 = (R)c0.Invoke(new object[0]);
                 System.Runtime.InteropServices.Marshal.PtrToStructure(ptr, mapped_arg_Result_1);
             }

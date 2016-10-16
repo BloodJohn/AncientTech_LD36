@@ -114,7 +114,7 @@ namespace GooglePlayGames.Native.PInvoke
 
         internal PlayerStats AsPlayerStats()
         {
-            var playerStats = new PlayerStats();
+            PlayerStats playerStats = new PlayerStats();
 
             playerStats.Valid = Valid();
             if (Valid ()) {

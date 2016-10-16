@@ -154,7 +154,7 @@ namespace GooglePlayGames.Native.PInvoke
         internal RealTimeEventListenerHelper SetOnDataReceivedCallback(
             Action<NativeRealTimeRoom, MultiplayerParticipant, byte[], bool> callback)
         {
-            var onData = Callbacks.ToIntPtr(callback);
+            IntPtr onData = Callbacks.ToIntPtr(callback);
 
             Logger.d("OnData Callback has addr: " + onData.ToInt64());
 
@@ -212,7 +212,7 @@ namespace GooglePlayGames.Native.PInvoke
         {
             Action<IntPtr> pointerReceiver = result =>
             {
-                var converted = NativeRealTimeRoom.FromPointer(result);
+                NativeRealTimeRoom converted = NativeRealTimeRoom.FromPointer(result);
                 if (callback != null)
                 {
                     callback(converted);

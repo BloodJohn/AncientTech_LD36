@@ -54,7 +54,7 @@ namespace GooglePlayGames.Editor
         public static void MenuItemGooglePlayGamesAndroidSdk()
         {
             // check that Android SDK is there
-            var sdkPath = GPGSUtil.GetAndroidSdkPath();
+            string sdkPath = GPGSUtil.GetAndroidSdkPath();
             if (!GPGSUtil.HasAndroidSdk())
             {
                 EditorUtility.DisplayDialog(GPGSStrings.AndroidSetup.SdkNotFound,
@@ -62,15 +62,15 @@ namespace GooglePlayGames.Editor
                 return;
             }
 
-            var launch = EditorUtility.DisplayDialog(
+            bool launch = EditorUtility.DisplayDialog(
                               GPGSStrings.ExternalLinks.GooglePlayGamesAndroidSdkTitle,
                               GPGSStrings.ExternalLinks.GooglePlayGamesAndroidSdkBlurb, GPGSStrings.Yes,
                               GPGSStrings.No);
             if (launch)
             {
-                var exeName =
+                string exeName =
                     sdkPath + GPGSUtil.SlashesToPlatformSeparator("/tools/android");
-                var altExeName =
+                string altExeName =
                     sdkPath + GPGSUtil.SlashesToPlatformSeparator("/tools/android.bat");
 
                 EditorUtility.DisplayDialog(
@@ -99,7 +99,7 @@ namespace GooglePlayGames.Editor
         [MenuItem("Window/Google Play Games/About/About the Plugin...", false, 300)]
         public static void MenuItemAbout()
         {
-            var msg = GPGSStrings.AboutText +
+            string msg = GPGSStrings.AboutText +
                 PluginVersion.VersionString + " (" +
                          string.Format("0x{0:X8}", GooglePlayGames.PluginVersion.VersionInt) + ")";
             EditorUtility.DisplayDialog(GPGSStrings.AboutTitle, msg,

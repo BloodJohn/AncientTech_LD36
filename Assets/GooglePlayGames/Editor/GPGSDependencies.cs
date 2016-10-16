@@ -37,7 +37,7 @@ public class GPGSDependencies : AssetPostprocessor
 #if UNITY_ANDROID
             // Setup the resolver using reflection as the module may not be
             // available at compile time.
-            var playServicesSupport = Google.VersionHandler.FindClass(
+            Type playServicesSupport = Google.VersionHandler.FindClass(
                 "Google.JarResolver", "Google.JarResolver.PlayServicesSupport");
             if (playServicesSupport == null) {
                 return;
@@ -113,7 +113,7 @@ public class GPGSDependencies : AssetPostprocessor
         private static void OnPostprocessAllAssets(
                 string[] importedAssets, string[] deletedAssets,
                 string[] movedAssets, string[] movedFromPath) {
-            foreach (var asset in importedAssets) {
+            foreach (string asset in importedAssets) {
                 if (asset.Contains("IOSResolver") ||
                     asset.Contains("JarResolver")) {
                     RegisterDependencies();
