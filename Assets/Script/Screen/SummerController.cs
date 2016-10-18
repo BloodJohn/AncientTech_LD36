@@ -49,6 +49,7 @@ public class SummerController : MonoBehaviour
     void Start()
     {
         BigFlockAchievement();
+        Game10Achievement();
     }
 
     void Update()
@@ -162,7 +163,12 @@ public class SummerController : MonoBehaviour
     private void BigFlockAchievement()
     {
         if (CoreGame.Instance.SheepCount < 20) return;
-        if (PlayerPrefs.HasKey(GPGSIds.achievement_big_flock)) return;
+        if (PlayerPrefs.HasKey(GPGSIds.achievement_big_flock))
+        {
+            GreatFlockAchievement();
+            return;
+        }
+
 
         // unlock achievement (achievement ID "Cfjewijawiu_QA")
         Social.ReportProgress(GPGSIds.achievement_big_flock, 100.0f, (bool success) =>
@@ -175,5 +181,41 @@ public class SummerController : MonoBehaviour
         });
     }
 
+    /// <summary>Стадо из 30 овец</summary>
+    private void GreatFlockAchievement()
+    {
+        if (CoreGame.Instance.SheepCount < 30) return;
+        if (PlayerPrefs.HasKey(GPGSIds.achievement_great_flock)) return;
+
+        // unlock achievement (achievement ID "Cfjewijawiu_QA")
+        Social.ReportProgress(GPGSIds.achievement_great_flock, 100.0f, (bool success) =>
+        {
+            // handle success or failure
+            if (success)
+            {
+                PlayerPrefs.SetInt(GPGSIds.achievement_great_flock, 100);
+            }
+        });
+    }
+
+    /// <summary>сыграл 10 игр</summary>
+    private void Game10Achievement()
+    {
+        if (CoreGame.Instance.WinterCount > 0) return;
+        var games = PlayerPrefs.GetInt(GPGSIds.achievement_play_test, 0);
+        games++;
+        PlayerPrefs.SetInt(GPGSIds.achievement_play_test, games);
+        if (games != 11) return;
+
+        // unlock achievement (achievement ID "Cfjewijawiu_QA")
+        Social.ReportProgress(GPGSIds.achievement_play_test, 100.0f, (bool success) =>
+        {
+            // handle success or failure
+            if (success)
+            {
+                PlayerPrefs.SetInt(GPGSIds.achievement_play_test, 100);
+            }
+        });
+    }
     #endregion
 }

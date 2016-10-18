@@ -1,4 +1,5 @@
-﻿using SmartLocalization;
+﻿using System.Collections.Generic;
+using SmartLocalization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -67,11 +68,15 @@ public class DefeatController : MonoBehaviour
 
     private void LeaderBoard()
     {
+        var oldResult = PlayerPrefs.GetInt(GPGSIds.leaderboard_woolen_fabric, 0);
+        if (CoreGame.Instance.FeltedCount <= oldResult) return;
+
         Social.ReportScore(CoreGame.Instance.FeltedCount, GPGSIds.leaderboard_woolen_fabric,
             (bool success) =>
             {
                 if (success)
                 {
+                    PlayerPrefs.SetInt(GPGSIds.leaderboard_woolen_fabric, CoreGame.Instance.FeltedCount);
                     Social.ShowLeaderboardUI();
                 }
             });
