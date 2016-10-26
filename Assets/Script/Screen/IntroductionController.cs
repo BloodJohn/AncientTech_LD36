@@ -74,7 +74,7 @@ public class IntroductionController : MonoBehaviour
             if (!success)
             {
                 //пишем для отладки, потом надо убрать.
-                author.text = "Social.localUser.Authenticate - failed";
+                //author.text = "Social.localUser.Authenticate - failed";
             }
         });
     }

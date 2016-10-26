@@ -7,8 +7,8 @@ public class WinterController : MonoBehaviour
 {
     #region variables
     public const string sceneName = "Winter";
-
-    public const int dayMax = 24;
+    public Color blackColor;
+    public Color redColor;
     #endregion
 
     #region UI variables
@@ -132,6 +132,27 @@ public class WinterController : MonoBehaviour
             //все овцы подохли
             SceneManager.LoadScene(DefeatController.sceneName);
         }
+
+        if (CoreGame.Instance.SheepCount > CoreGame.Instance.HaylageCount)
+        {
+            sheepLabel.text = string.Format("{0}/{1}", CoreGame.Instance.SheepCount, CoreGame.Instance.HaylageCount);
+            sheepLabel.color = redColor;
+        }
+        else
+        {
+            sheepLabel.color = blackColor;
+        }
+
+        if (CoreGame.Instance.DayCount > CoreGame.Instance.FishCount + CoreGame.Instance.MeatCount)
+        {
+            meatLabel.text = string.Format("{0}/{1}", CoreGame.Instance.MeatCount, CoreGame.Instance.DayCount - CoreGame.Instance.FishCount);
+            meatLabel.color = redColor;
+        }
+        else
+        {
+            meatLabel.color = blackColor;
+        }
+
     }
 
     public void SummerClick()

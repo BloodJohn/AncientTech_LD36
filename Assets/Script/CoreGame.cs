@@ -53,7 +53,7 @@ public class CoreGame : MonoBehaviour
         WinterCount = 0;
         LongWinterCount = 0;
         DayCount = 0;
-        SheepCount = 12;
+        SheepCount = SheepStartCount;
         HaylageCount = 0;
         WoolCount = 0;
         FeltedCount = 0;
