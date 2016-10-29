@@ -37,6 +37,8 @@ public class DefeatController : MonoBehaviour
 
         restartButton.gameObject.SetActive(!showVoteBtn);
         voteButton.gameObject.SetActive(showVoteBtn);
+
+        PlayerPrefs.DeleteKey(CoreGame.GameSaveKey);
     }
 
     public void Start()

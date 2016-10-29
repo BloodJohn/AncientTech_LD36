@@ -16,7 +16,7 @@ public class CoreGame : MonoBehaviour
     /// <summary>рыбы в море</summary>
     public const int SeaMax = 200;
     /// <summary>Ключ куда мы сохраним игру</summary>
-    private const string GameSaveKey = "gameSave";
+    public const string GameSaveKey = "gameSave";
 
     /// <summary>сколько зим прошло</summary>
     public int WinterCount;
@@ -73,7 +73,7 @@ public class CoreGame : MonoBehaviour
     {
         var json = JsonUtility.ToJson(this);
         PlayerPrefs.SetString(GameSaveKey, json);
-        Debug.LogFormat("save: {0}", json);
+        //Debug.LogFormat("save: {0}", json);
     }
 
     public void LoadGame()
@@ -141,7 +141,14 @@ public class CoreGame : MonoBehaviour
         TurnSummerDay();
 
         var production = Mathf.RoundToInt((float)SeaCount / 100);
-        if (production <= 0) production = 1;
+        if (production <= 0)
+        {
+            //после 10 зимовки рыбы в море может не быть совсем
+            if (WinterCount < 10)
+                production = 1;
+            else
+                production = 0;
+        }
 
         FishCount += production;
         SeaCount -= production;

@@ -9,6 +9,11 @@ public class WinterController : MonoBehaviour
     public const string sceneName = "Winter";
     public Color blackColor;
     public Color redColor;
+
+    /// <summary>сколько рыбы было в начале зимы?</summary>
+    private int startFishCount;
+    /// <summary>сколько останется рыбы, если питаться только ею</summary>
+    private int seaFoodCount;
     #endregion
 
     #region UI variables
@@ -46,6 +51,8 @@ public class WinterController : MonoBehaviour
     public void Awake()
     {
         CoreGame.Instance.StartWinter();
+        startFishCount = CoreGame.Instance.FishCount;
+        seaFoodCount = CoreGame.Instance.FishCount - CoreGame.Instance.DayCount;
         ShowStats();
 
         summerButton.GetComponentInChildren<Text>().text = LanguageManager.Instance.GetTextValue("summer_button");
@@ -153,6 +160,12 @@ public class WinterController : MonoBehaviour
             meatLabel.color = blackColor;
         }
 
+        if (!isWinter)
+        {
+            SeaFoodAchievement();
+            CarnivoreAchievement();
+            //Debug.LogFormat("fish {0} begin {1} end {2}", CoreGame.Instance.FishCount, startFishCount, seaFoodCount);
+        }
     }
 
     public void SummerClick()
@@ -182,6 +195,40 @@ public class WinterController : MonoBehaviour
             if (success)
             {
                 PlayerPrefs.SetInt(GPGSIds.achievement_first_batch_of_fabric, 100);
+            }
+        });
+    }
+
+    /// <summary>рыбная диета</summary>
+    private void SeaFoodAchievement()
+    {
+        if (CoreGame.Instance.FishCount > seaFoodCount) return;
+        if (PlayerPrefs.HasKey(GPGSIds.achievement_seafood)) return;
+
+        // unlock achievement (achievement ID "Cfjewijawiu_QA")
+        Social.ReportProgress(GPGSIds.achievement_seafood, 100.0f, (bool success) =>
+        {
+            // handle success or failure
+            if (success)
+            {
+                PlayerPrefs.SetInt(GPGSIds.achievement_seafood, 100);
+            }
+        });
+    }
+
+    /// <summary>мясная диета</summary>
+    private void CarnivoreAchievement()
+    {
+        if (CoreGame.Instance.FishCount < startFishCount) return;
+        if (PlayerPrefs.HasKey(GPGSIds.achievement_arnivore)) return;
+
+        // unlock achievement (achievement ID "Cfjewijawiu_QA")
+        Social.ReportProgress(GPGSIds.achievement_arnivore, 100.0f, (bool success) =>
+        {
+            // handle success or failure
+            if (success)
+            {
+                PlayerPrefs.SetInt(GPGSIds.achievement_arnivore, 100);
             }
         });
     }

@@ -146,16 +146,33 @@ public class SummerController : MonoBehaviour
     /// <summary>большой улов</summary>
     private void BigFishAchievement(int fishing)
     {
-        if (PlayerPrefs.HasKey(GPGSIds.achievement_big_fish)) return;
-        if (fishing < 3) return;
+        if (fishing <=0) DeadSeaAchievement(fishing);
 
-        // unlock achievement (achievement ID "Cfjewijawiu_QA")
+        if (fishing < 3) return;
+        if (PlayerPrefs.HasKey(GPGSIds.achievement_big_fish)) return;
+
         Social.ReportProgress(GPGSIds.achievement_big_fish, 100.0f, (bool success) =>
         {
             // handle success or failure
             if (success)
             {
                 PlayerPrefs.SetInt(GPGSIds.achievement_big_fish, 100);
+            }
+        });
+    }
+
+    /// <summary>метрвое море</summary>
+    private void DeadSeaAchievement(int fishing)
+    {
+        if (fishing > 0) return;
+        if (PlayerPrefs.HasKey(GPGSIds.achievement_dead_sea)) return;
+
+        Social.ReportProgress(GPGSIds.achievement_dead_sea, 100.0f, (bool success) =>
+        {
+            // handle success or failure
+            if (success)
+            {
+                PlayerPrefs.SetInt(GPGSIds.achievement_dead_sea, 100);
             }
         });
     }
