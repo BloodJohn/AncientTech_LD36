@@ -60,7 +60,7 @@ namespace GooglePlayGames.OurUtils
             if (Application.isPlaying)
             {
                 // add an invisible game object to the scene
-                GameObject obj = new GameObject("PlayGames_QueueRunner");
+                var obj = new GameObject("PlayGames_QueueRunner");
                 DontDestroyOnLoad(obj);
                 instance = obj.AddComponent<PlayGamesHelperObject>();
             }
@@ -130,7 +130,7 @@ namespace GooglePlayGames.OurUtils
             // execute queued actions (from local queue)
             // use a loop to avoid extra memory allocations using the
             // forEach
-            for (int i = 0; i < localQueue.Count; i++)
+            for (var i = 0; i < localQueue.Count; i++)
             {
                 localQueue[i].Invoke();
             }
@@ -138,7 +138,7 @@ namespace GooglePlayGames.OurUtils
 
         public void OnApplicationFocus(bool focused)
         {
-            foreach (Action<bool> cb in sFocusCallbackList)
+            foreach (var cb in sFocusCallbackList)
             {
                 try
                 {
@@ -154,7 +154,7 @@ namespace GooglePlayGames.OurUtils
 
         public void OnApplicationPause(bool paused)
         {
-            foreach (Action<bool> cb in sPauseCallbackList)
+            foreach (var cb in sPauseCallbackList)
             {
                 try
                 {

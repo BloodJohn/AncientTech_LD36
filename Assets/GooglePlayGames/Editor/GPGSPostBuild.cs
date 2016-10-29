@@ -19,11 +19,8 @@
 
 namespace GooglePlayGames.Editor
 {
-    using System.Collections.Generic;
-    using System.IO;
     using UnityEditor.Callbacks;
     using UnityEditor;
-    using UnityEngine;
 
     // Use the included xcode support for unity 5+,
     // otherwise use the backported code.
@@ -194,10 +191,10 @@ namespace GooglePlayGames.Editor
 
         private static string GetReverseClientId()
         {
-            string clientId = GPGSProjectSettings.Instance.Get(GPGSUtil.IOSCLIENTIDKEY);
-            string[] parts = clientId.Split ('.');
-            string revClientId = "";
-            foreach (string p in parts)
+            var clientId = GPGSProjectSettings.Instance.Get(GPGSUtil.IOSCLIENTIDKEY);
+            var parts = clientId.Split ('.');
+            var revClientId = "";
+            foreach (var p in parts)
             {
                 if (revClientId.Length == 0)
                 {

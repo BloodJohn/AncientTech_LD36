@@ -133,7 +133,7 @@ namespace GooglePlayGames.Native.PInvoke
 
             internal List<NativeEvent> Data()
             {
-                IntPtr[] events = PInvokeUtilities.OutParamsToArray<IntPtr>((out_arg, out_size) => C.EventManager_FetchAllResponse_GetData(SelfPtr(), out_arg, out_size));
+                var events = PInvokeUtilities.OutParamsToArray<IntPtr>((out_arg, out_size) => C.EventManager_FetchAllResponse_GetData(SelfPtr(), out_arg, out_size));
 
                 return events.Select(ptr => new NativeEvent(ptr)).ToList();
             }

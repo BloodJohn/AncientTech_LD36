@@ -23,7 +23,6 @@ namespace GooglePlayGames.Native.PInvoke
     using System;
     using System.Runtime.InteropServices;
     using C = GooglePlayGames.Native.Cwrapper.MessageListenerHelper;
-    using Types = GooglePlayGames.Native.Cwrapper.Types;
 
     internal class NativeMessageListenerHelper : BaseReferenceHolder
     {

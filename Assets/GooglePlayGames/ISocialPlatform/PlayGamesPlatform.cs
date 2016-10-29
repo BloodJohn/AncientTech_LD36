@@ -678,9 +678,9 @@ namespace GooglePlayGames
             }
 
             // figure out if it's a standard or incremental achievement
-            bool isIncremental = false;
+            var isIncremental = false;
             int curSteps = 0, totalSteps = 0;
-            Achievement ach = mClient.GetAchievement(achievementID);
+            var ach = mClient.GetAchievement(achievementID);
             if (ach == null)
             {
                 GooglePlayGames.OurUtils.Logger.w(
@@ -717,8 +717,8 @@ namespace GooglePlayGames
                         " is less than or equal to 1. You might be trying to use values in the range of [0,1], while values are expected to be within the range [0,100]. If you are using the latter, you can safely ignore this message.");
                 }
 
-                int targetSteps = (int) Math.Round((progress / 100f) * totalSteps);
-                int numSteps = targetSteps - curSteps;
+                var targetSteps = (int) Math.Round((progress / 100f) * totalSteps);
+                var numSteps = targetSteps - curSteps;
                 GooglePlayGames.OurUtils.Logger.d("Target steps: " +
                     targetSteps + ", cur steps:" + curSteps);
                 GooglePlayGames.OurUtils.Logger.d("Steps to increment: " +
@@ -840,8 +840,8 @@ namespace GooglePlayGames
 
             mClient.LoadAchievements(ach =>
                 {
-                    IAchievementDescription[] data = new IAchievementDescription[ach.Length];
-                    for (int i = 0; i < data.Length; i++)
+                    var data = new IAchievementDescription[ach.Length];
+                    for (var i = 0; i < data.Length; i++)
                     {
                         data[i] = new PlayGamesAchievement(ach[i]);
                     }
@@ -866,8 +866,8 @@ namespace GooglePlayGames
 
             mClient.LoadAchievements(ach =>
                 {
-                    IAchievement[] data = new IAchievement[ach.Length];
-                    for (int i = 0; i < data.Length; i++)
+                    var data = new IAchievement[ach.Length];
+                    for (var i = 0; i < data.Length; i++)
                     {
                         data[i] = new PlayGamesAchievement(ach[i]);
                     }
@@ -917,7 +917,7 @@ namespace GooglePlayGames
             }
 
             GooglePlayGames.OurUtils.Logger.d("ReportScore: score=" + score + ", board=" + board);
-            string leaderboardId = MapId(board);
+            var leaderboardId = MapId(board);
             mClient.SubmitScore(leaderboardId, score, callback);
         }
 
@@ -946,7 +946,7 @@ namespace GooglePlayGames
             GooglePlayGames.OurUtils.Logger.d("ReportScore: score=" + score +
                 ", board=" + board +
                 " metadata=" + metadata);
-            string leaderboardId = MapId(board);
+            var leaderboardId = MapId(board);
             mClient.SubmitScore(leaderboardId, score, metadata, callback);
         }
 
@@ -1277,10 +1277,10 @@ namespace GooglePlayGames
             LeaderboardScoreData scoreData,
             Action<bool> callback)
         {
-            bool ok = board.SetFromData(scoreData);
+            var ok = board.SetFromData(scoreData);
             if (ok && !board.HasAllScores() && scoreData.NextPageToken != null)
             {
-                int rowCount = board.range.count - board.ScoreCount;
+                var rowCount = board.range.count - board.ScoreCount;
 
                 // need to load more scores
                 mClient.LoadMoreScores(
@@ -1328,7 +1328,7 @@ namespace GooglePlayGames
 
             if (mIdMap.ContainsKey(id))
             {
-                string result = mIdMap[id];
+                var result = mIdMap[id];
                 GooglePlayGames.OurUtils.Logger.d("Mapping alias " + id + " to ID " + result);
                 return result;
             }

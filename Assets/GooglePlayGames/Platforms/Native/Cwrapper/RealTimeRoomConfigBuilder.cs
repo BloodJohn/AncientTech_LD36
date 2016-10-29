@@ -20,7 +20,6 @@ namespace GooglePlayGames.Native.Cwrapper
 {
     using System;
     using System.Runtime.InteropServices;
-    using System.Text;
 
     internal static class RealTimeRoomConfigBuilder
     {

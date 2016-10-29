@@ -52,10 +52,10 @@ namespace GooglePlayGames.Native.PInvoke
 
         internal void FetchList(string[] userIds, Action<NativePlayer[]> callback)
         {
-            FetchResponseCollector coll = new FetchResponseCollector();
+            var coll = new FetchResponseCollector();
             coll.pendingCount = userIds.Length;
             coll.callback = callback;
-            foreach(string id in userIds)
+            foreach(var id in userIds)
             {
                 C.PlayerManager_Fetch(mGameServices.AsHandle(),
                     Types.DataSource.CACHE_OR_NETWORK,
@@ -81,7 +81,7 @@ namespace GooglePlayGames.Native.PInvoke
             if (resp.Status() == Status.ResponseStatus.VALID ||
                 resp.Status() == Status.ResponseStatus.VALID_BUT_STALE)
             {
-                NativePlayer player = resp.GetPlayer();
+                var player = resp.GetPlayer();
                 collector.results.Add(player);
             }
             collector.pendingCount--;
@@ -112,12 +112,12 @@ namespace GooglePlayGames.Native.PInvoke
         internal void HandleFetchCollected(FetchListResponse rsp,
             Action<GooglePlayGames.BasicApi.ResponseStatus, List<Player>> callback)
         {
-            List<Player> players = new List<Player>();
+            var players = new List<Player>();
             if (rsp.Status() == Status.ResponseStatus.VALID ||
                 rsp.Status() == Status.ResponseStatus.VALID_BUT_STALE)
             {
                 Logger.d("Got "  + rsp.Length().ToUInt64() + " players");
-                foreach (NativePlayer p in rsp)
+                foreach (var p in rsp)
                 {
                    players.Add(p.AsPlayer());
                 }

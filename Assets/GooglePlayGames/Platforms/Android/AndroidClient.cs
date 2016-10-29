@@ -50,7 +50,7 @@ namespace GooglePlayGames.Android
                         // will return before this happens. If we do not hold onto a durable reference,
                         // the code calling us will clean up the intent before we have a chance to display
                         // it.
-                        IntPtr intentRef = AndroidJNI.NewGlobalRef(intent);
+                        var intentRef = AndroidJNI.NewGlobalRef(intent);
 
                         PlayGamesHelperObject.RunOnGameThread(() =>
                             {
@@ -85,8 +85,8 @@ namespace GooglePlayGames.Android
         // java classes we require).
         private static void LaunchBridgeIntent(IntPtr bridgedIntent)
         {
-            object[] objectArray = new object[2];
-            jvalue[] jArgs = AndroidJNIHelper.CreateJNIArgArray(objectArray);
+            var objectArray = new object[2];
+            var jArgs = AndroidJNIHelper.CreateJNIArgArray(objectArray);
             try
             {
                 using (var bridgeClass = new AndroidJavaClass(BridgeActivityClass))
@@ -95,7 +95,7 @@ namespace GooglePlayGames.Android
                     {
                         // Unity no longer supports constructing an AndroidJavaObject using an IntPtr,
                         // so I have to manually munge with JNI here.
-                        IntPtr methodId = AndroidJNI.GetStaticMethodID(bridgeClass.GetRawClass(),
+                        var methodId = AndroidJNI.GetStaticMethodID(bridgeClass.GetRawClass(),
                                               LaunchBridgeMethod,
                                               LaunchBridgeSignature);
                         jArgs[0].l = currentActivity.GetRawObject();
@@ -119,7 +119,7 @@ namespace GooglePlayGames.Android
                                     Action<CommonStatusCodes,
                                     GooglePlayGames.BasicApi.PlayerStats> callback)
         {
-            GoogleApiClient client = new GoogleApiClient(apiClient);
+            var client = new GoogleApiClient(apiClient);
             StatsResultCallback resCallback;
 
             try
@@ -152,7 +152,7 @@ namespace GooglePlayGames.Android
                 return;
             }
 
-            PendingResult<Stats_LoadPlayerStatsResultObject> pr =
+            var pr =
                     Games.Stats.loadPlayerStats(client, true);
 
             pr.setResultCallback(resCallback);

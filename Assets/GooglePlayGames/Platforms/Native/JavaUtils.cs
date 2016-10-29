@@ -20,8 +20,8 @@ namespace GooglePlayGames.Native {
 using System;
 using UnityEngine;
 using System.Reflection;
-using GooglePlayGames.OurUtils;
-internal static class JavaUtils {
+
+    internal static class JavaUtils {
 
     private static ConstructorInfo IntPtrConstructor =
         typeof(AndroidJavaObject).GetConstructor(

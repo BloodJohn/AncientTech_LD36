@@ -131,7 +131,7 @@ namespace GooglePlayGames
             // avatar configured.
             if (!string.IsNullOrEmpty(AvatarURL))
             {
-                WWW www = new WWW(AvatarURL);
+                var www = new WWW(AvatarURL);
                 while (!www.isDone)
                 {
                     yield return null;
@@ -169,7 +169,7 @@ namespace GooglePlayGames
                 return true;
             }
 
-            PlayGamesUserProfile other = obj as PlayGamesUserProfile;
+            var other = obj as PlayGamesUserProfile;
             if (other == null)
             {
                 return false;

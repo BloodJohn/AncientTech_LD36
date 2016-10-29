@@ -64,7 +64,7 @@ namespace GooglePlayGames.Editor
         [MenuItem("Window/Google Play Games/Setup/Android setup...", false, 1)]
         public static void MenuItemFileGPGSAndroidSetup()
         {
-            EditorWindow window = EditorWindow.GetWindow(
+            var window = EditorWindow.GetWindow(
                                       typeof(GPGSAndroidSetupUI), true, GPGSStrings.AndroidSetup.Title);
             window.minSize = new Vector2(500, 400);
         }
@@ -146,7 +146,7 @@ namespace GooglePlayGames.Editor
                     return false;
                 }
 
-                string serverAppId = webClientId.Split('-')[0];
+                var serverAppId = webClientId.Split('-')[0];
                 if (!serverAppId.Equals(appId))
                 {
                     GPGSUtil.Alert(GPGSStrings.Setup.AppIdMismatch);
@@ -202,7 +202,7 @@ namespace GooglePlayGames.Editor
         /// </summary>
         public void OnEnable()
         {
-            GPGSProjectSettings settings = GPGSProjectSettings.Instance;
+            var settings = GPGSProjectSettings.Instance;
             mConstantDirectory = settings.Get(GPGSUtil.CLASSDIRECTORYKEY, mConstantDirectory);
             mClassName = settings.Get(GPGSUtil.CLASSNAMEKEY, mClassName);
             mConfigData = settings.Get(GPGSUtil.ANDROIDRESOURCEKEY);
@@ -218,7 +218,7 @@ namespace GooglePlayGames.Editor
             GUI.skin.label.wordWrap = true;
             GUILayout.BeginVertical();
 
-            GUIStyle link = new GUIStyle(GUI.skin.label);
+            var link = new GUIStyle(GUI.skin.label);
             link.normal.textColor = new Color(0f, 0f, 1f);
 
             GUILayout.Space(10);
@@ -228,7 +228,7 @@ namespace GooglePlayGames.Editor
                 Application.OpenURL("https://play.google.com/apps/publish");
             }
 
-            Rect last = GUILayoutUtility.GetLastRect();
+            var last = GUILayoutUtility.GetLastRect();
             last.y += last.height - 2;
             last.x += 3;
             last.width -= 6;
@@ -350,9 +350,9 @@ namespace GooglePlayGames.Editor
         /// </remarks>
         public static void CheckBundleId()
         {
-            string packageName = GPGSProjectSettings.Instance.Get(
+            var packageName = GPGSProjectSettings.Instance.Get(
                 GPGSUtil.ANDROIDBUNDLEIDKEY, string.Empty);
-            string currentId = PlayerSettings.bundleIdentifier;
+            var currentId = PlayerSettings.bundleIdentifier;
             if (!string.IsNullOrEmpty(packageName))
             {
                 if (string.IsNullOrEmpty(currentId) ||
@@ -391,10 +391,10 @@ namespace GooglePlayGames.Editor
         /// <param name="res">Res. the data to parse.</param>
         private static bool ParseResources(string classDirectory, string className, string res)
         {
-            XmlTextReader reader = new XmlTextReader(new StringReader(res));
-            bool inResource = false;
+            var reader = new XmlTextReader(new StringReader(res));
+            var inResource = false;
             string lastProp = null;
-            Hashtable resourceKeys = new Hashtable();
+            var resourceKeys = new Hashtable();
             string appId = null;
             while (reader.Read())
             {

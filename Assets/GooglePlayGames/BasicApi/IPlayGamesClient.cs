@@ -19,7 +19,6 @@ namespace GooglePlayGames.BasicApi
 {
   using System;
   using GooglePlayGames.BasicApi.Multiplayer;
-  using UnityEngine;
   using UnityEngine.SocialPlatforms;
 
   /// <summary>

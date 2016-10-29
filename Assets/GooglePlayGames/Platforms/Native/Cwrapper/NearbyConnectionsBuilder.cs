@@ -20,10 +20,9 @@
 
 namespace GooglePlayGames.Native.Cwrapper {
 using System;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using System.Text;
-internal static class NearbyConnectionsBuilder {
+
+    internal static class NearbyConnectionsBuilder {
     internal delegate void OnInitializationFinishedCallback(
          /* from(InitializationStatus_t) */ NearbyConnectionsStatus.InitializationStatus arg0,
          /* from(void *) */ IntPtr arg1);

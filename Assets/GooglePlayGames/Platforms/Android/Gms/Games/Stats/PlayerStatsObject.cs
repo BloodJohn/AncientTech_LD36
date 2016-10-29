@@ -19,8 +19,7 @@
 //
 using Google.Developers;
 using System;
-using System.Reflection;
-using UnityEngine;
+
 namespace Com.Google.Android.Gms.Games.Stats
 {
     public class PlayerStatsObject : JavaObjWrapper , PlayerStats

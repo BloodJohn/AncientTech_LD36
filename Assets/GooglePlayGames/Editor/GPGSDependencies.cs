@@ -16,9 +16,7 @@
 
 namespace GooglePlayGames.Editor
 {
-
-using System;
-using System.Collections.Generic;
+    using System.Collections.Generic;
 using UnityEditor;
 
 /// AdMob dependencies file.
@@ -37,7 +35,7 @@ public class GPGSDependencies : AssetPostprocessor
 #if UNITY_ANDROID
             // Setup the resolver using reflection as the module may not be
             // available at compile time.
-            Type playServicesSupport = Google.VersionHandler.FindClass(
+            var playServicesSupport = Google.VersionHandler.FindClass(
                 "Google.JarResolver", "Google.JarResolver.PlayServicesSupport");
             if (playServicesSupport == null) {
                 return;
@@ -113,7 +111,7 @@ public class GPGSDependencies : AssetPostprocessor
         private static void OnPostprocessAllAssets(
                 string[] importedAssets, string[] deletedAssets,
                 string[] movedAssets, string[] movedFromPath) {
-            foreach (string asset in importedAssets) {
+            foreach (var asset in importedAssets) {
                 if (asset.Contains("IOSResolver") ||
                     asset.Contains("JarResolver")) {
                     RegisterDependencies();

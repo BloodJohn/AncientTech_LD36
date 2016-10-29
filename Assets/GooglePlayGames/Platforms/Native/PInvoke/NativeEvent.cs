@@ -21,7 +21,6 @@ namespace GooglePlayGames.Native.PInvoke
     using System;
     using System.Runtime.InteropServices;
     using GooglePlayGames.BasicApi.Events;
-    using GooglePlayGames.Native.PInvoke;
     using Types = GooglePlayGames.Native.Cwrapper.Types;
     using C = GooglePlayGames.Native.Cwrapper.Event;
 

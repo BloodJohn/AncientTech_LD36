@@ -163,8 +163,8 @@ namespace GooglePlayGames.Editor
                 return null;
             }
 
-            StreamReader sr = new StreamReader(filePath);
-            string body = sr.ReadToEnd();
+            var sr = new StreamReader(filePath);
+            var body = sr.ReadToEnd();
             sr.Close();
             return body;
         }
@@ -205,7 +205,7 @@ namespace GooglePlayGames.Editor
                 return false;
             }
 
-            foreach (char c in s)
+            foreach (var c in s)
             {
                 if (!char.IsLetterOrDigit(c) && c != '.')
                 {
@@ -228,7 +228,7 @@ namespace GooglePlayGames.Editor
                 return false;
             }
 
-            foreach (char c in s)
+            foreach (var c in s)
             {
                 if (c < '0' || c > '9')
                 {
@@ -271,11 +271,11 @@ namespace GooglePlayGames.Editor
                 throw new Exception("cannot be empty");
             }
 
-            string[] parts = s.Split(new char[] { '.' });
-            foreach (string p in parts)
+            var parts = s.Split(new char[] { '.' });
+            foreach (var p in parts)
             {
-                char[] bytes = p.ToCharArray();
-                for (int i = 0; i < bytes.Length; i++)
+                var bytes = p.ToCharArray();
+                for (var i = 0; i < bytes.Length; i++)
                 {
                     if (i == 0 && !char.IsLetter(bytes[i]))
                     {
@@ -301,13 +301,13 @@ namespace GooglePlayGames.Editor
         /// <returns><c>true</c> if is setup done; otherwise, <c>false</c>.</returns>
         public static bool IsSetupDone()
         {
-            bool doneSetup = true;
+            var doneSetup = true;
             #if UNITY_ANDROID
             doneSetup = GPGSProjectSettings.Instance.GetBool(ANDROIDSETUPDONEKEY, false);
             // check gameinfo
             if (File.Exists(GameInfoPath))
             {
-                string contents = ReadFile(GameInfoPath);
+                var contents = ReadFile(GameInfoPath);
                 if (contents.Contains(APPIDPLACEHOLDER))
                 {
                     Debug.Log("GameInfo not initialized with AppId.  " +
@@ -356,7 +356,7 @@ namespace GooglePlayGames.Editor
         public static string MakeIdentifier(string key)
         {
             string s;
-            string retval = string.Empty;
+            var retval = string.Empty;
             if (string.IsNullOrEmpty(key))
             {
                 return "_";
@@ -364,7 +364,7 @@ namespace GooglePlayGames.Editor
 
             s = key.Trim().Replace(' ', '_');
 
-            foreach (char c in s)
+            foreach (var c in s)
             {
                 if (char.IsLetterOrDigit(c) || c == '_')
                 {
@@ -400,7 +400,7 @@ namespace GooglePlayGames.Editor
         /// <returns>The android sdk path.</returns>
         public static string GetAndroidSdkPath()
         {
-            string sdkPath = EditorPrefs.GetString("AndroidSdkRoot");
+            var sdkPath = EditorPrefs.GetString("AndroidSdkRoot");
             if (sdkPath != null && (sdkPath.EndsWith("/") || sdkPath.EndsWith("\\")))
             {
                 sdkPath = sdkPath.Substring(0, sdkPath.Length - 1);
@@ -415,7 +415,7 @@ namespace GooglePlayGames.Editor
         /// <returns><c>true</c> if  android sdk exists; otherwise, <c>false</c>.</returns>
         public static bool HasAndroidSdk()
         {
-            string sdkPath = GetAndroidSdkPath();
+            var sdkPath = GetAndroidSdkPath();
             return sdkPath != null && sdkPath.Trim() != string.Empty && System.IO.Directory.Exists(sdkPath);
         }
 
@@ -426,7 +426,7 @@ namespace GooglePlayGames.Editor
         public static int GetUnityMajorVersion()
         {
 #if UNITY_5
-            string majorVersion = Application.unityVersion.Split('.')[0];
+            var majorVersion = Application.unityVersion.Split('.')[0];
             int ver;
             if (!int.TryParse(majorVersion, out ver))
             {
@@ -448,7 +448,7 @@ namespace GooglePlayGames.Editor
         /// <returns><c>true</c>, if the file exists <c>false</c> otherwise.</returns>
         public static bool AndroidManifestExists()
         {
-            string destFilename = GPGSUtil.SlashesToPlatformSeparator(
+            var destFilename = GPGSUtil.SlashesToPlatformSeparator(
                                       "Assets/Plugins/Android/MainLibProj/AndroidManifest.xml");
 
             return File.Exists(destFilename);
@@ -459,18 +459,18 @@ namespace GooglePlayGames.Editor
         /// </summary>
         public static void GenerateAndroidManifest()
         {
-            string destFilename = GPGSUtil.SlashesToPlatformSeparator(
+            var destFilename = GPGSUtil.SlashesToPlatformSeparator(
                                       "Assets/Plugins/Android/MainLibProj/AndroidManifest.xml");
 
             // Generate AndroidManifest.xml
-            string manifestBody = GPGSUtil.ReadEditorTemplate("template-AndroidManifest");
+            var manifestBody = GPGSUtil.ReadEditorTemplate("template-AndroidManifest");
 
-            Dictionary<string, string> overrideValues =
+            var overrideValues =
                 new Dictionary<string, string>();
 
-            foreach (KeyValuePair<string, string> ent in replacements)
+            foreach (var ent in replacements)
             {
-                string value =
+                var value =
                     GPGSProjectSettings.Instance.Get(ent.Value, overrideValues);
                 manifestBody = manifestBody.Replace(ent.Key, value);
             }
@@ -488,16 +488,16 @@ namespace GooglePlayGames.Editor
         /// <param name="resourceKeys">Resource keys.</param>
         public static void WriteResourceIds(string classDirectory, string className, Hashtable resourceKeys)
         {
-            string constantsValues = string.Empty;
-            string[] parts = className.Split('.');
-            string dirName = classDirectory;
+            var constantsValues = string.Empty;
+            var parts = className.Split('.');
+            var dirName = classDirectory;
             if (string.IsNullOrEmpty(dirName))
             {
                 dirName = "Assets";
             }
 
-            string nameSpace = string.Empty;
-            for (int i = 0; i < parts.Length - 1; i++)
+            var nameSpace = string.Empty;
+            for (var i = 0; i < parts.Length - 1; i++)
             {
                 dirName += "/" + parts[i];
                 if (nameSpace != string.Empty)
@@ -511,12 +511,12 @@ namespace GooglePlayGames.Editor
             EnsureDirExists(dirName);
             foreach (DictionaryEntry ent in resourceKeys)
             {
-                string key = MakeIdentifier((string)ent.Key);
+                var key = MakeIdentifier((string)ent.Key);
                 constantsValues += "        public const string " +
                 key + " = \"" + ent.Value + "\"; // <GPGSID>\n";
             }
 
-            string fileBody = GPGSUtil.ReadEditorTemplate("template-Constants");
+            var fileBody = GPGSUtil.ReadEditorTemplate("template-Constants");
             if (nameSpace != string.Empty)
             {
                 fileBody = fileBody.Replace(
@@ -550,11 +550,11 @@ namespace GooglePlayGames.Editor
         /// </summary>
         public static void UpdateGameInfo()
         {
-            string fileBody = GPGSUtil.ReadEditorTemplate("template-GameInfo");
+            var fileBody = GPGSUtil.ReadEditorTemplate("template-GameInfo");
 
-            foreach (KeyValuePair<string, string> ent in replacements)
+            foreach (var ent in replacements)
             {
-                string value =
+                var value =
                     GPGSProjectSettings.Instance.Get(ent.Value);
                 fileBody = fileBody.Replace(ent.Key, value);
             }
@@ -596,11 +596,11 @@ namespace GooglePlayGames.Editor
         /// <param name="libProjPath">Lib proj path.</param>
         private static int GetGPSVersion(string libProjPath)
         {
-            string versionFile = libProjPath + "/res/values/version.xml";
+            var versionFile = libProjPath + "/res/values/version.xml";
 
-            XmlTextReader reader = new XmlTextReader(new StreamReader(versionFile));
-            bool inResource = false;
-            int version = -1;
+            var reader = new XmlTextReader(new StreamReader(versionFile));
+            var inResource = false;
+            var version = -1;
 
             while (reader.Read())
             {

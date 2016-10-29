@@ -45,7 +45,7 @@ namespace GooglePlayGames.BasicApi.Nearby
 
         public void StartAdvertising(string name, System.Collections.Generic.List<string> appIdentifiers, System.TimeSpan? advertisingDuration, System.Action<AdvertisingResult> resultCallback, System.Action<ConnectionRequest> connectionRequestCallback)
         {
-            AdvertisingResult obj = new AdvertisingResult(ResponseStatus.LicenseCheckFailed, string.Empty);
+            var obj = new AdvertisingResult(ResponseStatus.LicenseCheckFailed, string.Empty);
             resultCallback.Invoke(obj);
         }
 
@@ -60,7 +60,7 @@ namespace GooglePlayGames.BasicApi.Nearby
 
             if (responseCallback != null)
             {
-                ConnectionResponse obj = ConnectionResponse.Rejected(0, string.Empty);
+                var obj = ConnectionResponse.Rejected(0, string.Empty);
                 responseCallback.Invoke(obj);
             }
         }

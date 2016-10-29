@@ -20,9 +20,7 @@ namespace GooglePlayGames.Native.PInvoke
 {
     using System;
     using C = GooglePlayGames.Native.Cwrapper.TurnBasedMultiplayerManager;
-    using Types = GooglePlayGames.Native.Cwrapper.Types;
     using Status = GooglePlayGames.Native.Cwrapper.CommonErrorStatus;
-    using MultiplayerStatus = GooglePlayGames.Native.Cwrapper.CommonErrorStatus.MultiplayerStatus;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
 

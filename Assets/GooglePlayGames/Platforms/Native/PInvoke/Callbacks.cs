@@ -38,7 +38,7 @@ namespace GooglePlayGames.Native.PInvoke
         {
             Action<IntPtr> pointerReceiver = result =>
             {
-                using (T converted = conversionFunction(result))
+                using (var converted = conversionFunction(result))
                 {
                     if (callback != null)
                     {
@@ -55,7 +55,7 @@ namespace GooglePlayGames.Native.PInvoke
         {
             Action<T, IntPtr> pointerReceiver = (param1, param2) =>
             {
-                using (P converted = conversionFunction(param2))
+                using (var converted = conversionFunction(param2))
                 {
                     if (callback != null)
                     {
@@ -151,7 +151,7 @@ namespace GooglePlayGames.Native.PInvoke
                                                      IntPtr response, IntPtr userData)
         {
             Logger.d("Entering internal callback for " + callbackName);
-            Action<IntPtr> callback = callbackType == Type.Permanent
+            var callback = callbackType == Type.Permanent
                 ? IntPtrToPermanentCallback<Action<IntPtr>>(userData)
                     : IntPtrToTempCallback<Action<IntPtr>>(userData);
 
@@ -244,7 +244,7 @@ namespace GooglePlayGames.Native.PInvoke
                 return null;
             }
 
-            byte[] convertedData = new byte[dataLength.ToUInt32()];
+            var convertedData = new byte[dataLength.ToUInt32()];
             Marshal.Copy(data, convertedData, 0, (int)dataLength.ToUInt32());
 
             return convertedData;

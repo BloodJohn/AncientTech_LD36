@@ -17,9 +17,6 @@
 //
 // ****   GENERATED FILE  DO NOT EDIT !!!  ****//
 //
-using Google.Developers;
-using System;
-using UnityEngine;
 namespace Com.Google.Android.Gms.Common.Api
 {
     

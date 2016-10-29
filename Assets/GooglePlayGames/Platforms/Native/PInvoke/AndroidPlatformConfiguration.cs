@@ -19,7 +19,6 @@
 namespace GooglePlayGames.Native.PInvoke {
     using System;
     using System.Runtime.InteropServices;
-    using GooglePlayGames.Native.Cwrapper;
     using GooglePlayGames.OurUtils;
     using C = GooglePlayGames.Native.Cwrapper.AndroidPlatformConfiguration;
 

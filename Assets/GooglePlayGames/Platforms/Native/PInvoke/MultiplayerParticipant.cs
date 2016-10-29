@@ -95,7 +95,7 @@ namespace GooglePlayGames.Native.PInvoke
 
         internal Participant AsParticipant()
         {
-            NativePlayer nativePlayer = Player();
+            var nativePlayer = Player();
 
             return new Participant(
                 DisplayName(),

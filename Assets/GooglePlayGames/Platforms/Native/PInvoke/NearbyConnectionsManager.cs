@@ -25,7 +25,6 @@ namespace GooglePlayGames.Native.PInvoke
     using System.Runtime.InteropServices;
     using C = GooglePlayGames.Native.Cwrapper.NearbyConnections;
     using N = GooglePlayGames.Native.Cwrapper.NearbyConnectionTypes;
-    using Types = GooglePlayGames.Native.Cwrapper.Types;
     using UnityEngine;
 
     internal class NearbyConnectionsManager : BaseReferenceHolder
@@ -180,7 +179,7 @@ namespace GooglePlayGames.Native.PInvoke
 #if UNITY_ANDROID
                 using (var jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
                 {
-                    AndroidJavaObject activity = jc.GetStatic<AndroidJavaObject>("currentActivity");
+                    var activity = jc.GetStatic<AndroidJavaObject>("currentActivity");
                     return activity.Call<string>("getPackageName");
                    
                 }

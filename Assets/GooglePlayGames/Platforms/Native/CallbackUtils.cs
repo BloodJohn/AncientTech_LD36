@@ -19,7 +19,6 @@ namespace GooglePlayGames.Native
 {
     using System;
     using GooglePlayGames.OurUtils;
-    using Types = GooglePlayGames.Native.Cwrapper.Types;
     using Status = GooglePlayGames.Native.Cwrapper.CommonErrorStatus;
 
 

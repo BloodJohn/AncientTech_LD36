@@ -21,7 +21,6 @@ namespace GooglePlayGames.Native.PInvoke
     using System;
     using System.Runtime.InteropServices;
     using System.Collections.Generic;
-    using GooglePlayGames.OurUtils;
 
     internal abstract class BaseReferenceHolder : IDisposable
     {

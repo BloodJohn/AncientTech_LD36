@@ -18,7 +18,6 @@
 
 namespace GooglePlayGames.Native.Cwrapper
 {
-    using System;
     using System.Runtime.InteropServices;
 
     internal static class PlayerStats

@@ -20,9 +20,8 @@
 //
 using Google.Developers;
 using System;
-using System.Reflection;
 using Com.Google.Android.Gms.Common.Api;
-using UnityEngine;
+
 namespace Com.Google.Android.Gms.Games.Stats
 {
     public class StatsObject : JavaObjWrapper , Stats
@@ -34,7 +33,7 @@ namespace Com.Google.Android.Gms.Games.Stats
         }
         public PendingResult<Stats_LoadPlayerStatsResultObject> loadPlayerStats(GoogleApiClient arg_GoogleApiClient_1, bool arg_bool_2)
         {
-            IntPtr obj = InvokeCall<IntPtr>("loadPlayerStats", "(Lcom/google/android/gms/common/api/GoogleApiClient;Z)Lcom/google/android/gms/common/api/PendingResult;",  arg_GoogleApiClient_1,  arg_bool_2);
+            var obj = InvokeCall<IntPtr>("loadPlayerStats", "(Lcom/google/android/gms/common/api/GoogleApiClient;Z)Lcom/google/android/gms/common/api/PendingResult;",  arg_GoogleApiClient_1,  arg_bool_2);
             return new PendingResult<Stats_LoadPlayerStatsResultObject>(obj);
         }
     }

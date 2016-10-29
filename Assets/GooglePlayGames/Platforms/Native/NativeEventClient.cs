@@ -25,7 +25,6 @@ namespace GooglePlayGames.Native
     using GooglePlayGames.BasicApi.Events;
     using GooglePlayGames.OurUtils;
     using GooglePlayGames.Native.PInvoke;
-    using Types = GooglePlayGames.Native.Cwrapper.Types;
     using Status = GooglePlayGames.Native.Cwrapper.CommonErrorStatus;
 
     internal class NativeEventClient : IEventsClient

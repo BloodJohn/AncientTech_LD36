@@ -128,7 +128,7 @@ namespace GooglePlayGames.BasicApi.Multiplayer
         /// Gets a participant by ID. Returns null if not found.
         public Participant GetParticipant(string participantId)
         {
-            foreach (Participant p in mParticipants)
+            foreach (var p in mParticipants)
             {
                 if (p.ParticipantId.Equals(participantId))
                 {

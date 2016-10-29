@@ -21,7 +21,6 @@ namespace GooglePlayGames
 {
     using UnityEngine;
     using System;
-    using GooglePlayGames.OurUtils;
     using GooglePlayGames.BasicApi.Nearby;
     using S = GooglePlayGames.Native.Cwrapper.NearbyConnectionsStatus;
 

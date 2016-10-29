@@ -32,7 +32,7 @@ namespace GooglePlayGames.Editor
         /// </summary>
         static GPGSUpgrader()
         {
-            string prevVer = GPGSProjectSettings.Instance.Get(GPGSUtil.LASTUPGRADEKEY, "00000");
+            var prevVer = GPGSProjectSettings.Instance.Get(GPGSUtil.LASTUPGRADEKEY, "00000");
             if (!prevVer.Equals(PluginVersion.VersionKey))
             {
                 // if this is a really old version, upgrade to 911 first, then 915
@@ -61,7 +61,7 @@ namespace GooglePlayGames.Editor
                     prevVer = PluginVersion.VersionKey;
                 }
 
-                string msg = GPGSStrings.PostInstall.Text.Replace(
+                var msg = GPGSStrings.PostInstall.Text.Replace(
                                  "$VERSION",
                                  PluginVersion.VersionString);
                 EditorUtility.DisplayDialog(GPGSStrings.PostInstall.Title, msg, "OK");
@@ -73,7 +73,7 @@ namespace GooglePlayGames.Editor
             GPGSProjectSettings.Instance.Save();
 
             // clean up duplicate scripts if Unity 5+
-            int ver = GPGSUtil.GetUnityMajorVersion();
+            var ver = GPGSUtil.GetUnityMajorVersion();
 
             if (ver >= 5)
             {
@@ -83,13 +83,13 @@ namespace GooglePlayGames.Editor
                         "Assets/Plugins/Android",
                         "Assets/PlayServicesResolver"
                     };
-                foreach (string p in paths)
+                foreach (var p in paths)
                 {
                     CleanDuplicates(p);
                 }
 
                 // remove support lib from old location.
-                string jarFile =
+                var jarFile =
                     "Assets/Plugins/Android/libs/android-support-v4.jar";
                 if (File.Exists(jarFile))
                 {
@@ -97,7 +97,7 @@ namespace GooglePlayGames.Editor
                 }
 
                 // remove the massive play services client lib
-                string clientDir = "Assets/Plugins/Android/google-play-services_lib";
+                var clientDir = "Assets/Plugins/Android/google-play-services_lib";
                 GPGSUtil.DeleteDirIfExists(clientDir);
             }
 
@@ -117,25 +117,25 @@ namespace GooglePlayGames.Editor
         /// <param name="root">Root of the directory to clean.</param>
         private static void CleanDuplicates(string root)
         {
-            string[] subDirs = Directory.GetDirectories(root);
+            var subDirs = Directory.GetDirectories(root);
 
             // look for .1 and .2
-            string[] dups = Directory.GetFiles(root, "* 1.*");
-            foreach (string d in dups)
+            var dups = Directory.GetFiles(root, "* 1.*");
+            foreach (var d in dups)
             {
                 Debug.Log("Deleting duplicate file: " + d);
                 File.Delete(d);
             }
 
             dups = Directory.GetFiles(root, "* 2.*");
-            foreach (string d in dups)
+            foreach (var d in dups)
             {
                 Debug.Log("Deleting duplicate file: " + d);
                 File.Delete(d);
             }
 
             // recurse
-            foreach (string s in subDirs)
+            foreach (var s in subDirs)
             {
                 CleanDuplicates(s);
             }
@@ -184,7 +184,7 @@ namespace GooglePlayGames.Editor
                 // not an obsolete file, but delete the cache since the schema changed.
                 "ProjectSettings/GoogleDependencyGooglePlayGames.xml"
             };
-            foreach (string file in obsoleteFiles)
+            foreach (var file in obsoleteFiles)
             {
                 if (File.Exists(file))
                 {
@@ -210,7 +210,7 @@ namespace GooglePlayGames.Editor
                     "Assets/GooglePlayGames/Editor/GPGSExportPackageUI.cs",
                     "Assets/GooglePlayGames/Editor/GPGSExportPackageUI.cs.meta"
                 };
-            foreach (string file in obsoleteFiles)
+            foreach (var file in obsoleteFiles)
             {
                 if (File.Exists(file))
                 {
@@ -252,7 +252,7 @@ namespace GooglePlayGames.Editor
             if (string.Compare(PluginVersion.VersionKey, PluginVersion.VersionKeyJNIStats,
                                System.StringComparison.Ordinal) <= 0)
             {
-                foreach (string file in obsoleteFiles)
+                foreach (var file in obsoleteFiles)
                 {
                     if (File.Exists(file))
                     {
@@ -277,9 +277,9 @@ namespace GooglePlayGames.Editor
                     "Assets/GooglePlayGames/Editor/BackgroundResolution.cs.meta"
                 };
 
-            bool found = File.Exists(obsoleteFiles[0]);
+            var found = File.Exists(obsoleteFiles[0]);
 
-            foreach (string file in obsoleteFiles)
+            foreach (var file in obsoleteFiles)
             {
                 if (File.Exists(file))
                 {
@@ -316,7 +316,7 @@ namespace GooglePlayGames.Editor
                     "Assets/GooglePlayGames/Platforms/Native/UnsupportedAppStateClient.cs",
                     "Assets/GooglePlayGames/Platforms/Native/UnsupportedAppStateClient.cs.meta"
                 };
-            foreach (string file in obsoleteFiles)
+            foreach (var file in obsoleteFiles)
             {
                 if (File.Exists(file))
                 {
@@ -378,7 +378,7 @@ namespace GooglePlayGames.Editor
                     "Assets/Plugins/iOS/GPGSAppController 1.mm.meta"
                 };
 
-            foreach (string file in obsoleteFiles)
+            foreach (var file in obsoleteFiles)
             {
                 if (File.Exists(file))
                 {
@@ -410,7 +410,7 @@ namespace GooglePlayGames.Editor
                     "Assets/Plugins/GPGSUtils.dll.meta",
                 };
 
-            foreach (string file in obsoleteFiles)
+            foreach (var file in obsoleteFiles)
             {
                 if (File.Exists(file))
                 {
@@ -425,7 +425,7 @@ namespace GooglePlayGames.Editor
                     "Assets/Plugins/Android/BaseGameUtils"
                 };
 
-            foreach (string directory in obsoleteDirectories)
+            foreach (var directory in obsoleteDirectories)
             {
                 if (Directory.Exists(directory))
                 {

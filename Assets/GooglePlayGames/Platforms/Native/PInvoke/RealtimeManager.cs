@@ -22,12 +22,9 @@ namespace GooglePlayGames.Native.PInvoke
     using System;
     using System.Linq;
     using GooglePlayGames.OurUtils;
-    using GooglePlayGames.BasicApi.Multiplayer;
     using System.Collections.Generic;
     using C = GooglePlayGames.Native.Cwrapper.RealTimeMultiplayerManager;
-    using Types = GooglePlayGames.Native.Cwrapper.Types;
     using Status = GooglePlayGames.Native.Cwrapper.CommonErrorStatus;
-    using MultiplayerStatus = GooglePlayGames.Native.Cwrapper.CommonErrorStatus.MultiplayerStatus;
     using System.Runtime.InteropServices;
 
     internal class RealtimeManager
@@ -128,7 +125,7 @@ namespace GooglePlayGames.Native.PInvoke
         {
             Logger.d("Entering internal callback for InternalLeaveRoomCallback");
 
-            Action<Status.ResponseStatus> callback =
+            var callback =
                 Callbacks.IntPtrToTempCallback<Action<Status.ResponseStatus>>(data);
 
             if (callback == null)
@@ -184,7 +181,7 @@ namespace GooglePlayGames.Native.PInvoke
         {
             Logger.d("Entering internal callback for InternalSendReliableMessageCallback " + response);
 
-            Action<Status.MultiplayerStatus> callback =
+            var callback =
                 Callbacks.IntPtrToTempCallback<Action<Status.MultiplayerStatus>>(data);
 
             if (callback == null)

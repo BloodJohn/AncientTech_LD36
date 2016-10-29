@@ -39,7 +39,7 @@ namespace GooglePlayGames.OurUtils
                 return false;
             }
 
-            for (int i = 0; i < a.Length; i++)
+            for (var i = 0; i < a.Length; i++)
             {
                 if (a[i] != b[i])
                 {
@@ -72,7 +72,7 @@ namespace GooglePlayGames.OurUtils
                 return array;
             }
 
-            byte[] piece = new byte[length];
+            var piece = new byte[length];
             Array.Copy(array, offset, piece, 0, length);
             return piece;
         }

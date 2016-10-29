@@ -23,7 +23,6 @@ namespace GooglePlayGames.Native.PInvoke
     using System.Collections.Generic;
     using GooglePlayGames.OurUtils;
     using GooglePlayGames.Native.Cwrapper;
-    using Types = GooglePlayGames.Native.Cwrapper.Types;
     using Status = GooglePlayGames.Native.Cwrapper.CommonErrorStatus;
     using MultiplayerStatus = GooglePlayGames.Native.Cwrapper.CommonErrorStatus.MultiplayerStatus;
 
@@ -337,7 +336,7 @@ namespace GooglePlayGames.Native.PInvoke
 
             internal int InvitationCount()
             {
-                UIntPtr ptr =
+                var ptr =
                     TurnBasedMultiplayerManager.TurnBasedMultiplayerManager_TurnBasedMatchesResponse_GetInvitations_Length(SelfPtr());
                 return (int)ptr.ToUInt32();
             }
@@ -352,7 +351,7 @@ namespace GooglePlayGames.Native.PInvoke
 
             internal int MyTurnMatchesCount()
             {
-                UIntPtr ptr =
+                var ptr =
                     TurnBasedMultiplayerManager.TurnBasedMultiplayerManager_TurnBasedMatchesResponse_GetMyTurnMatches_Length(SelfPtr());
                 return (int)ptr.ToUInt32();
             }
@@ -367,7 +366,7 @@ namespace GooglePlayGames.Native.PInvoke
 
             internal int TheirTurnMatchesCount()
             {
-                UIntPtr ptr =
+                var ptr =
                     TurnBasedMultiplayerManager.TurnBasedMultiplayerManager_TurnBasedMatchesResponse_GetTheirTurnMatches_Length(SelfPtr());
                 return (int)ptr.ToUInt32();
             }
@@ -382,7 +381,7 @@ namespace GooglePlayGames.Native.PInvoke
 
             internal int CompletedMatchesCount()
             {
-                UIntPtr ptr =
+                var ptr =
                     TurnBasedMultiplayerManager.TurnBasedMultiplayerManager_TurnBasedMatchesResponse_GetCompletedMatches_Length(SelfPtr());
                 return (int)ptr.ToUInt32();
             }

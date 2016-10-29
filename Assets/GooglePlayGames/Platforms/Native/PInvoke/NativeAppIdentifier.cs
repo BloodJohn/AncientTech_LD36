@@ -24,7 +24,6 @@ namespace GooglePlayGames.Native.PInvoke
     using System.Runtime.InteropServices;
 
     using C = GooglePlayGames.Native.Cwrapper.NearbyConnectionTypes;
-    using Types = GooglePlayGames.Native.Cwrapper.Types;
 
     internal class NativeAppIdentifier : BaseReferenceHolder
     {

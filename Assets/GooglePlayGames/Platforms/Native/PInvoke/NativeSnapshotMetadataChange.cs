@@ -20,7 +20,6 @@ namespace GooglePlayGames.Native.PInvoke
 {
     using System;
     using System.Runtime.InteropServices;
-    using Types = GooglePlayGames.Native.Cwrapper.Types;
     using C = GooglePlayGames.Native.Cwrapper.SnapshotMetadataChange;
     using B = GooglePlayGames.Native.Cwrapper.SnapshotMetadataChangeBuilder;
     using GooglePlayGames.OurUtils;

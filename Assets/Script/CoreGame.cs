@@ -15,9 +15,13 @@ public class CoreGame : MonoBehaviour
     public const int LandMax = 3000;
     /// <summary>рыбы в море</summary>
     public const int SeaMax = 200;
+    /// <summary>Ключ куда мы сохраним игру</summary>
+    private const string GameSaveKey = "gameSave";
 
     /// <summary>сколько зим прошло</summary>
     public int WinterCount;
+    /// <summary>сколько лет прошло</summary>
+    public int SummerCount;
     /// <summary>сколько обычных зим прошло?</summary>
     public int LongWinterCount;
     /// <summary>дней</summary>
@@ -41,7 +45,7 @@ public class CoreGame : MonoBehaviour
 
     #endregion
 
-
+    #region constructor
     void Awake()
     {
         DontDestroyOnLoad(this);
@@ -50,6 +54,7 @@ public class CoreGame : MonoBehaviour
 
     public void RestartGame()
     {
+        SummerCount = 0;
         WinterCount = 0;
         LongWinterCount = 0;
         DayCount = 0;
@@ -64,30 +69,67 @@ public class CoreGame : MonoBehaviour
         SceneManager.LoadScene(SummerController.sceneName);
     }
 
+    public void Save()
+    {
+        var json = JsonUtility.ToJson(this);
+        PlayerPrefs.SetString(GameSaveKey, json);
+        Debug.LogFormat("save: {0}", json);
+    }
+
+    public void LoadGame()
+    {
+        var json = PlayerPrefs.GetString(GameSaveKey, string.Empty);
+
+        if (string.IsNullOrEmpty(json))
+        {
+            RestartGame();
+            return;
+        }
+
+        JsonUtility.FromJsonOverwrite(json, this);
+
+        if (SummerCount > WinterCount)
+        {
+            SceneManager.LoadScene(WinterController.sceneName);
+        }
+        else
+        {
+            SceneManager.LoadScene(SummerController.sceneName);
+        }
+    }
+    #endregion
+
     #region summer
 
     public void StartSummer()
     {
-        if (WinterCount > 0 && SheepCount > 1)
-        {
-            SheepCount += SheepCount/2;
-        }
-
-
         DayCount = SeasonDays;
         LandCount = LandMax;
-        //после первой зимовки рыбы в море бывает разное количество (от 1 до 3 рыбин за улов)
-        if (WinterCount > 0)
-            SeaCount = Random.Range(100, 400);
-        else
+        SummerCount++;
+
+        //плодим овец
+        if (WinterCount > 0 && SheepCount > 1) SheepCount += SheepCount / 2;
+
+
+        if (WinterCount == 0)
             SeaCount = 200;
+        else if (WinterCount < 10)
+        {
+            //после первой зимовки рыбы в море бывает разное количество (от 1 до 3 рыбин за улов)
+            SeaCount = Random.Range(100, 400);
+        }
+        else
+        {
+            //после 10 зимовки рыбы в море бывает разное количество (от 0 до 3 рыбин за улов)
+            SeaCount = Random.Range(0, 400);
+        }
 
         //короткое лето после долгой зимы
         if (LongWinterCount <= 0) DayCount--;
         Debug.LogFormat("seaCount {0} longWinter {1}", SeaCount, LongWinterCount);
     }
 
-    public void TurnSummerDay()
+    private void TurnSummerDay()
     {
         if (LandCount < SheepCount) SheepCount = LandCount;
         LandCount -= SheepCount;

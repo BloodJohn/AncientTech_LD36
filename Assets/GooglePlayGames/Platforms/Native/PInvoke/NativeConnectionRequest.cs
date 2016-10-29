@@ -22,7 +22,6 @@ namespace GooglePlayGames.Native.PInvoke
     using System;
     using System.Runtime.InteropServices;
     using C = GooglePlayGames.Native.Cwrapper.NearbyConnectionTypes;
-    using Types = GooglePlayGames.Native.Cwrapper.Types;
 
     internal class NativeConnectionRequest : BaseReferenceHolder
     {
@@ -62,7 +61,7 @@ namespace GooglePlayGames.Native.PInvoke
 
         internal ConnectionRequest AsRequest()
         {
-            ConnectionRequest req = new ConnectionRequest(
+            var req = new ConnectionRequest(
                                         RemoteEndpointId(),
                                         RemoteDeviceId(),
                                         RemoteEndpointName(),

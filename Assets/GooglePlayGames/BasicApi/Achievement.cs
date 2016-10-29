@@ -212,7 +212,7 @@ namespace GooglePlayGames.BasicApi
 
             set
             {
-                TimeSpan ts = value - UnixEpoch;
+                var ts = value - UnixEpoch;
                 mLastModifiedTime = (long)ts.TotalMilliseconds;
             }
         }

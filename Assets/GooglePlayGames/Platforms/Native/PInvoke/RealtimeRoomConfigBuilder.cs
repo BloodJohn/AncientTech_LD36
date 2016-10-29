@@ -21,7 +21,6 @@ namespace GooglePlayGames.Native.PInvoke
     using System;
     using System.Runtime.InteropServices;
     using C = GooglePlayGames.Native.Cwrapper.RealTimeRoomConfigBuilder;
-    using Types = GooglePlayGames.Native.Cwrapper.Types;
     using Status = GooglePlayGames.Native.Cwrapper.CommonErrorStatus;
 
     internal class RealtimeRoomConfigBuilder : BaseReferenceHolder

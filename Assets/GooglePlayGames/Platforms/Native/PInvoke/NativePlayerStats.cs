@@ -20,9 +20,7 @@ namespace GooglePlayGames.Native.PInvoke
 {
     using System;
     using System.Runtime.InteropServices;
-    using GooglePlayGames;
     using GooglePlayGames.BasicApi;
-    using UnityEngine;
     using C = GooglePlayGames.Native.Cwrapper.PlayerStats;
 
     internal class NativePlayerStats : BaseReferenceHolder
@@ -114,7 +112,7 @@ namespace GooglePlayGames.Native.PInvoke
 
         internal PlayerStats AsPlayerStats()
         {
-            PlayerStats playerStats = new PlayerStats();
+            var playerStats = new PlayerStats();
 
             playerStats.Valid = Valid();
             if (Valid ()) {

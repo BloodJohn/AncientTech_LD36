@@ -122,8 +122,8 @@ namespace GooglePlayGames.Native
         {
             mTurnBasedManager.GetAllTurnbasedMatches(allMatches =>
                 {
-                    Invitation[] invites = new Invitation[allMatches.InvitationCount()];
-                    int i=0;
+                    var invites = new Invitation[allMatches.InvitationCount()];
+                    var i=0;
                     foreach (var invitation in allMatches.Invitations())
                     {
                         invites[i++] = invitation.AsInvitation();
@@ -136,12 +136,12 @@ namespace GooglePlayGames.Native
         {
             mTurnBasedManager.GetAllTurnbasedMatches(allMatches =>
                 {
-                    int count = allMatches.MyTurnMatchesCount() +
+                    var count = allMatches.MyTurnMatchesCount() +
                         allMatches.TheirTurnMatchesCount() +
                         allMatches.CompletedMatchesCount();
 
-                    TurnBasedMatch[] matches = new TurnBasedMatch[count];
-                    int i=0;
+                    var matches = new TurnBasedMatch[count];
+                    var i=0;
                     foreach (var match in allMatches.MyTurnMatches())
                     {
                         matches[i++] = match.AsTurnBasedMatch(mNativeClient.GetUserId());
@@ -167,7 +167,7 @@ namespace GooglePlayGames.Native
                 {
                     if (match == null)
                     {
-                        UIStatus status = UIStatus.InternalError;
+                        var status = UIStatus.InternalError;
                         switch(callbackResult.ResponseStatus())
                         {
                             case Cwrapper.CommonErrorStatus.MultiplayerStatus.VALID:
@@ -297,7 +297,7 @@ namespace GooglePlayGames.Native
                 return;
             }
 
-            bool shouldAutolaunch = eventType == Types.MultiplayerEvent.UPDATED_FROM_APP_LAUNCH;
+            var shouldAutolaunch = eventType == Types.MultiplayerEvent.UPDATED_FROM_APP_LAUNCH;
 
             match.ReferToMe();
             Callbacks.AsCoroutine(WaitForLogin(()=>
@@ -416,13 +416,13 @@ namespace GooglePlayGames.Native
             callback = Callbacks.AsOnGameThreadCallback(callback);
             FindEqualVersionMatch(match, callback, foundMatch =>
                 {
-                    ParticipantResults results = foundMatch.Results();
+                    var results = foundMatch.Results();
 
-                    foreach (string participantId in outcome.ParticipantIds)
+                    foreach (var participantId in outcome.ParticipantIds)
                     {
-                        Types.MatchResult matchResult =
+                        var matchResult =
                             ResultToMatchResult(outcome.GetResultFor(participantId));
-                        uint placing = outcome.GetPlacementFor(participantId);
+                        var placing = outcome.GetPlacementFor(participantId);
 
                         if (results.HasResultsForParticipant(participantId))
                         {

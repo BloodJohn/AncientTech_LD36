@@ -20,7 +20,6 @@ namespace GooglePlayGames.Native.PInvoke
 {
     using System;
     using System.Runtime.InteropServices;
-    using System.Collections.Generic;
     using GooglePlayGames.OurUtils;
     using GooglePlayGames.Native.Cwrapper;
     using C = GooglePlayGames.Native.Cwrapper.StatsManager;
@@ -63,7 +62,7 @@ namespace GooglePlayGames.Native.PInvoke
 
             internal NativePlayerStats PlayerStats()
             {
-                IntPtr p = C.StatsManager_FetchForPlayerResponse_GetData(SelfPtr());
+                var p = C.StatsManager_FetchForPlayerResponse_GetData(SelfPtr());
                 return new NativePlayerStats(p);
             }
 

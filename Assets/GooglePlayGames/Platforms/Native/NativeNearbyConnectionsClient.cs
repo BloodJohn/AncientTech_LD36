@@ -22,11 +22,9 @@ namespace GooglePlayGames.Native
     using System;
     using System.Linq;
     using System.Collections.Generic;
-    using GooglePlayGames.BasicApi;
     using GooglePlayGames.BasicApi.Nearby;
     using GooglePlayGames.OurUtils;
     using GooglePlayGames.Native.PInvoke;
-    using Types = GooglePlayGames.Native.Cwrapper.Types;
     using Status = GooglePlayGames.Native.Cwrapper.CommonErrorStatus;
 
     internal class NativeNearbyConnectionsClient : INearbyConnectionClient

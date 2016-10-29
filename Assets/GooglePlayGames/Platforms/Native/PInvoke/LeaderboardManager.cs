@@ -25,7 +25,6 @@ namespace GooglePlayGames.Native.PInvoke
     using C = GooglePlayGames.Native.Cwrapper.LeaderboardManager;
     using Types = GooglePlayGames.Native.Cwrapper.Types;
     using Status = GooglePlayGames.Native.Cwrapper.CommonErrorStatus;
-    using UnityEngine.SocialPlatforms;
 
     internal class LeaderboardManager
     {
@@ -94,14 +93,14 @@ namespace GooglePlayGames.Native.PInvoke
         {
 
             //Create a token we'll use to load scores later.
-            NativeScorePageToken nativeToken = new NativeScorePageToken(
+            var nativeToken = new NativeScorePageToken(
                                              C.LeaderboardManager_ScorePageToken(
                                                  mServices.AsHandle(),
                                                  leaderboardId,
                                                  (Types.LeaderboardStart)start,
                                                  (Types.LeaderboardTimeSpan)timeSpan,
                                                  (Types.LeaderboardCollection)collection));
-            ScorePageToken token = new ScorePageToken(nativeToken, leaderboardId,
+            var token = new ScorePageToken(nativeToken, leaderboardId,
                                        collection, timeSpan);
 
            // First fetch the leaderboard to get the title
@@ -139,7 +138,7 @@ namespace GooglePlayGames.Native.PInvoke
             Action<LeaderboardScoreData> callback)
         {
 
-            LeaderboardScoreData data =
+            var data =
                 new LeaderboardScoreData(
                     token.LeaderboardId, (ResponseStatus)response.GetStatus());
 
@@ -189,7 +188,7 @@ namespace GooglePlayGames.Native.PInvoke
                 return;
             }
 
-            NativeScoreSummary summary = response.GetScoreSummary();
+            var summary = response.GetScoreSummary();
             data.ApproximateCount = summary.ApproximateResults();
             data.PlayerScore = summary.LocalUserScore().AsScore(data.Id, selfPlayerId);
 
@@ -222,7 +221,7 @@ namespace GooglePlayGames.Native.PInvoke
                 data = new LeaderboardScoreData(token.LeaderboardId);
             }
 
-            NativeScorePageToken nativeToken = (NativeScorePageToken)token.InternalObject;
+            var nativeToken = (NativeScorePageToken)token.InternalObject;
             C.LeaderboardManager_FetchScorePage(mServices.AsHandle(),
                 Types.DataSource.CACHE_OR_NETWORK,
                 nativeToken.AsPointer(),
@@ -253,7 +252,7 @@ namespace GooglePlayGames.Native.PInvoke
                 callback(data);
             }
 
-            NativeScorePage page = rsp.GetScorePage();
+            var page = rsp.GetScorePage();
 
             if (!page.Valid())
             {
@@ -278,7 +277,7 @@ namespace GooglePlayGames.Native.PInvoke
                     token.TimeSpan);
             }
 
-            foreach (NativeScoreEntry ent in page)
+            foreach (var ent in page)
             {
                 data.AddScore(ent.AsScore(data.Id));
             }

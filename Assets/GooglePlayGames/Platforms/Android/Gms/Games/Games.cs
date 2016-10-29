@@ -22,7 +22,7 @@ using Com.Google.Android.Gms.Games.Stats;
 using Google.Developers;
 using System;
 using Com.Google.Android.Gms.Common.Api;
-using UnityEngine;
+
 namespace Com.Google.Android.Gms.Games
 {
     public class Games : JavaObjWrapper

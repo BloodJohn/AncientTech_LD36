@@ -39,7 +39,7 @@ public class IntroductionController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            CoreGame.Instance.RestartGame();
+            CoreGame.Instance.LoadGame();
         }
 
         if (Input.GetKeyUp(KeyCode.Escape)) Application.Quit();

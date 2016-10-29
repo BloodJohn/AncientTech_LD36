@@ -65,7 +65,7 @@ namespace GooglePlayGames.Native.PInvoke
                                                      CommonErrorStatus.AuthStatus status, IntPtr data)
         {
 
-            AuthFinishedCallback callback =
+            var callback =
                 Callbacks.IntPtrToPermanentCallback<AuthFinishedCallback>(data);
 
             if (callback == null)
@@ -93,7 +93,7 @@ namespace GooglePlayGames.Native.PInvoke
         [AOT.MonoPInvokeCallback(typeof(C.OnAuthActionStartedCallback))]
         private static void InternalAuthStartedCallback(Types.AuthOperation op, IntPtr data)
         {
-            AuthStartedCallback callback =
+            var callback =
                 Callbacks.IntPtrToPermanentCallback<AuthStartedCallback>(data);
 
             try
@@ -141,7 +141,7 @@ namespace GooglePlayGames.Native.PInvoke
         internal void SetOnTurnBasedMatchEventCallback(
             Action<Types.MultiplayerEvent, string, NativeTurnBasedMatch> callback)
         {
-            IntPtr callbackPointer = Callbacks.ToIntPtr(callback);
+            var callbackPointer = Callbacks.ToIntPtr(callback);
             C.GameServices_Builder_SetOnTurnBasedMatchEvent(SelfPtr(),
                 InternalOnTurnBasedMatchEventCallback, callbackPointer);
         }
@@ -174,14 +174,14 @@ namespace GooglePlayGames.Native.PInvoke
         internal void SetOnMultiplayerInvitationEventCallback(
             Action<Types.MultiplayerEvent, string, MultiplayerInvitation> callback)
         {
-            IntPtr callbackPointer = Callbacks.ToIntPtr(callback);
+            var callbackPointer = Callbacks.ToIntPtr(callback);
             C.GameServices_Builder_SetOnMultiplayerInvitationEvent(SelfPtr(),
                 InternalOnMultiplayerInvitationEventCallback, callbackPointer);
         }
 
         internal GameServices Build(PlatformConfiguration configRef)
         {
-            IntPtr pointer = C.GameServices_Builder_Create(SelfPtr(),
+            var pointer = C.GameServices_Builder_Create(SelfPtr(),
                              HandleRef.ToIntPtr(configRef.AsHandle()));
 
             if (pointer.Equals(IntPtr.Zero))

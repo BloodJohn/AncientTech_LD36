@@ -21,7 +21,6 @@ namespace GooglePlayGames.Native.PInvoke
     using System;
     using System.Runtime.InteropServices;
     using GooglePlayGames.BasicApi;
-    using UnityEngine;
     using C = GooglePlayGames.Native.Cwrapper.Achievement;
 
     internal class NativeAchievement : BaseReferenceHolder
@@ -104,13 +103,13 @@ namespace GooglePlayGames.Native.PInvoke
 
         internal Achievement AsAchievement()
         {
-            Achievement achievement = new Achievement();
+            var achievement = new Achievement();
 
             achievement.Id = Id();
             achievement.Name = Name();
             achievement.Description = Description();
-            DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            ulong val = LastModifiedTime();
+            var UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            var val = LastModifiedTime();
             if (val == MinusOne)
             {
                 val = 0;

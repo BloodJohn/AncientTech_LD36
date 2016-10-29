@@ -23,9 +23,8 @@ namespace GooglePlayGames.Native.PInvoke
     using System;
     using System.Runtime.InteropServices;
     using C = GooglePlayGames.Native.Cwrapper.NearbyConnectionTypes;
-    using Types = GooglePlayGames.Native.Cwrapper.Types;
 
-internal class NativeConnectionResponse : BaseReferenceHolder
+    internal class NativeConnectionResponse : BaseReferenceHolder
     {
         internal NativeConnectionResponse(IntPtr pointer)
             : base(pointer)

@@ -195,8 +195,8 @@ namespace GooglePlayGames.Native
                         {
                             builder.RequireGooglePlus();
                         }
-                        string[] scopes = mConfiguration.Scopes;
-                        for (int i = 0; i < scopes.Length; i++) {
+                        var scopes = mConfiguration.Scopes;
+                        for (var i = 0; i < scopes.Length; i++) {
                             builder.AddOauthScope(scopes[i]);
                         }
                         Debug.Log("Building GPG services, implicitly attempts silent auth");
@@ -252,10 +252,10 @@ namespace GooglePlayGames.Native
                 return;
             }
 
-            bool shouldAutolaunch = eventType == Types.MultiplayerEvent.UPDATED_FROM_APP_LAUNCH;
+            var shouldAutolaunch = eventType == Types.MultiplayerEvent.UPDATED_FROM_APP_LAUNCH;
 
             // Copy the invitation into managed memory.
-            Invitation invite = invitation.AsInvitation();
+            var invite = invitation.AsInvitation();
             PlayGamesHelperObject.RunOnGameThread(() =>
                 currentHandler(invite, shouldAutolaunch));
         }
@@ -378,7 +378,7 @@ namespace GooglePlayGames.Native
         {
             mServices.FetchServerAuthCode(serverClientId, (serverAuthCodeResponse) => {
                 // Translate native errors into CommonStatusCodes.
-                CommonStatusCodes responseCode =
+                var responseCode =
                     ConversionUtils.ConvertResponseStatusToCommonStatus(serverAuthCodeResponse.Status());
                 // Log errors.
                 if (responseCode != CommonStatusCodes.Success &&
@@ -391,7 +391,7 @@ namespace GooglePlayGames.Native
                 {
                     // copy the auth code into managed memory before posting
                     // the callback.
-                    string authCode = serverAuthCodeResponse.Code();
+                    var authCode = serverAuthCodeResponse.Code();
                     PlayGamesHelperObject.RunOnGameThread(() =>
                         callback(responseCode, authCode));
                 }
@@ -594,7 +594,7 @@ namespace GooglePlayGames.Native
                                 mSilentAuthCallbacks = null;
                             }
 
-                            uint currentAuthGeneration = mAuthGeneration;
+                            var currentAuthGeneration = mAuthGeneration;
                             mServices.AchievementManager().FetchAll(
                                 results => PopulateAchievements(currentAuthGeneration, results));
                             mServices.PlayerManager().FetchSelf(
@@ -635,7 +635,7 @@ namespace GooglePlayGames.Native
                                 UnpauseUnityPlayer();
 
                                 // Noisy sign-in failed - report failure.
-                                Action<bool> localCallbacks = mPendingAuthCallbacks;
+                                var localCallbacks = mPendingAuthCallbacks;
                                 mPendingAuthCallbacks = null;
                                 InvokeCallbackOnGameThread(localCallbacks, false);
                             }
@@ -774,8 +774,8 @@ namespace GooglePlayGames.Native
             mServices.PlayerManager().FetchList(userIds,
                 (nativeUsers) =>
                 {
-                    IUserProfile[] users = new IUserProfile[nativeUsers.Length];
-                    for (int i = 0; i < users.Length; i++)
+                    var users = new IUserProfile[nativeUsers.Length];
+                    for (var i = 0; i < users.Length; i++)
                     {
                         users[i] = nativeUsers[i].AsPlayer();
                     }
@@ -800,7 +800,7 @@ namespace GooglePlayGames.Native
         /// <seealso cref="GooglePlayGames.BasicApi.IPlayGamesClient.LoadAchievements"/>
         public void LoadAchievements(Action<Achievement[]> callback)
         {
-            Achievement[] data = new Achievement[mAchievements.Count];
+            var data = new Achievement[mAchievements.Count];
             mAchievements.Values.CopyTo (data, 0);
             PlayGamesHelperObject.RunOnGameThread(() =>
                 callback.Invoke (data));
@@ -1013,7 +1013,7 @@ namespace GooglePlayGames.Native
                 return;
             }
 
-            Action<Status.UIStatus> callback = Callbacks.NoopUICallback;
+            var callback = Callbacks.NoopUICallback;
             if (cb != null)
             {
                 callback = (result) =>
@@ -1188,7 +1188,7 @@ namespace GooglePlayGames.Native
         public IntPtr GetApiClient()
         {
 #if UNITY_ANDROID
-            IntPtr ptr =
+            var ptr =
                 Cwrapper.InternalHooks.InternalHooks_GetApiClient(mServices.AsHandle());
 
             return  ptr;

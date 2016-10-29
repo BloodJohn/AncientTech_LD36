@@ -20,9 +20,8 @@
 //
 using Google.Developers;
 using System;
-using System.Reflection;
 using Com.Google.Android.Gms.Common.Api;
-using UnityEngine;
+
 namespace Com.Google.Android.Gms.Games.Stats
 {
     public class Stats_LoadPlayerStatsResultObject : JavaObjWrapper , Stats_LoadPlayerStatsResult, Result
@@ -34,12 +33,12 @@ namespace Com.Google.Android.Gms.Games.Stats
         }
         public PlayerStats getPlayerStats()
         {
-            IntPtr obj = InvokeCall<IntPtr>("getPlayerStats", "()Lcom/google/android/gms/games/stats/PlayerStats;");
+            var obj = InvokeCall<IntPtr>("getPlayerStats", "()Lcom/google/android/gms/games/stats/PlayerStats;");
             return new PlayerStatsObject(obj);
         }
         public Status getStatus()
         {
-            IntPtr obj = InvokeCall<IntPtr>("getStatus", "()Lcom/google/android/gms/common/api/Status;");
+            var obj = InvokeCall<IntPtr>("getStatus", "()Lcom/google/android/gms/common/api/Status;");
             return new Status(obj);
         }
     }

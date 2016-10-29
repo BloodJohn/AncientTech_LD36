@@ -22,7 +22,6 @@ namespace GooglePlayGames.Native.PInvoke
     using System.Runtime.InteropServices;
     using System.Collections.Generic;
     using C = GooglePlayGames.Native.Cwrapper.TurnBasedMatchConfig;
-    using Types = GooglePlayGames.Native.Cwrapper.Types;
     using Status = GooglePlayGames.Native.Cwrapper.CommonErrorStatus;
 
     internal class TurnBasedMatchConfig : BaseReferenceHolder

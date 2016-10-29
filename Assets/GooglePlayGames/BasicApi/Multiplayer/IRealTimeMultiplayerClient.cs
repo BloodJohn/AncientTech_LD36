@@ -20,9 +20,8 @@ namespace GooglePlayGames.BasicApi.Multiplayer
 #if (UNITY_ANDROID || (UNITY_IPHONE && !NO_GPGS))
   using System;
   using System.Collections.Generic;
-  using GooglePlayGames.BasicApi.Multiplayer;
 
-  /// <summary>
+    /// <summary>
   /// API entry point for Real-Time multiplayer.
   /// </summary>
   /// <remarks> To know more about multiplayer,

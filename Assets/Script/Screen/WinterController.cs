@@ -157,6 +157,7 @@ public class WinterController : MonoBehaviour
 
     public void SummerClick()
     {
+        CoreGame.Instance.Save();
         SceneManager.LoadScene(SpringController.sceneName);
     }
 

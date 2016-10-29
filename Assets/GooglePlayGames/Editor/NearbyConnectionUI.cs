@@ -27,7 +27,7 @@ namespace GooglePlayGames.Editor
         [MenuItem("Window/Google Play Games/Setup/Nearby Connections setup...", false, 3)]
         public static void MenuItemFileGPGSAndroidSetup()
         {
-            EditorWindow window = EditorWindow.GetWindow(
+            var window = EditorWindow.GetWindow(
                 typeof(NearbyConnectionUI), true, GPGSStrings.NearbyConnections.Title);
             window.minSize = new Vector2(400, 200);
         }

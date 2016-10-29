@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using SmartLocalization;
+﻿using SmartLocalization;
 using UnityEngine;
 using UnityEngine.UI;
 

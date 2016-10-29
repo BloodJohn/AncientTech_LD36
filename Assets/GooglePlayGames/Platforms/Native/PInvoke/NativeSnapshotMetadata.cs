@@ -21,7 +21,6 @@ namespace GooglePlayGames.Native.PInvoke
     using System;
     using System.Runtime.InteropServices;
     using GooglePlayGames.BasicApi.SavedGame;
-    using Types = GooglePlayGames.Native.Cwrapper.Types;
     using C = GooglePlayGames.Native.Cwrapper.SnapshotMetadata;
 
     internal class NativeSnapshotMetadata : BaseReferenceHolder, ISavedGameMetadata
