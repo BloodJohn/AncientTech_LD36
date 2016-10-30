@@ -113,15 +113,10 @@ public class CoreGame : MonoBehaviour
 
         if (WinterCount == 0)
             SeaCount = 200;
-        else if (WinterCount < 10)
+        else
         {
             //после первой зимовки рыбы в море бывает разное количество (от 1 до 3 рыбин за улов)
             SeaCount = Random.Range(100, 400);
-        }
-        else
-        {
-            //после 10 зимовки рыбы в море бывает разное количество (от 0 до 3 рыбин за улов)
-            SeaCount = Random.Range(0, 400);
         }
 
         //короткое лето после долгой зимы
@@ -141,9 +136,9 @@ public class CoreGame : MonoBehaviour
         TurnSummerDay();
 
         var production = Mathf.RoundToInt((float)SeaCount / 100);
-        if (production <= 0)
+        if (production < 1)
         {
-            //после 10 зимовки рыбы в море может не быть совсем
+            //до 10 зимовки минимум добычи - одна рыба
             if (WinterCount < 10)
                 production = 1;
             else

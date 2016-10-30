@@ -134,6 +134,9 @@
 	<data name="defeat_result" xml:space="preserve">
 		<value>Your score: {0} Felted Wool</value>
 	</data>
+	<data name="defeat_vote" xml:space="preserve">
+		<value>Comment in Store!</value>
+	</data>
 	<data name="intro_author" xml:space="preserve">
 		<value>design by BloodJohn, art by Mebemory</value>
 	</data>
@@ -165,7 +168,16 @@ Shear more wool!
 	<data name="winter_title" xml:space="preserve">
 		<value>{0} Winter {1}</value>
 	</data>
-	<data name="defeat_vote" xml:space="preserve">
-		<value>Comment in Store!</value>
+	<data name="summer_hay_spr" xml:space="preserve">
+		<value>En/Arrow/S_1</value>
+	</data>
+	<data name="summer_fish_spr" xml:space="preserve">
+		<value>En/Arrow/S_2</value>
+	</data>
+	<data name="winter_ship_spr" xml:space="preserve">
+		<value>En/Arrow/W_1</value>
+	</data>
+	<data name="winter_turn_spr" xml:space="preserve">
+		<value>En/Arrow/W_2</value>
 	</data>
 </root>

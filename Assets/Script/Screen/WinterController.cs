@@ -56,8 +56,20 @@ public class WinterController : MonoBehaviour
         ShowStats();
 
         summerButton.GetComponentInChildren<Text>().text = LanguageManager.Instance.GetTextValue("summer_button");
-        foodHelp.gameObject.SetActive(CoreGame.Instance.FeltedCount == 0);
-        shipHelp.gameObject.SetActive(CoreGame.Instance.FeltedCount == 0);
+
+        if (CoreGame.Instance.FeltedCount == 0)
+        {
+            shipHelp.sprite = Resources.Load<Sprite>(LanguageManager.Instance.GetTextValue("winter_ship_spr"));
+            foodHelp.sprite = Resources.Load<Sprite>(LanguageManager.Instance.GetTextValue("winter_turn_spr"));
+
+            foodHelp.gameObject.SetActive(true);
+            shipHelp.gameObject.SetActive(true);
+        }
+        else
+        {
+            foodHelp.gameObject.SetActive(false);
+            shipHelp.gameObject.SetActive(false);
+        }
     }
 
     void Update()

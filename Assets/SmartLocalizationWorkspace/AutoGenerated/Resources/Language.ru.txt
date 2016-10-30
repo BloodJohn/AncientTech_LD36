@@ -158,13 +158,25 @@
 	<data name="summer_button" xml:space="preserve">
 		<value>Исландия</value>
 	</data>
+	<data name="summer_fish_spr" xml:space="preserve">
+		<value>Ru/Arrow/S_2</value>
+	</data>
+	<data name="summer_hay_spr" xml:space="preserve">
+		<value>Ru/Arrow/S_1</value>
+	</data>
 	<data name="summer_title" xml:space="preserve">
 		<value>Лето {0}</value>
 	</data>
 	<data name="winter_button" xml:space="preserve">
 		<value>Длинный Дом</value>
 	</data>
+	<data name="winter_ship_spr" xml:space="preserve">
+		<value>Ru/Arrow/W_1</value>
+	</data>
 	<data name="winter_title" xml:space="preserve">
 		<value>{0} Зима {1}</value>
+	</data>
+	<data name="winter_turn_spr" xml:space="preserve">
+		<value>Ru/Arrow/W_2</value>
 	</data>
 </root>

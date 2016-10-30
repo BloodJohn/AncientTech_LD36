@@ -35,6 +35,20 @@ public class SummerController : MonoBehaviour
     {
         CoreGame.Instance.StartSummer();
 
+        if (CoreGame.Instance.FeltedCount == 0) //обучение
+        {
+            helpHay.sprite = Resources.Load<Sprite>(LanguageManager.Instance.GetTextValue("summer_hay_spr"));
+            helpFish.sprite = Resources.Load<Sprite>(LanguageManager.Instance.GetTextValue("summer_fish_spr"));
+
+            helpFish.gameObject.SetActive(true);
+            helpHay.gameObject.SetActive(true);
+        }
+        else
+        {
+            helpFish.gameObject.SetActive(false);
+            helpHay.gameObject.SetActive(false);
+        }
+
         helpFish.gameObject.SetActive(CoreGame.Instance.FeltedCount == 0);
         helpHay.gameObject.SetActive(CoreGame.Instance.FeltedCount == 0);
 

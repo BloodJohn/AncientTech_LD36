@@ -159,13 +159,25 @@ Shear more wool!
 	<data name="summer_button" xml:space="preserve">
 		<value>IceLand</value>
 	</data>
+	<data name="summer_fish_spr" xml:space="preserve">
+		<value>En/Arrow/S_2</value>
+	</data>
+	<data name="summer_hay_spr" xml:space="preserve">
+		<value>En/Arrow/S_1</value>
+	</data>
 	<data name="summer_title" xml:space="preserve">
 		<value>Summer {0}</value>
 	</data>
 	<data name="winter_button" xml:space="preserve">
 		<value>LongHouse</value>
 	</data>
+	<data name="winter_ship_spr" xml:space="preserve">
+		<value>En/Arrow/W_1</value>
+	</data>
 	<data name="winter_title" xml:space="preserve">
 		<value>{0} Winter {1}</value>
+	</data>
+	<data name="winter_turn_spr" xml:space="preserve">
+		<value>En/Arrow/W_2</value>
 	</data>
 </root>
