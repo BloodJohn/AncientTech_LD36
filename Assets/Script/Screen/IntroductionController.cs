@@ -25,8 +25,17 @@ public class IntroductionController : MonoBehaviour
 
         LanguageManager.SetDontDestroyOnLoad();
 
-        title.text = LanguageManager.Instance.GetTextValue("intro_title");
-        description.text = LanguageManager.Instance.GetTextValue("intro_description");
+        if (PlayerPrefs.HasKey(CoreGame.GameSaveKey))
+        {
+            title.text = LanguageManager.Instance.GetTextValue("intro_title2");
+            description.text = LanguageManager.Instance.GetTextValue("intro_description2");
+        }
+        else
+        {
+            title.text = LanguageManager.Instance.GetTextValue("intro_title");
+            description.text = LanguageManager.Instance.GetTextValue("intro_description");
+        }
+        
         author.text = LanguageManager.Instance.GetTextValue("intro_author");
     }
 

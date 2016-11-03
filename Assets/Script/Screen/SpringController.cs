@@ -13,8 +13,17 @@ public class SpringController : MonoBehaviour
 
     void Awake()
     {
-        title.text = LanguageManager.Instance.GetTextValue("spring_title");
-        description.text = LanguageManager.Instance.GetTextValue("spring_description");
+        if (CoreGame.Instance.WinterCount < 10)
+        {
+            title.text = LanguageManager.Instance.GetTextValue("spring_title");
+            description.text = LanguageManager.Instance.GetTextValue("spring_description");
+        }
+        else
+        {
+            title.text = LanguageManager.Instance.GetTextValue("spring_title2");
+            description.text = LanguageManager.Instance.GetTextValue("spring_description2");
+        }
+
         author.text = LanguageManager.Instance.GetTextValue("intro_author");
     }
 

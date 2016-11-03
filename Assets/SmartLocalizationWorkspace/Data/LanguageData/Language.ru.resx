@@ -119,8 +119,15 @@
 	<data name="autumn_description" xml:space="preserve">
 		<value>Всю зиму овцы едят сено заготовленное летом. Из шерсти изготавливают ткань. Часть овец забивают на мясо.</value>
 	</data>
+	<data name="autumn_description2" xml:space="preserve">
+		<value>Рыбу потрошат и вывешивают на улице. 
+Идеальные условия - чуть выше нуля градусов и мало дождей. При заморозках лед разрывает мясо и рыба портится.</value>
+	</data>
 	<data name="autumn_title" xml:space="preserve">
 		<value>Осенью овец собирают и стригут</value>
+	</data>
+	<data name="autumn_title2" xml:space="preserve">
+		<value>Треску сушат на палке</value>
 	</data>
 	<data name="defeat_noFood" xml:space="preserve">
 		<value>Еда закончилась. Люди начали умирать от голода.</value>
@@ -146,14 +153,28 @@
 Добудь больше шерсти.
 </value>
 	</data>
+	<data name="intro_description2" xml:space="preserve">
+		<value>870 год. Сага о людях из долины Лососьей реки, Книга о взятии земли. 
+Первые поселенцы, главы родов приехали на собственных кораблях, с семьями, домочадцами и рабами.</value>
+	</data>
 	<data name="intro_title" xml:space="preserve">
 		<value>Древняя Исландия: Экономика выживания</value>
+	</data>
+	<data name="intro_title2" xml:space="preserve">
+		<value>Исландия: Взятие земли</value>
 	</data>
 	<data name="spring_description" xml:space="preserve">
 		<value>К весне ягнята подрастают. Ткань продадут купцам в обмен на инструмент и оружие. Не всегда в море есть рыба. Заготовь сена на зиму.</value>
 	</data>
+	<data name="spring_description2" xml:space="preserve">
+		<value>Скошенное сено может сгнить от сильных дождей. Придется начинать косить заново.
+В лугах стога стоят недолго. Сено укрывают, с помощью шкур и шерстяных тканей.</value>
+	</data>
 	<data name="spring_title" xml:space="preserve">
 		<value>Зимой родились ягнята</value>
+	</data>
+	<data name="spring_title2" xml:space="preserve">
+		<value>Каково лето, таково и сено</value>
 	</data>
 	<data name="summer_button" xml:space="preserve">
 		<value>Исландия</value>

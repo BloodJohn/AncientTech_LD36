@@ -119,8 +119,15 @@
 	<data name="autumn_description" xml:space="preserve">
 		<value>All winter, the sheep will eat the hay, that you mowed in the summer. Over the winter people will make cloth from wool. Some sheep be slaughtered at the beginning of winter for meat.</value>
 	</data>
+	<data name="autumn_description2" xml:space="preserve">
+		<value>Is unsalted fish, dried by cold air and wind on wooden racks (hjell) on the foreshore. 
+Dried fish has a storage life of several years.</value>
+	</data>
 	<data name="autumn_title" xml:space="preserve">
 		<value>Sheep are sheared in the autumn</value>
+	</data>
+	<data name="autumn_title2" xml:space="preserve">
+		<value>Stockfish (cod)</value>
 	</data>
 	<data name="defeat_noFood" xml:space="preserve">
 		<value>Winter on the house run out of food. The Vikings began to die from hunger.</value>
@@ -146,8 +153,15 @@ Catch fish to feed people. Mow hay to feed sheep in winter. Kill a few sheep if 
 Shear more wool!
 </value>
 	</data>
+	<data name="intro_description2" xml:space="preserve">
+		<value>870. The Saga of the People of the Tattúín River Valley, Landnamabok. 
+The first settlers, heads came on their own ships, with families, households and slaves.</value>
+	</data>
 	<data name="intro_title" xml:space="preserve">
 		<value>Ancient Iceland: survival economy</value>
+	</data>
+	<data name="intro_title2" xml:space="preserve">
+		<value>Icelandic: Landnámsöld</value>
 	</data>
 	<data name="spring_description" xml:space="preserve">
 		<value>In the spring the sheep go to graze on the meadows. Made in winter fabric will be sold to the merchants in exchange for weapons and tools. Fishing is not always a lot of fish. Mow enough hay for the winter.
@@ -179,5 +193,11 @@ Shear more wool!
 	</data>
 	<data name="winter_turn_spr" xml:space="preserve">
 		<value>En/Arrow/W_2</value>
+	</data>
+	<data name="spring_title2" xml:space="preserve">
+		<value />
+	</data>
+	<data name="spring_description2" xml:space="preserve">
+		<value />
 	</data>
 </root>

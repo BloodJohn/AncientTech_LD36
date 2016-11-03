@@ -13,8 +13,17 @@ public class AutumnController : MonoBehaviour
 
     void Awake()
     {
-        title.text = LanguageManager.Instance.GetTextValue("autumn_title");
-        description.text = LanguageManager.Instance.GetTextValue("autumn_description");
+        if (CoreGame.Instance.WinterCount < 10)
+        {
+            title.text = LanguageManager.Instance.GetTextValue("autumn_title");
+            description.text = LanguageManager.Instance.GetTextValue("autumn_description");
+        }
+        else
+        {
+            title.text = LanguageManager.Instance.GetTextValue("autumn_title2");
+            description.text = LanguageManager.Instance.GetTextValue("autumn_description2");
+        }
+        
         author.text = LanguageManager.Instance.GetTextValue("intro_author");
     }
 
