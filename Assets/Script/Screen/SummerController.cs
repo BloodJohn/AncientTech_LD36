@@ -28,6 +28,7 @@ public class SummerController : MonoBehaviour
     public GameObject shipPrefab;
     public GameObject haylagePrefab;
     public GameObject fishPrefab;
+    public GameObject fishbonePrefab;
     #endregion
 
     #region unity
@@ -125,7 +126,7 @@ public class SummerController : MonoBehaviour
         BigFishAchievement(fishing);
         ShowStats();
 
-        var item = (GameObject)Instantiate(fishPrefab, transform);
+        var item = (GameObject)Instantiate(fishing > 0 ? fishPrefab: fishbonePrefab, transform);
         item.transform.position = new Vector3(point.x, point.y, 0f);
     }
 
