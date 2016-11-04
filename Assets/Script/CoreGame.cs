@@ -120,7 +120,8 @@ public class CoreGame : MonoBehaviour
         }
 
         //короткое лето после долгой зимы
-        if (LongWinterCount <= 0) DayCount--;
+        if (LongWinterCount <= 0)
+            DayCount -= Mathf.Max(1, WinterCount / 10);
         Debug.LogFormat("seaCount {0} longWinter {1}", SeaCount, LongWinterCount);
     }
 
@@ -172,7 +173,7 @@ public class CoreGame : MonoBehaviour
         LongWinterCount++;
         if (LongWinterCount > 5)
         {
-            DayCount++;
+            DayCount += Mathf.Max(1, WinterCount/10);
             LongWinterCount = 0;
         }
 
