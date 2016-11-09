@@ -38,6 +38,10 @@ public class CoreGame : MonoBehaviour
     public int MeatCount;
     /// <summary>трески</summary>
     public int FishCount;
+    /// <summary>камня</summary>
+    public int StoneCount;
+    /// <summary>тюленей</summary>
+    public int SealCount;
     /// <summary>лугов</summary>
     public int LandCount = 3000;
     /// <summary>рыбы в море</summary>
@@ -64,6 +68,8 @@ public class CoreGame : MonoBehaviour
         FeltedCount = 0;
         MeatCount = 0;
         FishCount = 0;
+        StoneCount = 0;
+        SealCount = 0;
         LandCount = LandMax;
         SeaCount = SeaMax;
         SceneManager.LoadScene(SummerController.sceneName);
@@ -146,6 +152,8 @@ public class CoreGame : MonoBehaviour
                 production = 0;
         }
 
+        if (Random.Range(0, 10) == 0) SealCount++; //WinterCount > 10 &&
+
         FishCount += production;
         SeaCount -= production;
 
@@ -158,6 +166,7 @@ public class CoreGame : MonoBehaviour
 
         var production = PeopleCount * 2;
         if (production > LandCount) production = LandCount;
+        if (Random.Range(0, 10) == 0) StoneCount++; //WinterCount > 10 &&
 
         HaylageCount += production;
         LandCount -= production;
@@ -173,7 +182,7 @@ public class CoreGame : MonoBehaviour
         LongWinterCount++;
         if (LongWinterCount > 5)
         {
-            DayCount += Mathf.Max(1, WinterCount/10);
+            DayCount += Mathf.Max(1, WinterCount / 10);
             LongWinterCount = 0;
         }
 

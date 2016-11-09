@@ -23,6 +23,11 @@ public class SummerController : MonoBehaviour
     /// <summary>сколько рыбы</summary>
     public Text fishLabel;
 
+    /// <summary>сколько камня</summary>
+    public Text stoneLabel;
+    /// <summary>сколько тюленей</summary>
+    public Text sealLabel;
+
     public Button longhouseButton;
 
     public GameObject shipPrefab;
@@ -103,6 +108,11 @@ public class SummerController : MonoBehaviour
         sheepLabel.text = string.Format("{0}", CoreGame.Instance.SheepCount);
         hayLabel.text = string.Format("{0}/{1}", CoreGame.Instance.HaylageCount, CoreGame.Instance.SheepCount * CoreGame.SeasonDays);
         fishLabel.text = string.Format("{0}/{1}", CoreGame.Instance.FishCount, CoreGame.SeasonDays);
+
+        stoneLabel.gameObject.SetActive(CoreGame.Instance.StoneCount>0);
+        stoneLabel.text = string.Format("{0}", CoreGame.Instance.StoneCount);
+        sealLabel.gameObject.SetActive(CoreGame.Instance.SealCount > 0);
+        sealLabel.text = string.Format("{0}", CoreGame.Instance.SealCount);
 
         longhouseButton.gameObject.SetActive(CoreGame.Instance.DayCount <= 0);
     }
