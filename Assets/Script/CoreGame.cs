@@ -15,6 +15,11 @@ public class CoreGame : MonoBehaviour
     public const int LandMax = 3000;
     /// <summary>рыбы в море</summary>
     public const int SeaMax = 200;
+    /// <summary>камней на амбар</summary>
+    public const int StonePerHouse = 10;
+    /// <summary>тюленей на лодку</summary>
+    public const int SealPerBoat = 10;
+
     /// <summary>Ключ куда мы сохраним игру</summary>
     public const string GameSaveKey = "gameSave";
 
@@ -42,6 +47,11 @@ public class CoreGame : MonoBehaviour
     public int StoneCount;
     /// <summary>тюленей</summary>
     public int SealCount;
+    /// <summary>амбаров (/10)</summary>
+    public int HouseCount;
+    /// <summary>лодок (/10)</summary>
+    public int BoatCount;
+
     /// <summary>лугов</summary>
     public int LandCount = 3000;
     /// <summary>рыбы в море</summary>
@@ -70,6 +80,9 @@ public class CoreGame : MonoBehaviour
         FishCount = 0;
         StoneCount = 0;
         SealCount = 0;
+        HouseCount = 0;
+        BoatCount = 0;
+
         LandCount = LandMax;
         SeaCount = SeaMax;
         SceneManager.LoadScene(SummerController.sceneName);
@@ -187,6 +200,18 @@ public class CoreGame : MonoBehaviour
         }
 
         WoolCount = SheepCount;
+
+        //каждую зиму достроенные амбары немного разрушаются
+        if (HouseCount >= StonePerHouse)
+        {
+            HouseCount -= Mathf.FloorToInt((float) HouseCount/StonePerHouse);
+        }
+
+        //каждую зиму достроенные лодки немного разрушаются
+        if (BoatCount >= SealPerBoat)
+        {
+            BoatCount -= Mathf.FloorToInt((float)BoatCount / SealPerBoat);
+        }
     }
 
     public int TurnWinterDay()
@@ -217,12 +242,30 @@ public class CoreGame : MonoBehaviour
             return -1;
         }
 
-        //обрабатываем шерсть
-        if (WoolCount > 0)
+        //на мясной диете удается работать в два раза больше
+        var poduction = result > 0 ? 2 : 1;
+        for (var i = 0; i < poduction; i++)
         {
-            WoolCount--;
-            FeltedCount++;
-            result = 2;
+            //обрабатываем шерсть
+            if (WoolCount > 0)
+            {
+                WoolCount--;
+                FeltedCount++;
+                result = 2;
+            }
+            else //если осталось время стоим лодки и дома
+            {
+                if (SealCount > 0)
+                {
+                    SealCount--;
+                    BoatCount++;
+                }
+                else if (StoneCount > 0)
+                {
+                    StoneCount--;
+                    HouseCount++;
+                }
+            }
         }
 
         return result;

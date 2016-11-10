@@ -37,13 +37,10 @@ public class WinterController : MonoBehaviour
     /// <summary>сколько рыбы</summary>
     public Text fishLabel;
     /// <summary>сколько амбаров</summary>
-    public Text storehouseLabel;
+    public Text houseLabel;
     /// <summary>сколько лодок</summary>
     public Text boatLabel;
 
-    //public Image slaughterButton;
-    //public Image woolButton;
-    //public Image fishButton;
     public Button summerButton;
 
     public GameObject meatPrefab;
@@ -144,18 +141,48 @@ public class WinterController : MonoBehaviour
         fishLabel.text = string.Format("{0}", CoreGame.Instance.FishCount);
 
         var isWinter = CoreGame.Instance.DayCount > 0;
-
         sheepLabel.gameObject.SetActive(isWinter && CoreGame.Instance.SheepCount > 0);
         woolLabel.gameObject.SetActive(isWinter && CoreGame.Instance.WoolCount > 0);
         fishLabel.gameObject.SetActive(isWinter);
         summerButton.gameObject.SetActive(!isWinter);
 
+        //амбар
+        houseLabel.gameObject.SetActive(isWinter);
+        if (CoreGame.Instance.StoneCount > 0)
+        {
+            houseLabel.text = string.Format("{0}+{1}", (float)CoreGame.Instance.HouseCount / CoreGame.StonePerHouse, (float)CoreGame.Instance.StoneCount / CoreGame.StonePerHouse);
+        }
+        else
+        {
+            if (CoreGame.Instance.HouseCount > 0)
+                houseLabel.text = string.Format("{0}", (float)CoreGame.Instance.HouseCount / CoreGame.StonePerHouse);
+            else
+                houseLabel.gameObject.SetActive(false);
+        }
+
+        //лодки
+        boatLabel.gameObject.SetActive(isWinter);
+        if (CoreGame.Instance.SealCount > 0)
+        {
+            boatLabel.text = string.Format("{0}+{1}", (float)CoreGame.Instance.BoatCount / CoreGame.SealPerBoat, (float)CoreGame.Instance.SealCount / CoreGame.SealPerBoat);
+        }
+        else
+        {
+            if (CoreGame.Instance.BoatCount > 0)
+                boatLabel.text = string.Format("{0}", (float)CoreGame.Instance.BoatCount / CoreGame.SealPerBoat);
+            else
+                boatLabel.gameObject.SetActive(false);
+        }
+
+
+        //все овцы подохли
         if (CoreGame.Instance.SheepCount <= 0)
         {
-            //все овцы подохли
+            
             SceneManager.LoadScene(DefeatController.sceneName);
         }
 
+        //режем овец которых не прокормить
         if (CoreGame.Instance.SheepCount > CoreGame.Instance.HaylageCount)
         {
             sheepLabel.text = string.Format("{0}/{1}", CoreGame.Instance.SheepCount, CoreGame.Instance.HaylageCount);
@@ -166,6 +193,7 @@ public class WinterController : MonoBehaviour
             sheepLabel.color = blackColor;
         }
 
+        //предупреждение, если еды не хваатает
         if (CoreGame.Instance.DayCount > CoreGame.Instance.FishCount + CoreGame.Instance.MeatCount)
         {
             meatLabel.text = string.Format("{0}/{1}", CoreGame.Instance.MeatCount, CoreGame.Instance.DayCount - CoreGame.Instance.FishCount);
