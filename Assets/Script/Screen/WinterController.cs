@@ -41,9 +41,9 @@ public class WinterController : MonoBehaviour
     /// <summary>сколько лодок</summary>
     public Text boatLabel;
 
-    public Image slaughterButton;
-    public Image woolButton;
-    public Image fishButton;
+    //public Image slaughterButton;
+    //public Image woolButton;
+    //public Image fishButton;
     public Button summerButton;
 
     public GameObject meatPrefab;
@@ -145,9 +145,9 @@ public class WinterController : MonoBehaviour
 
         var isWinter = CoreGame.Instance.DayCount > 0;
 
-        slaughterButton.gameObject.SetActive(isWinter && CoreGame.Instance.SheepCount > 0);
-        woolButton.gameObject.SetActive(isWinter && CoreGame.Instance.WoolCount > 0);
-        fishButton.gameObject.SetActive(isWinter);
+        sheepLabel.gameObject.SetActive(isWinter && CoreGame.Instance.SheepCount > 0);
+        woolLabel.gameObject.SetActive(isWinter && CoreGame.Instance.WoolCount > 0);
+        fishLabel.gameObject.SetActive(isWinter);
         summerButton.gameObject.SetActive(!isWinter);
 
         if (CoreGame.Instance.SheepCount <= 0)
