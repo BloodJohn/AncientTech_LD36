@@ -36,6 +36,10 @@ public class WinterController : MonoBehaviour
     public Text meatLabel;
     /// <summary>сколько рыбы</summary>
     public Text fishLabel;
+    /// <summary>сколько амбаров</summary>
+    public Text storehouseLabel;
+    /// <summary>сколько лодок</summary>
+    public Text boatLabel;
 
     public Image slaughterButton;
     public Image woolButton;
