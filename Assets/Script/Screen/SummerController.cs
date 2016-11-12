@@ -34,6 +34,8 @@ public class SummerController : MonoBehaviour
     public GameObject haylagePrefab;
     public GameObject fishPrefab;
     public GameObject fishbonePrefab;
+    public GameObject stonePrefab;
+    public GameObject sealPrefab;
     #endregion
 
     #region unity
@@ -106,10 +108,11 @@ public class SummerController : MonoBehaviour
     {
         title.text = string.Format(LanguageManager.Instance.GetTextValue("summer_title"), CoreGame.Instance.DayCount);
         sheepLabel.text = string.Format("{0}", CoreGame.Instance.SheepCount);
-        hayLabel.text = string.Format("{0}/{1}", CoreGame.Instance.HaylageCount, CoreGame.Instance.SheepCount * CoreGame.SeasonDays);
+        hayLabel.text = string.Format("{0}/{1}", CoreGame.Instance.HaylageCount,
+            Mathf.Min(CoreGame.Instance.SheepCount * CoreGame.SeasonDays, CoreGame.Instance.HaylageMaxStore));
         fishLabel.text = string.Format("{0}/{1}", CoreGame.Instance.FishCount, CoreGame.SeasonDays);
 
-        stoneLabel.gameObject.SetActive(CoreGame.Instance.StoneCount>0);
+        stoneLabel.gameObject.SetActive(CoreGame.Instance.StoneCount > 0);
         stoneLabel.text = string.Format("{0}", CoreGame.Instance.StoneCount);
         sealLabel.gameObject.SetActive(CoreGame.Instance.SealCount > 0);
         sealLabel.text = string.Format("{0}", CoreGame.Instance.SealCount);
@@ -120,7 +123,7 @@ public class SummerController : MonoBehaviour
     private void HaylageClick(Vector2 point)
     {
         helpHay.gameObject.SetActive(false);
-        
+
         CoreGame.Instance.HaylageSummer();
         ShowStats();
 
@@ -131,12 +134,12 @@ public class SummerController : MonoBehaviour
     private void FishingClick(Vector2 point)
     {
         helpFish.gameObject.SetActive(false);
-        
+
         var fishing = CoreGame.Instance.FishingSummer();
         BigFishAchievement(fishing);
         ShowStats();
 
-        var item = (GameObject)Instantiate(fishing > 0 ? fishPrefab: fishbonePrefab, transform);
+        var item = (GameObject)Instantiate(fishing > 0 ? fishPrefab : fishbonePrefab, transform);
         item.transform.position = new Vector3(point.x, point.y, 0f);
     }
 
@@ -171,7 +174,7 @@ public class SummerController : MonoBehaviour
     /// <summary>большой улов</summary>
     private void BigFishAchievement(int fishing)
     {
-        if (fishing <=0) DeadSeaAchievement(fishing);
+        if (fishing <= 0) DeadSeaAchievement(fishing);
 
         if (fishing < 3) return;
         if (PlayerPrefs.HasKey(GPGSIds.achievement_big_fish)) return;

@@ -56,6 +56,7 @@ public class IntroductionController : MonoBehaviour
 
     private void GooglePlayServices()
     {
+        #if UNITY_ANDROID
         Debug.LogFormat("GooglePlayServices");
         var config = new PlayGamesClientConfiguration.Builder()
         // enables saving game progress.
@@ -71,7 +72,7 @@ public class IntroductionController : MonoBehaviour
 
         PlayGamesPlatform.InitializeInstance(config);
         // recommended for debugging:
-        PlayGamesPlatform.DebugLogEnabled = true;
+        PlayGamesPlatform.DebugLogEnabled = false;
         // Activate the Google Play Games platform
         PlayGamesPlatform.Activate();
 
@@ -86,5 +87,6 @@ public class IntroductionController : MonoBehaviour
                 //author.text = "Social.localUser.Authenticate - failed";
             }
         });
+        #endif
     }
 }

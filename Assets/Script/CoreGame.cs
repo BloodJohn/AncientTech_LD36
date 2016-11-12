@@ -15,10 +15,22 @@ public class CoreGame : MonoBehaviour
     public const int LandMax = 3000;
     /// <summary>рыбы в море</summary>
     public const int SeaMax = 200;
+    /// <summary>минимальный улов</summary>
+    public const int SeaMin = 100;
     /// <summary>камней на амбар</summary>
     public const int StonePerHouse = 10;
     /// <summary>тюленей на лодку</summary>
-    public const int SealPerBoat = 10;
+    public const int SealPerBoat = 5;
+    /// <summary>периодичность длинной зимы (раз в сколько лет?)</summary>
+    public const int LongWinterCicle = 5;
+    /// <summary>начальная сложность (первые 10 зим)</summary>
+    public const int EasyWinters = 10;
+    /// <summary>вероятность выпадения камня</summary>
+    public const int StoneChanse = 10;
+    /// <summary>вероятность выпадения тюленя</summary>
+    public const int SealChanse = 10;
+
+
 
     /// <summary>Ключ куда мы сохраним игру</summary>
     public const string GameSaveKey = "gameSave";
@@ -59,6 +71,25 @@ public class CoreGame : MonoBehaviour
 
     #endregion
 
+    #region function
+    /// <summary>Дополнительные ходы при длинной зиме</summary>
+    public int LongWinterTurns { get { return 1; } }
+
+    /// <summary>сколько мы можем заготовить сена</summary>
+    public int HaylageMaxStore { get { return (3 + HouseCount / StonePerHouse) * 100; } }
+
+    /// <summary>сколько мы можем заготовить рыбы</summary>
+    public int FishingSea
+    {
+        get
+        {
+            //люди могут использовать не более 4х лодок!
+            var boat = Mathf.Min(BoatCount / SealPerBoat, PeopleCount / 3);
+            return boat * SeaMin + SeaMin / 2;
+        }
+    }
+    #endregion
+
     #region constructor
     void Awake()
     {
@@ -81,7 +112,7 @@ public class CoreGame : MonoBehaviour
         StoneCount = 0;
         SealCount = 0;
         HouseCount = 0;
-        BoatCount = 0;
+        BoatCount = SealPerBoat * 2; //вначале у нас есть 2 лодки
 
         LandCount = LandMax;
         SeaCount = SeaMax;
@@ -131,16 +162,15 @@ public class CoreGame : MonoBehaviour
 
 
         if (WinterCount == 0)
-            SeaCount = 200;
+            SeaCount = SeaMax;
         else
         {
-            //после первой зимовки рыбы в море бывает разное количество (от 1 до 3 рыбин за улов)
-            SeaCount = Random.Range(100, 400);
+            //после первой зимовки рыбы в море бывает разное количество (от 1 до 3 рыбин за улов + нужно иметь 4 лодки!)
+            SeaCount = Random.Range(SeaMin, FishingSea);
         }
 
         //короткое лето после долгой зимы
-        if (LongWinterCount <= 0)
-            DayCount -= Mathf.Max(1, WinterCount / 10);
+        if (LongWinterCount == 0) DayCount -= LongWinterTurns;
         Debug.LogFormat("seaCount {0} longWinter {1}", SeaCount, LongWinterCount);
     }
 
@@ -159,13 +189,13 @@ public class CoreGame : MonoBehaviour
         if (production < 1)
         {
             //до 10 зимовки минимум добычи - одна рыба
-            if (WinterCount < 10)
+            if (WinterCount < EasyWinters)
                 production = 1;
             else
                 production = 0;
         }
 
-        if (Random.Range(0, 10) == 0) SealCount++; //WinterCount > 10 &&
+        if (Random.Range(0, SealChanse) == 0) SealCount++; //WinterCount > 10 &&
 
         FishCount += production;
         SeaCount -= production;
@@ -179,10 +209,12 @@ public class CoreGame : MonoBehaviour
 
         var production = PeopleCount * 2;
         if (production > LandCount) production = LandCount;
-        if (Random.Range(0, 10) == 0) StoneCount++; //WinterCount > 10 &&
+        if (Random.Range(0, StoneChanse) == 0) StoneCount++; //WinterCount > 10 &&
 
         HaylageCount += production;
         LandCount -= production;
+        //если склады переполнены
+        if (HaylageCount > HaylageMaxStore) HaylageCount = HaylageMaxStore;
     }
     #endregion
 
@@ -193,25 +225,26 @@ public class CoreGame : MonoBehaviour
         DayCount = SeasonDays;
         WinterCount++;
         LongWinterCount++;
-        if (LongWinterCount > 5)
+        if (LongWinterCount > LongWinterCicle)
         {
-            DayCount += Mathf.Max(1, WinterCount / 10);
+            DayCount += LongWinterTurns;
             LongWinterCount = 0;
         }
 
         WoolCount = SheepCount;
 
+        /*
         //каждую зиму достроенные амбары немного разрушаются
         if (HouseCount >= StonePerHouse)
         {
-            HouseCount -= Mathf.FloorToInt((float) HouseCount/StonePerHouse);
+            HouseCount -= Mathf.FloorToInt((float)HouseCount / StonePerHouse);
         }
 
         //каждую зиму достроенные лодки немного разрушаются
         if (BoatCount >= SealPerBoat)
         {
             BoatCount -= Mathf.FloorToInt((float)BoatCount / SealPerBoat);
-        }
+        }*/
     }
 
     public int TurnWinterDay()
