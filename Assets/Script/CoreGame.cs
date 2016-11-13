@@ -30,7 +30,7 @@ public class CoreGame : MonoBehaviour
     /// <summary>вероятность выпадения камня</summary>
     public const int StoneChanse = 10;
     /// <summary>вероятность выпадения тюленя</summary>
-    public const int SealChanse = 10;
+    public const int SealChanse = 20;
 
 
 
@@ -100,7 +100,7 @@ public class CoreGame : MonoBehaviour
         StoneCount = 0;
         SealCount = 0;
         HouseCount = 0;
-        BoatCount = SealPerBoat * 2; //вначале у нас есть 2 лодки
+        BoatCount = 0; //вначале у нас есть 2 лодки
 
         LandCount = LandMax;
         SeaCount = SeaFirst;
