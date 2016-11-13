@@ -14,9 +14,11 @@ public class CoreGame : MonoBehaviour
     /// <summary>лугов</summary>
     public const int LandMax = 3000;
     /// <summary>рыбы в море</summary>
-    public const int SeaMax = 200;
+    public const int SeaFirst = 200;
     /// <summary>минимальный улов</summary>
     public const int SeaMin = 100;
+    /// <summary>максимальный улов</summary>
+    public const int SeaMax = 400;
     /// <summary>камней на амбар</summary>
     public const int StonePerHouse = 10;
     /// <summary>тюленей на лодку</summary>
@@ -74,20 +76,6 @@ public class CoreGame : MonoBehaviour
     #region function
     /// <summary>Дополнительные ходы при длинной зиме</summary>
     public int LongWinterTurns { get { return 1; } }
-
-    /// <summary>сколько мы можем заготовить сена</summary>
-    public int HaylageMaxStore { get { return (3 + HouseCount / StonePerHouse) * 100; } }
-
-    /// <summary>сколько мы можем заготовить рыбы</summary>
-    public int FishingSea
-    {
-        get
-        {
-            //люди могут использовать не более 4х лодок!
-            var boat = Mathf.Min(BoatCount / SealPerBoat, PeopleCount / 3);
-            return boat * SeaMin + SeaMin / 2;
-        }
-    }
     #endregion
 
     #region constructor
@@ -115,7 +103,7 @@ public class CoreGame : MonoBehaviour
         BoatCount = SealPerBoat * 2; //вначале у нас есть 2 лодки
 
         LandCount = LandMax;
-        SeaCount = SeaMax;
+        SeaCount = SeaFirst;
         SceneManager.LoadScene(SummerController.sceneName);
     }
 
@@ -162,11 +150,11 @@ public class CoreGame : MonoBehaviour
 
 
         if (WinterCount == 0)
-            SeaCount = SeaMax;
+            SeaCount = SeaFirst;
         else
         {
             //после первой зимовки рыбы в море бывает разное количество (от 1 до 3 рыбин за улов + нужно иметь 4 лодки!)
-            SeaCount = Random.Range(SeaMin, FishingSea);
+            SeaCount = Random.Range(SeaMin, SeaMax);
         }
 
         //короткое лето после долгой зимы
@@ -185,6 +173,7 @@ public class CoreGame : MonoBehaviour
     {
         TurnSummerDay();
 
+        var seal = 0;
         var production = Mathf.RoundToInt((float)SeaCount / 100);
         if (production < 1)
         {
@@ -192,29 +181,43 @@ public class CoreGame : MonoBehaviour
             if (WinterCount < EasyWinters)
                 production = 1;
             else
+            {
                 production = 0;
+                seal = -1;
+            }
         }
 
-        if (Random.Range(0, SealChanse) == 0) SealCount++; //WinterCount > 10 &&
+        
+        if (Random.Range(0, SealChanse) == 0)
+        {
+            SealCount++;
+            seal = 1;
+        }
 
         FishCount += production;
         SeaCount -= production;
 
-        return production;
+        return seal;
     }
 
-    public void HaylageSummer()
+    public int HaylageSummer()
     {
         TurnSummerDay();
 
         var production = PeopleCount * 2;
         if (production > LandCount) production = LandCount;
-        if (Random.Range(0, StoneChanse) == 0) StoneCount++; //WinterCount > 10 &&
+
+        var stone = 0;
+        if (Random.Range(0, StoneChanse) == 0)
+        {
+            StoneCount++;
+            stone = 1;
+        }
 
         HaylageCount += production;
         LandCount -= production;
-        //если склады переполнены
-        if (HaylageCount > HaylageMaxStore) HaylageCount = HaylageMaxStore;
+
+        return stone;
     }
     #endregion
 

@@ -30,7 +30,7 @@ public class SummerController : MonoBehaviour
 
     public Button longhouseButton;
 
-    public GameObject shipPrefab;
+    public GameObject sheepPrefab;
     public GameObject haylagePrefab;
     public GameObject fishPrefab;
     public GameObject fishbonePrefab;
@@ -108,14 +108,13 @@ public class SummerController : MonoBehaviour
     {
         title.text = string.Format(LanguageManager.Instance.GetTextValue("summer_title"), CoreGame.Instance.DayCount);
         sheepLabel.text = string.Format("{0}", CoreGame.Instance.SheepCount);
-        hayLabel.text = string.Format("{0}/{1}", CoreGame.Instance.HaylageCount,
-            Mathf.Min(CoreGame.Instance.SheepCount * CoreGame.SeasonDays, CoreGame.Instance.HaylageMaxStore));
+        hayLabel.text = string.Format("{0}/{1}", CoreGame.Instance.HaylageCount, CoreGame.Instance.SheepCount * CoreGame.SeasonDays);
         fishLabel.text = string.Format("{0}/{1}", CoreGame.Instance.FishCount, CoreGame.SeasonDays);
 
-        stoneLabel.gameObject.SetActive(CoreGame.Instance.StoneCount > 0);
+        /*stoneLabel.gameObject.SetActive(CoreGame.Instance.StoneCount > 0);
         stoneLabel.text = string.Format("{0}", CoreGame.Instance.StoneCount);
         sealLabel.gameObject.SetActive(CoreGame.Instance.SealCount > 0);
-        sealLabel.text = string.Format("{0}", CoreGame.Instance.SealCount);
+        sealLabel.text = string.Format("{0}", CoreGame.Instance.SealCount);*/
 
         longhouseButton.gameObject.SetActive(CoreGame.Instance.DayCount <= 0);
     }
@@ -124,10 +123,12 @@ public class SummerController : MonoBehaviour
     {
         helpHay.gameObject.SetActive(false);
 
-        CoreGame.Instance.HaylageSummer();
+        var stone = CoreGame.Instance.HaylageSummer();
         ShowStats();
 
-        var item = (GameObject)Instantiate(haylagePrefab, transform);
+        var prefab = stone==0?haylagePrefab: stonePrefab;
+
+        var item = (GameObject)Instantiate(prefab, transform);
         item.transform.position = new Vector3(point.x, point.y, 0f);
     }
 
@@ -135,11 +136,20 @@ public class SummerController : MonoBehaviour
     {
         helpFish.gameObject.SetActive(false);
 
-        var fishing = CoreGame.Instance.FishingSummer();
-        BigFishAchievement(fishing);
+        var oldFish = CoreGame.Instance.FishCount;
+        var seal = CoreGame.Instance.FishingSummer();
+        BigFishAchievement(CoreGame.Instance.FishCount - oldFish);
         ShowStats();
 
-        var item = (GameObject)Instantiate(fishing > 0 ? fishPrefab : fishbonePrefab, transform);
+        var prefab = fishPrefab;
+        switch (seal)
+        {
+            case -1: prefab = fishbonePrefab; break;
+            case 1: prefab = sealPrefab; break;
+        }
+
+
+        var item = (GameObject)Instantiate(prefab, transform);
         item.transform.position = new Vector3(point.x, point.y, 0f);
     }
 
@@ -160,7 +170,7 @@ public class SummerController : MonoBehaviour
             {
                 if (hit.transform.name.Contains("land"))
                 {
-                    var item = (GameObject)Instantiate(shipPrefab, transform);
+                    var item = (GameObject)Instantiate(sheepPrefab, transform);
                     item.transform.position = new Vector3(point.x, point.y, 0f);
                     return;
                 }
