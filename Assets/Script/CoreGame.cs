@@ -14,7 +14,7 @@ public class CoreGame : MonoBehaviour
     /// <summary>лугов</summary>
     public const int LandMax = 3000;
     /// <summary>рыбы в море</summary>
-    public const int SeaFirst = 200;
+    public const int SeaFirst = 299;
     /// <summary>минимальный улов</summary>
     public const int SeaMin = 100;
     /// <summary>максимальный улов</summary>
@@ -74,8 +74,19 @@ public class CoreGame : MonoBehaviour
     #endregion
 
     #region function
+
     /// <summary>Дополнительные ходы при длинной зиме</summary>
-    public int LongWinterTurns { get { return 1; } }
+    private int LongWinterTurns
+    {
+        get
+        {
+            if (WinterCount < LongWinterCicle*4) return 1;
+
+            return Mathf.Min(WinterCount / (2*LongWinterCicle), 4);
+        }
+    }
+
+    public int HaylageMax { get { return (HouseCount / StonePerHouse) * 100; } }
     #endregion
 
     #region constructor
@@ -99,8 +110,8 @@ public class CoreGame : MonoBehaviour
         FishCount = 0;
         StoneCount = 0;
         SealCount = 0;
-        HouseCount = 0;
-        BoatCount = 0; //вначале у нас есть 2 лодки
+        HouseCount = StonePerHouse * 3;
+        BoatCount = SealPerBoat * 2; //вначале у нас есть 2 лодки
 
         LandCount = LandMax;
         SeaCount = SeaFirst;
@@ -154,7 +165,7 @@ public class CoreGame : MonoBehaviour
         else
         {
             //после первой зимовки рыбы в море бывает разное количество (от 1 до 3 рыбин за улов + нужно иметь 4 лодки!)
-            SeaCount = Random.Range(SeaMin, SeaMax);
+            SeaCount = Random.Range(SeaMin + (BoatCount/SealPerBoat), SeaMax);
         }
 
         //короткое лето после долгой зимы
@@ -174,7 +185,7 @@ public class CoreGame : MonoBehaviour
         TurnSummerDay();
 
         var seal = 0;
-        var production = Mathf.RoundToInt((float)SeaCount / 100);
+        var production = SeaCount / SeaMin;
         if (production < 1)
         {
             //до 10 зимовки минимум добычи - одна рыба
@@ -187,7 +198,7 @@ public class CoreGame : MonoBehaviour
             }
         }
 
-        
+
         if (Random.Range(0, SealChanse) == 0)
         {
             SealCount++;
@@ -217,6 +228,8 @@ public class CoreGame : MonoBehaviour
         HaylageCount += production;
         LandCount -= production;
 
+        if (HaylageCount > HaylageMax) HaylageCount = HaylageMax;
+
         return stone;
     }
     #endregion
@@ -231,7 +244,7 @@ public class CoreGame : MonoBehaviour
         if (LongWinterCount > LongWinterCicle)
         {
             DayCount += LongWinterTurns;
-            LongWinterCount = 0;
+            LongWinterCount = Random.Range(0,2);
         }
 
         WoolCount = SheepCount;

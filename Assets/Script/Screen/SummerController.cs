@@ -108,7 +108,8 @@ public class SummerController : MonoBehaviour
     {
         title.text = string.Format(LanguageManager.Instance.GetTextValue("summer_title"), CoreGame.Instance.DayCount);
         sheepLabel.text = string.Format("{0}", CoreGame.Instance.SheepCount);
-        hayLabel.text = string.Format("{0}/{1}", CoreGame.Instance.HaylageCount, CoreGame.Instance.SheepCount * CoreGame.SeasonDays);
+        hayLabel.text = string.Format("{0}/{1}", CoreGame.Instance.HaylageCount,
+            Mathf.Min(CoreGame.Instance.SheepCount * CoreGame.SeasonDays,CoreGame.Instance.HaylageMax));
         fishLabel.text = string.Format("{0}/{1}", CoreGame.Instance.FishCount, CoreGame.SeasonDays);
 
         /*stoneLabel.gameObject.SetActive(CoreGame.Instance.StoneCount > 0);
