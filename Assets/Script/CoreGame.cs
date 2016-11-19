@@ -165,7 +165,7 @@ public class CoreGame : MonoBehaviour
         else
         {
             //после первой зимовки рыбы в море бывает разное количество (от 1 до 3 рыбин за улов + нужно иметь 4 лодки!)
-            SeaCount = Random.Range(SeaMin + (BoatCount/SealPerBoat), SeaMax);
+            SeaCount = Random.Range(SeaMin + BoatCount, SeaMax); //(BoatCount/SealPerBoat)
         }
 
         //короткое лето после долгой зимы
@@ -208,6 +208,8 @@ public class CoreGame : MonoBehaviour
         FishCount += production;
         SeaCount -= production;
 
+        if (FishCount > HaylageMax - HaylageCount) FishCount = HaylageMax - HaylageCount;
+
         return seal;
     }
 
@@ -228,7 +230,7 @@ public class CoreGame : MonoBehaviour
         HaylageCount += production;
         LandCount -= production;
 
-        if (HaylageCount > HaylageMax) HaylageCount = HaylageMax;
+        if (HaylageCount > HaylageMax - FishCount) HaylageCount = HaylageMax - FishCount;
 
         return stone;
     }

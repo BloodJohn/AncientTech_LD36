@@ -109,7 +109,7 @@ public class SummerController : MonoBehaviour
         title.text = string.Format(LanguageManager.Instance.GetTextValue("summer_title"), CoreGame.Instance.DayCount);
         sheepLabel.text = string.Format("{0}", CoreGame.Instance.SheepCount);
         hayLabel.text = string.Format("{0}/{1}", CoreGame.Instance.HaylageCount,
-            Mathf.Min(CoreGame.Instance.SheepCount * CoreGame.SeasonDays,CoreGame.Instance.HaylageMax));
+            Mathf.Min(CoreGame.Instance.SheepCount * CoreGame.SeasonDays,CoreGame.Instance.HaylageMax - CoreGame.Instance.FishCount));
         fishLabel.text = string.Format("{0}/{1}", CoreGame.Instance.FishCount, CoreGame.SeasonDays);
 
         /*stoneLabel.gameObject.SetActive(CoreGame.Instance.StoneCount > 0);
@@ -156,12 +156,11 @@ public class SummerController : MonoBehaviour
 
     private void CreateSheep()
     {
-        var isLand = false;
         var cnt = 0;
         var height = Camera.allCameras[0].orthographicSize;
         var width = height * Camera.allCameras[0].aspect * height;
 
-        while (!isLand && cnt < 100)
+        while (cnt < 100)
         {
             cnt++;
             var point = new Vector2(Random.Range(-width, width), Random.Range(-height, height));

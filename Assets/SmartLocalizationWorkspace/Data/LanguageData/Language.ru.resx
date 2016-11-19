@@ -117,11 +117,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
 	<data name="autumn_description" xml:space="preserve">
-		<value>Всю зиму овцы едят сено заготовленное летом. Из шерсти изготавливают ткань. Часть овец забивают на мясо.</value>
+		<value>Всю зиму овцы едят сено заготовленное летом. Из шерсти изготавливают сукно. Часть овец забивают на мясо.</value>
 	</data>
 	<data name="autumn_description2" xml:space="preserve">
 		<value>Рыбу потрошат и вывешивают на улице. 
 Идеальные условия - чуть выше нуля градусов и мало дождей. При заморозках лед разрывает мясо и рыба портится.</value>
+	</data>
+	<data name="autumn_description3" xml:space="preserve">
+		<value>Узкий дом с единственный комнатой 5 на 15 метров. Каменный фундамент, деревянные балки и стены из дерна в 2 метра толщиной.</value>
 	</data>
 	<data name="autumn_title" xml:space="preserve">
 		<value>Осенью овец собирают и стригут</value>
@@ -129,11 +132,15 @@
 	<data name="autumn_title2" xml:space="preserve">
 		<value>Треску сушат на палке</value>
 	</data>
+	<data name="autumn_title3" xml:space="preserve">
+		<value>Длинный дом
+</value>
+	</data>
 	<data name="defeat_noFood" xml:space="preserve">
 		<value>Еда закончилась. Люди начали умирать от голода.</value>
 	</data>
 	<data name="defeat_noSheep" xml:space="preserve">
-		<value>Сено кончилось. Овцы погибли от голода. Нет шерсти - нечем торговать. Хутор обречен.</value>
+		<value>Сено кончилось. Овцы погибли от голода. Нет сукна - нечем торговать. Хутор обречен.</value>
 	</data>
 	<data name="defeat_restart" xml:space="preserve">
 		<value>Сыграть снова</value>
@@ -148,10 +155,9 @@
 		<value>идея BloodJohn, графика Mebemory</value>
 	</data>
 	<data name="intro_description" xml:space="preserve">
-		<value>Ты глава хутора викингов
+		<value>Ты глава хутора викингов.
 Лови рыбу чтобы кормить людей. Коси сено для овец.  Забивай овец если не хватает сена или рыбы. Овцы дают шерсть - для торговли.
-Добудь больше шерсти.
-</value>
+Производи больше сукна!</value>
 	</data>
 	<data name="intro_description2" xml:space="preserve">
 		<value>870 год. Сага о людях из долины Лососьей реки, Книга о взятии земли. 
@@ -168,13 +174,20 @@
 	</data>
 	<data name="spring_description2" xml:space="preserve">
 		<value>Скошенное сено может сгнить от сильных дождей. Придется начинать косить заново.
-В лугах стога стоят недолго. Сено укрывают, с помощью шкур и шерстяных тканей.</value>
+В лугах стога стоят недолго. Сено укрывают, с помощью шкур и сукна.</value>
+	</data>
+	<data name="spring_description3" xml:space="preserve">
+		<value>Лодки обрабатывают тюленьим жиром, чтобы дерево не съели морские черви.
+В Исландии нет своего строевого леса для киля и мачты.</value>
 	</data>
 	<data name="spring_title" xml:space="preserve">
 		<value>Зимой родились ягнята</value>
 	</data>
 	<data name="spring_title2" xml:space="preserve">
 		<value>Каково лето, таково и сено</value>
+	</data>
+	<data name="spring_title3" xml:space="preserve">
+		<value>Ворвань (seltjara)</value>
 	</data>
 	<data name="summer_button" xml:space="preserve">
 		<value>Исландия</value>

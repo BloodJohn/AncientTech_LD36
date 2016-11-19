@@ -123,11 +123,17 @@
 		<value>Is unsalted fish, dried by cold air and wind on wooden racks (hjell) on the foreshore. 
 Dried fish has a storage life of several years.</value>
 	</data>
+	<data name="autumn_description3" xml:space="preserve">
+		<value>Narrow house with a single room of 5 to 15 meters. Stone foundation, wooden beams and walls of turf in 2 meters thick.</value>
+	</data>
 	<data name="autumn_title" xml:space="preserve">
 		<value>Sheep are sheared in the autumn</value>
 	</data>
 	<data name="autumn_title2" xml:space="preserve">
 		<value>Stockfish (cod)</value>
+	</data>
+	<data name="autumn_title3" xml:space="preserve">
+		<value>Longhouse Stong</value>
 	</data>
 	<data name="defeat_noFood" xml:space="preserve">
 		<value>Winter on the house run out of food. The Vikings began to die from hunger.</value>
@@ -167,8 +173,21 @@ The first settlers, heads came on their own ships, with families, households and
 		<value>In the spring the sheep go to graze on the meadows. Made in winter fabric will be sold to the merchants in exchange for weapons and tools. Fishing is not always a lot of fish. Mow enough hay for the winter.
 </value>
 	</data>
+	<data name="spring_description2" xml:space="preserve">
+		<value>The treatment of the hay was a heavy and labour-consuming task. After mowing the windrows had to be tedded, spread and prepared for field-drying.
+Because of unreliable weather conditions, the hay had to be protected from dew and rain, leading to rewetting and reduced quality.</value>
+	</data>
+	<data name="spring_description3" xml:space="preserve">
+		<value>The ship's boat smeared with tar made of seal blubber for protection from infesting by sea worms. The tall, straight trees needed for keels and masts would be in short supply.</value>
+	</data>
 	<data name="spring_title" xml:space="preserve">
 		<value>Over the winter born lambs</value>
+	</data>
+	<data name="spring_title2" xml:space="preserve">
+		<value>Hay Drying in Iceland</value>
+	</data>
+	<data name="spring_title3" xml:space="preserve">
+		<value>Seal blubber (seltjara)</value>
 	</data>
 	<data name="summer_button" xml:space="preserve">
 		<value>IceLand</value>
@@ -193,11 +212,5 @@ The first settlers, heads came on their own ships, with families, households and
 	</data>
 	<data name="winter_turn_spr" xml:space="preserve">
 		<value>En/Arrow/W_2</value>
-	</data>
-	<data name="spring_title2" xml:space="preserve">
-		<value />
-	</data>
-	<data name="spring_description2" xml:space="preserve">
-		<value />
 	</data>
 </root>
