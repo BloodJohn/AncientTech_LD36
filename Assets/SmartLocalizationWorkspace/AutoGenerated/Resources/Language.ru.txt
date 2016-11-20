@@ -146,7 +146,7 @@
 		<value>Сыграть снова</value>
 	</data>
 	<data name="defeat_result" xml:space="preserve">
-		<value>Твой результат: {0}шт. ткани.</value>
+		<value>Твой результат: {0}шт. сукна.</value>
 	</data>
 	<data name="defeat_vote" xml:space="preserve">
 		<value>Что понравилось в игре?</value>
@@ -157,7 +157,7 @@
 	<data name="intro_description" xml:space="preserve">
 		<value>Ты глава хутора викингов.
 Лови рыбу чтобы кормить людей. Коси сено для овец.  Забивай овец если не хватает сена или рыбы. Овцы дают шерсть - для торговли.
-Производи больше сукна!</value>
+Нужно больше сукна!</value>
 	</data>
 	<data name="intro_description2" xml:space="preserve">
 		<value>870 год. Сага о людях из долины Лососьей реки, Книга о взятии земли. 

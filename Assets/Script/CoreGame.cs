@@ -12,7 +12,7 @@ public class CoreGame : MonoBehaviour
     /// <summary>дней в сезоне</summary>
     public const int SeasonDays = 24;
     /// <summary>лугов</summary>
-    public const int LandMax = 3000;
+    //public const int LandMax = 3000;
     /// <summary>рыбы в море</summary>
     public const int SeaFirst = 299;
     /// <summary>минимальный улов</summary>
@@ -67,9 +67,9 @@ public class CoreGame : MonoBehaviour
     public int BoatCount;
 
     /// <summary>лугов</summary>
-    public int LandCount = 3000;
+    //public int LandCount = 3000;
     /// <summary>рыбы в море</summary>
-    public int SeaCount = 200;
+    private int SeaCount = 200;
 
     #endregion
 
@@ -85,8 +85,8 @@ public class CoreGame : MonoBehaviour
             return Mathf.Min(WinterCount / (2*LongWinterCicle), 4);
         }
     }
-
-    public int HaylageMax { get { return (HouseCount / StonePerHouse) * 100; } }
+    /// <summary>Вместимость амбаров (сено+рыба)</summary>
+    public int StorageCapacity { get { return (HouseCount / StonePerHouse) * 100; } }
     #endregion
 
     #region constructor
@@ -113,7 +113,7 @@ public class CoreGame : MonoBehaviour
         HouseCount = StonePerHouse * 3;
         BoatCount = SealPerBoat * 2; //вначале у нас есть 2 лодки
 
-        LandCount = LandMax;
+        //LandCount = LandMax;
         SeaCount = SeaFirst;
         SceneManager.LoadScene(SummerController.sceneName);
     }
@@ -153,7 +153,7 @@ public class CoreGame : MonoBehaviour
     public void StartSummer()
     {
         DayCount = SeasonDays;
-        LandCount = LandMax;
+        //LandCount = LandMax;
         SummerCount++;
 
         //плодим овец
@@ -175,8 +175,8 @@ public class CoreGame : MonoBehaviour
 
     private void TurnSummerDay()
     {
-        if (LandCount < SheepCount) SheepCount = LandCount;
-        LandCount -= SheepCount;
+        /*if (LandCount < SheepCount) SheepCount = LandCount;
+        LandCount -= SheepCount;*/
         DayCount--;
     }
 
@@ -208,7 +208,9 @@ public class CoreGame : MonoBehaviour
         FishCount += production;
         SeaCount -= production;
 
-        if (FishCount > HaylageMax - HaylageCount) FishCount = HaylageMax - HaylageCount;
+        //отсечка по вместимости амбаров
+        if (FishCount > StorageCapacity - HaylageCount && HaylageCount < StorageCapacity)
+            FishCount = StorageCapacity - HaylageCount;
 
         return seal;
     }
@@ -218,7 +220,7 @@ public class CoreGame : MonoBehaviour
         TurnSummerDay();
 
         var production = PeopleCount * 2;
-        if (production > LandCount) production = LandCount;
+        //if (production > LandCount) production = LandCount;
 
         var stone = 0;
         if (Random.Range(0, StoneChanse) == 0)
@@ -228,9 +230,11 @@ public class CoreGame : MonoBehaviour
         }
 
         HaylageCount += production;
-        LandCount -= production;
+        //LandCount -= production;
 
-        if (HaylageCount > HaylageMax - FishCount) HaylageCount = HaylageMax - FishCount;
+        //отсечка по вместимости амбаров
+        if (HaylageCount > StorageCapacity - FishCount && FishCount < StorageCapacity)
+            HaylageCount = StorageCapacity - FishCount;
 
         return stone;
     }

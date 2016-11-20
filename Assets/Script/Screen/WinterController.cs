@@ -132,6 +132,13 @@ public class WinterController : MonoBehaviour
 
     private void ShowStats()
     {
+        var isWinter = CoreGame.Instance.DayCount > 0;
+
+        sheepLabel.gameObject.SetActive(isWinter && CoreGame.Instance.SheepCount > 0);
+        woolLabel.gameObject.SetActive(isWinter && CoreGame.Instance.WoolCount > 0);
+        fishLabel.gameObject.SetActive(isWinter);
+        summerButton.gameObject.SetActive(!isWinter);
+
         title.text = string.Format(LanguageManager.Instance.GetTextValue("winter_title"), CoreGame.Instance.WinterCount, CoreGame.Instance.DayCount);
         haylageLabel.text = string.Format("{0}", CoreGame.Instance.HaylageCount);
         sheepLabel.text = string.Format("{0}", CoreGame.Instance.SheepCount);
@@ -139,12 +146,6 @@ public class WinterController : MonoBehaviour
         feltedLabel.text = string.Format("{0}", CoreGame.Instance.FeltedCount);
         meatLabel.text = string.Format("{0}", CoreGame.Instance.MeatCount);
         fishLabel.text = string.Format("{0}", CoreGame.Instance.FishCount);
-
-        var isWinter = CoreGame.Instance.DayCount > 0;
-        sheepLabel.gameObject.SetActive(isWinter && CoreGame.Instance.SheepCount > 0);
-        woolLabel.gameObject.SetActive(isWinter && CoreGame.Instance.WoolCount > 0);
-        fishLabel.gameObject.SetActive(isWinter);
-        summerButton.gameObject.SetActive(!isWinter);
 
         //амбар
         houseLabel.gameObject.SetActive(isWinter);

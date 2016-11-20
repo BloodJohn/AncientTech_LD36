@@ -23,11 +23,6 @@ public class SummerController : MonoBehaviour
     /// <summary>сколько рыбы</summary>
     public Text fishLabel;
 
-    /// <summary>сколько камня</summary>
-    public Text stoneLabel;
-    /// <summary>сколько тюленей</summary>
-    public Text sealLabel;
-
     public Button longhouseButton;
 
     public GameObject sheepPrefab;
@@ -109,15 +104,10 @@ public class SummerController : MonoBehaviour
         title.text = string.Format(LanguageManager.Instance.GetTextValue("summer_title"), CoreGame.Instance.DayCount);
         sheepLabel.text = string.Format("{0}", CoreGame.Instance.SheepCount);
         hayLabel.text = string.Format("{0}/{1}", CoreGame.Instance.HaylageCount,
-            Mathf.Min(CoreGame.Instance.SheepCount * CoreGame.SeasonDays,CoreGame.Instance.HaylageMax - CoreGame.Instance.FishCount));
+            Mathf.Min(CoreGame.Instance.SheepCount * CoreGame.SeasonDays,CoreGame.Instance.StorageCapacity - CoreGame.Instance.FishCount));
         fishLabel.text = string.Format("{0}/{1}", CoreGame.Instance.FishCount, 
-            Mathf.Min(CoreGame.SeasonDays, CoreGame.Instance.HaylageMax - CoreGame.Instance.HaylageCount));
-
-        /*stoneLabel.gameObject.SetActive(CoreGame.Instance.StoneCount > 0);
-        stoneLabel.text = string.Format("{0}", CoreGame.Instance.StoneCount);
-        sealLabel.gameObject.SetActive(CoreGame.Instance.SealCount > 0);
-        sealLabel.text = string.Format("{0}", CoreGame.Instance.SealCount);*/
-
+            Mathf.Min(CoreGame.SeasonDays, CoreGame.Instance.StorageCapacity - CoreGame.Instance.HaylageCount));
+        
         longhouseButton.gameObject.SetActive(CoreGame.Instance.DayCount <= 0);
     }
 
