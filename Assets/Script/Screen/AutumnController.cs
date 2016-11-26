@@ -25,8 +25,8 @@ public class AutumnController : MonoBehaviour
         }
         else
         {
-            title.text = LanguageManager.Instance.GetTextValue("autumn_title2");
-            description.text = LanguageManager.Instance.GetTextValue("autumn_description2");
+            title.text = LanguageManager.Instance.GetTextValue("autumn_title3");
+            description.text = LanguageManager.Instance.GetTextValue("autumn_description3");
         }
 
         author.text = LanguageManager.Instance.GetTextValue("intro_author");
