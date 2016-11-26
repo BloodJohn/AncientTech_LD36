@@ -65,6 +65,10 @@ public class CoreGame : MonoBehaviour
     public int HouseCount;
     /// <summary>лодок (/10)</summary>
     public int BoatCount;
+    /// <summary>Косы для срезания сена</summary>
+    public int ScytheCount;
+    /// <summary>Вилы для разбрасывания сена</summary>
+    public int HayforkCount;
 
     /// <summary>лугов</summary>
     //public int LandCount = 3000;
@@ -80,9 +84,9 @@ public class CoreGame : MonoBehaviour
     {
         get
         {
-            if (WinterCount < LongWinterCicle*4) return 1;
+            if (WinterCount < LongWinterCicle * 4) return 1;
 
-            return Mathf.Min(WinterCount / (2*LongWinterCicle), 4);
+            return Mathf.Min(WinterCount / (2 * LongWinterCicle), 4);
         }
     }
     /// <summary>Вместимость амбаров (сено+рыба)</summary>
@@ -110,6 +114,8 @@ public class CoreGame : MonoBehaviour
         FishCount = 0;
         StoneCount = 0;
         SealCount = 0;
+        ScytheCount = 0;
+        HayforkCount = 0;
         HouseCount = StonePerHouse * 3;
         BoatCount = SealPerBoat * 2; //вначале у нас есть 2 лодки
 
@@ -220,7 +226,8 @@ public class CoreGame : MonoBehaviour
         TurnSummerDay();
 
         var production = PeopleCount * 2;
-        //if (production > LandCount) production = LandCount;
+        if (ScytheCount > 0) production += 1;
+        if (HayforkCount > 0) production += 2;
 
         var stone = 0;
         if (Random.Range(0, StoneChanse) == 0)
@@ -250,7 +257,7 @@ public class CoreGame : MonoBehaviour
         if (LongWinterCount > LongWinterCicle)
         {
             DayCount += LongWinterTurns;
-            LongWinterCount = Random.Range(0,2);
+            LongWinterCount = Random.Range(0, 2);
         }
 
         WoolCount = SheepCount;
@@ -334,6 +341,36 @@ public class CoreGame : MonoBehaviour
         MeatCount++;
 
         return true;
+    }
+    #endregion
+
+    #region merchant
+
+    public bool BuyScythe()
+    {
+        if (FeltedCount >= 200)
+        {
+            Debug.LogFormat("buy item 200");
+            FeltedCount -= 200;
+            ScytheCount++;
+            return true;
+        }
+
+        Debug.LogFormat("heed more Felted 200/{0}", FeltedCount);
+        return false;
+    }
+
+    public bool BuyHayfork()
+    {
+        if (FeltedCount >= 500)
+        {
+            Debug.LogFormat("buy item 500");
+            FeltedCount -= 500;
+            HayforkCount++;
+            return true;
+        }
+        Debug.LogFormat("heed more Felted 500/{0}", FeltedCount);
+        return false;
     }
     #endregion
 }

@@ -37,11 +37,11 @@ public class MerchantController : MonoBehaviour
 
     public void BuyItem200()
     {
-        Debug.LogFormat("buy item 200");
+        CoreGame.Instance.BuyScythe();
     }
 
     public void BuyItem500()
     {
-        Debug.LogFormat("buy item 500");
+        CoreGame.Instance.BuyHayfork();
     }
 }
