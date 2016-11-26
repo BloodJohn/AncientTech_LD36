@@ -257,7 +257,11 @@ public class CoreGame : MonoBehaviour
         if (LongWinterCount > LongWinterCicle)
         {
             DayCount += LongWinterTurns;
-            LongWinterCount = Random.Range(0, 2);
+            LongWinterCount = 0;
+        }
+        else if (LongWinterCount == 1)
+        {
+            LongWinterCount = Random.Range(1, 3);
         }
 
         WoolCount = SheepCount;
@@ -287,6 +291,7 @@ public class CoreGame : MonoBehaviour
             SheepCount--;
             MeatCount++;
         }
+        //кормим овец
         HaylageCount -= SheepCount;
 
         //кормим людей
@@ -303,6 +308,7 @@ public class CoreGame : MonoBehaviour
             SceneManager.LoadScene(DefeatController.sceneName);
             return -1;
         }
+
 
         //на мясной диете удается работать в два раза больше
         var poduction = result > 0 ? 2 : 1;

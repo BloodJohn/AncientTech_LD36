@@ -170,7 +170,15 @@ The first settlers, heads came on their own ships, with families, households and
 		<value>Icelandic: Landnámsöld</value>
 	</data>
 	<data name="merchant_description" xml:space="preserve">
-		<value>A ship of merchants from Norway sailed past your farm. They buy the cloth and sell iron products. A good day for trading!</value>
+		<value>A ship of merchants from Norway sailed past your farm. They buy the cloth and sell iron products. You have {0} cloth for trading.</value>
+	</data>
+	<data name="merchant_item200" xml:space="preserve">
+		<value>For 200 cloth you will receive one hammer-forged for superior cutting of hay.
++1 hay per turn! (click on the image to buy)</value>
+	</data>
+	<data name="merchant_item500" xml:space="preserve">
+		<value>For 500 cloth you get good forks for spreading hay. 
++2 to the Seine for the course! (until the end of this game)</value>
 	</data>
 	<data name="spring_description" xml:space="preserve">
 		<value>In the spring the sheep go to graze on the meadows. Made in winter fabric will be sold to the merchants in exchange for weapons and tools. Fishing is not always a lot of fish. Mow enough hay for the winter.
@@ -215,13 +223,5 @@ Because of unreliable weather conditions, the hay had to be protected from dew a
 	</data>
 	<data name="winter_turn_spr" xml:space="preserve">
 		<value>En/Arrow/W_2</value>
-	</data>
-	<data name="merchant_item200" xml:space="preserve">
-		<value>For 200 cloth you will receive one hammer-forged for superior cutting of hay.
-+1 hay per turn! (click on the image to buy)</value>
-	</data>
-	<data name="merchant_item500" xml:space="preserve">
-		<value>For 500 cloth you get good forks for spreading hay. 
-+2 to the Seine for the course! (until the end of this game)</value>
 	</data>
 </root>
