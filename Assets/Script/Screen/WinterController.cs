@@ -216,7 +216,8 @@ public class WinterController : MonoBehaviour
     public void SummerClick()
     {
         CoreGame.Instance.Save();
-        SceneManager.LoadScene(SpringController.sceneName);
+        //SceneManager.LoadScene(SpringController.sceneName);
+        SceneManager.LoadScene(MerchantController.sceneName);
     }
 
     public void RestartClick()
