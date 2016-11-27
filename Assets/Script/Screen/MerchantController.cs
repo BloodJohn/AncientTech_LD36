@@ -10,9 +10,16 @@ public class MerchantController : MonoBehaviour
     public Text item200;
     public Text item500;
 
-    public Button button200;
-    public Button button500;
+    public Image icon200;
+    public Image icon500;
     public Button summerButton;
+
+    /// <summary>не хватает сукна</summary>
+    public Color redColor;
+    /// <summary>можно купить</summary>
+    public Color greenColor;
+    /// <summary>уже купил!</summary>
+    public Color goldColor;
 
     void Awake()
     {
@@ -22,8 +29,37 @@ public class MerchantController : MonoBehaviour
 
         summerButton.GetComponentInChildren<Text>().text = LanguageManager.Instance.GetTextValue("summer_button");
 
-        button200.gameObject.SetActive(CoreGame.Instance.ScytheCount <= 0 && CoreGame.Instance.FeltedCount >= 200);
-        button500.gameObject.SetActive(CoreGame.Instance.HayforkCount <= 0 && CoreGame.Instance.FeltedCount >= 200);
+        if (CoreGame.Instance.ScytheCount > 0)
+        {
+            icon200.color = goldColor;
+        }
+        else
+        {
+            if (CoreGame.Instance.FeltedCount >= 200)
+            {
+                icon200.color = greenColor;
+            }
+            else
+            {
+                icon200.color = redColor;
+            }
+        }
+
+        if (CoreGame.Instance.HayforkCount > 0)
+        {
+            icon500.color = goldColor;
+        }
+        else
+        {
+            if (CoreGame.Instance.FeltedCount >= 500)
+            {
+                icon500.color = greenColor;
+            }
+            else
+            {
+                icon500.color = redColor;
+            }
+        }
     }
 
     void Update()
@@ -39,12 +75,12 @@ public class MerchantController : MonoBehaviour
     public void BuyItem200()
     {
         if (CoreGame.Instance.BuyScythe())
-            button200.gameObject.SetActive(false);
+            icon200.gameObject.SetActive(false);
     }
 
     public void BuyItem500()
     {
         if (CoreGame.Instance.BuyHayfork())
-            button500.gameObject.SetActive(false);
+            icon500.gameObject.SetActive(false);
     }
 }
