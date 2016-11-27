@@ -70,14 +70,14 @@ public class DefeatController : MonoBehaviour
     private void LeaderBoard()
     {
         var oldResult = PlayerPrefs.GetInt(GPGSIds.leaderboard_woolen_fabric, 0);
-        if (CoreGame.Instance.FeltedCount <= oldResult) return;
+        if (CoreGame.Instance.TotalFelted <= oldResult) return;
 
-        Social.ReportScore(CoreGame.Instance.FeltedCount, GPGSIds.leaderboard_woolen_fabric,
+        Social.ReportScore(CoreGame.Instance.TotalFelted, GPGSIds.leaderboard_woolen_fabric,
             (bool success) =>
             {
                 if (success)
                 {
-                    PlayerPrefs.SetInt(GPGSIds.leaderboard_woolen_fabric, CoreGame.Instance.FeltedCount);
+                    PlayerPrefs.SetInt(GPGSIds.leaderboard_woolen_fabric, CoreGame.Instance.TotalFelted);
                     Social.ShowLeaderboardUI();
                 }
             });

@@ -91,6 +91,8 @@ public class CoreGame : MonoBehaviour
     }
     /// <summary>Вместимость амбаров (сено+рыба)</summary>
     public int StorageCapacity { get { return (HouseCount / StonePerHouse) * 100; } }
+
+    public  int TotalFelted { get { return FeltedCount + ScytheCount*200 + HayforkCount*500; } }
     #endregion
 
     #region constructor
