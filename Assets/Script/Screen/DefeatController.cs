@@ -19,7 +19,7 @@ public class DefeatController : MonoBehaviour
     #region Unity
     public void Awake()
     {
-        feltedLabel.text = string.Format(LanguageManager.Instance.GetTextValue("defeat_result"), CoreGame.Instance.FeltedCount);
+        feltedLabel.text = string.Format(LanguageManager.Instance.GetTextValue("defeat_result"), CoreGame.Instance.TotalFelted);
 
         if (CoreGame.Instance.SheepCount > 0)
         {

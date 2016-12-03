@@ -75,12 +75,12 @@ public class MerchantController : MonoBehaviour
     public void BuyItem200()
     {
         if (CoreGame.Instance.BuyScythe())
-            icon200.gameObject.SetActive(false);
+            icon200.color = goldColor;
     }
 
     public void BuyItem500()
     {
         if (CoreGame.Instance.BuyHayfork())
-            icon500.gameObject.SetActive(false);
+            icon500.color = goldColor;
     }
 }
