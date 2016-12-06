@@ -9,9 +9,11 @@ public class MerchantController : MonoBehaviour
     public Text description;
     public Text item200;
     public Text item500;
+    public Text item10k;
 
     public Image icon200;
     public Image icon500;
+    public Image icon10k;
     public Button summerButton;
 
     /// <summary>не хватает сукна</summary>
@@ -26,6 +28,7 @@ public class MerchantController : MonoBehaviour
         description.text = string.Format(LanguageManager.Instance.GetTextValue("merchant_description"), CoreGame.Instance.FeltedCount);
         item200.text = LanguageManager.Instance.GetTextValue("merchant_item200");
         item500.text = LanguageManager.Instance.GetTextValue("merchant_item500");
+        item10k.text = LanguageManager.Instance.GetTextValue("merchant_item10k");
 
         summerButton.GetComponentInChildren<Text>().text = LanguageManager.Instance.GetTextValue("summer_button");
 
@@ -60,6 +63,8 @@ public class MerchantController : MonoBehaviour
                 icon500.color = redColor;
             }
         }
+
+        icon10k.color = redColor;
     }
 
     void Update()

@@ -224,4 +224,7 @@ Because of unreliable weather conditions, the hay had to be protected from dew a
 	<data name="winter_turn_spr" xml:space="preserve">
 		<value>En/Arrow/W_2</value>
 	</data>
+	<data name="merchant_item10k" xml:space="preserve">
+		<value>Long ship is worth a fortune. If you are willing to spend 10 thousand cloth, Drakkar will be yours.</value>
+	</data>
 </root>
