@@ -173,7 +173,8 @@ public class CoreGame : MonoBehaviour
         else
         {
             //после первой зимовки рыбы в море бывает разное количество (от 1 до 3 рыбин за улов + нужно иметь 4 лодки!)
-            SeaCount = Random.Range(SeaMin + BoatCount, SeaMax); //(BoatCount/SealPerBoat)
+            SeaCount = Random.Range(SeaMin + BoatCount, SeaMax);
+            Debug.LogFormat("Sea {0} [{1}+{2}, {3}] = {4}", SeaCount, SeaMin, BoatCount, SeaMax, SeaCount / SeaMin);
         }
 
         //короткое лето после долгой зимы
@@ -198,11 +199,11 @@ public class CoreGame : MonoBehaviour
         {
             //до 10 зимовки минимум добычи - одна рыба
             if (WinterCount < EasyWinters)
-                production = 1;
+                production = 2;
             else
             {
                 production = 0;
-                seal = -1;
+                seal = -1; //нет рыбы - нет тюленей
             }
         }
 
@@ -217,7 +218,7 @@ public class CoreGame : MonoBehaviour
         SeaCount -= production;
 
         //отсечка по вместимости амбаров
-        if (FishCount > StorageCapacity - HaylageCount && HaylageCount < StorageCapacity)
+        if (FishCount > StorageCapacity - HaylageCount && HaylageCount <= StorageCapacity)
             FishCount = StorageCapacity - HaylageCount;
 
         return seal;
@@ -242,7 +243,7 @@ public class CoreGame : MonoBehaviour
         //LandCount -= production;
 
         //отсечка по вместимости амбаров
-        if (HaylageCount > StorageCapacity - FishCount && FishCount < StorageCapacity)
+        if (HaylageCount > StorageCapacity - FishCount && FishCount <= StorageCapacity)
             HaylageCount = StorageCapacity - FishCount;
 
         return stone;

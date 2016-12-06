@@ -25,6 +25,7 @@
 public static class GPGSIds
 {
         public const string achievement_play_test = "CgkIp6SwmNsTEAIQCA"; // <GPGSID>
+        public const string achievement_scythe = "CgkIp6SwmNsTEAIQDQ"; // <GPGSID>
         public const string achievement_big_fish = "CgkIp6SwmNsTEAIQBA"; // <GPGSID>
         public const string achievement_big_flock = "CgkIp6SwmNsTEAIQBQ"; // <GPGSID>
         public const string achievement_first_winter = "CgkIp6SwmNsTEAIQAg"; // <GPGSID>
@@ -34,6 +35,7 @@ public static class GPGSIds
         public const string achievement_long_winter = "CgkIp6SwmNsTEAIQAw"; // <GPGSID>
         public const string achievement_arnivore = "CgkIp6SwmNsTEAIQCw"; // <GPGSID>
         public const string leaderboard_woolen_fabric = "CgkIp6SwmNsTEAIQAQ"; // <GPGSID>
+        public const string achievement_hayfork = "CgkIp6SwmNsTEAIQDg"; // <GPGSID>
         public const string achievement_first_batch_of_fabric = "CgkIp6SwmNsTEAIQBg"; // <GPGSID>
         public const string achievement_dead_sea = "CgkIp6SwmNsTEAIQDA"; // <GPGSID>
 
