@@ -126,6 +126,9 @@
 	<data name="autumn_description3" xml:space="preserve">
 		<value>Узкий дом с единственный комнатой 5 на 15 метров. Каменный фундамент, деревянные балки и стены из дерна в 2 метра толщиной.</value>
 	</data>
+	<data name="autumn_description4" xml:space="preserve">
+		<value>Зимой камни перевозят на место строительства. Амбар хранит 100 штук сена/рыбы. Сейчас у тебя 3 амбара общей вместимостью 300.</value>
+	</data>
 	<data name="autumn_title" xml:space="preserve">
 		<value>Осенью овец собирают и стригут</value>
 	</data>
@@ -134,6 +137,9 @@
 	</data>
 	<data name="autumn_title3" xml:space="preserve">
 		<value>Длинный дом</value>
+	</data>
+	<data name="autumn_title4" xml:space="preserve">
+		<value>Хранение и строительство</value>
 	</data>
 	<data name="defeat_noFood" xml:space="preserve">
 		<value>Еда закончилась. Люди начали умирать от голода.</value>
@@ -193,6 +199,9 @@
 		<value>Лодки обрабатывают тюленьим жиром, чтобы дерево не съели морские черви.
 В Исландии нет своего строевого леса для киля и мачты.</value>
 	</data>
+	<data name="spring_description4" xml:space="preserve">
+		<value>Во время покоса попадаются камни для строительства зданий. Во время рыбалки встречаются тюлени для обработки лодок. Нужно быстрее построить 4 сарай.</value>
+	</data>
 	<data name="spring_title" xml:space="preserve">
 		<value>Зимой родились ягнята</value>
 	</data>
@@ -201,6 +210,9 @@
 	</data>
 	<data name="spring_title3" xml:space="preserve">
 		<value>Ворвань (seltjara)</value>
+	</data>
+	<data name="spring_title4" xml:space="preserve">
+		<value>Сбор ресурсов</value>
 	</data>
 	<data name="summer_button" xml:space="preserve">
 		<value>Исландия</value>

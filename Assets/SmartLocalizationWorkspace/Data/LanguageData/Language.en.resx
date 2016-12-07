@@ -126,6 +126,9 @@ Dried fish has a storage life of several years.</value>
 	<data name="autumn_description3" xml:space="preserve">
 		<value>Narrow house with a single room of 5 to 15 meters. Stone foundation, wooden beams and walls of turf in 2 meters thick.</value>
 	</data>
+	<data name="autumn_description4" xml:space="preserve">
+		<value>In winter, the stones are transported to the build place. The barn holding 100 pieces of hay/fish. Now you have 3 barn with a total capacity of 300.</value>
+	</data>
 	<data name="autumn_title" xml:space="preserve">
 		<value>Sheep are sheared in the autumn</value>
 	</data>
@@ -134,6 +137,9 @@ Dried fish has a storage life of several years.</value>
 	</data>
 	<data name="autumn_title3" xml:space="preserve">
 		<value>Longhouse Stong</value>
+	</data>
+	<data name="autumn_title4" xml:space="preserve">
+		<value>Build and storage</value>
 	</data>
 	<data name="defeat_noFood" xml:space="preserve">
 		<value>Winter on the house run out of food. The Vikings began to die from hunger.</value>
@@ -194,6 +200,9 @@ Because of unreliable weather conditions, the hay had to be protected from dew a
 	<data name="spring_description3" xml:space="preserve">
 		<value>The ship's boat smeared with tar made of seal blubber for protection from infesting by sea worms. The tall, straight trees needed for keels and masts would be in short supply.</value>
 	</data>
+	<data name="spring_description4" xml:space="preserve">
+		<value>When the hay you may find rocks for buildings. While fishing meet seals to make boats. Now it is crucial to build four shed.</value>
+	</data>
 	<data name="spring_title" xml:space="preserve">
 		<value>Over the winter born lambs</value>
 	</data>
@@ -202,6 +211,9 @@ Because of unreliable weather conditions, the hay had to be protected from dew a
 	</data>
 	<data name="spring_title3" xml:space="preserve">
 		<value>Seal blubber (seltjara)</value>
+	</data>
+	<data name="spring_title4" xml:space="preserve">
+		<value>Сollect resources</value>
 	</data>
 	<data name="summer_button" xml:space="preserve">
 		<value>IceLand</value>

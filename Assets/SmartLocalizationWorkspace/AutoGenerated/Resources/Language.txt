@@ -172,6 +172,9 @@ The first settlers, heads came on their own ships, with families, households and
 	<data name="merchant_description" xml:space="preserve">
 		<value>A ship of merchants from Norway sailed past your farm. They buy the cloth and sell iron products. You have {0} cloth for trading.</value>
 	</data>
+	<data name="merchant_item10k" xml:space="preserve">
+		<value>Long ship is worth a fortune. If you are willing to spend 10 thousand cloth, Drakkar will be yours.</value>
+	</data>
 	<data name="merchant_item200" xml:space="preserve">
 		<value>For 200 cloth you will receive one hammer-forged for superior cutting of hay.
 +1 hay per turn! (click on the image to buy)</value>
@@ -224,7 +227,16 @@ Because of unreliable weather conditions, the hay had to be protected from dew a
 	<data name="winter_turn_spr" xml:space="preserve">
 		<value>En/Arrow/W_2</value>
 	</data>
-	<data name="merchant_item10k" xml:space="preserve">
-		<value>Long ship is worth a fortune. If you are willing to spend 10 thousand cloth, Drakkar will be yours.</value>
+	<data name="spring_title4" xml:space="preserve">
+		<value>Сollect resources</value>
+	</data>
+	<data name="spring_description4" xml:space="preserve">
+		<value>When the hay you may find rocks for buildings. While fishing meet seals to make boats. Now it is crucial to build four shed.</value>
+	</data>
+	<data name="autumn_title4" xml:space="preserve">
+		<value>Build and storage</value>
+	</data>
+	<data name="autumn_description4" xml:space="preserve">
+		<value>In winter, the stones are transported to the build place. The barn holding 100 pieces of hay/fish. Now you have 3 barn with a total capacity of 300.</value>
 	</data>
 </root>
