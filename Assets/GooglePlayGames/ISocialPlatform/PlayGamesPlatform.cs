@@ -1335,6 +1335,33 @@ namespace GooglePlayGames
 
             return id;
         }
+
+        //https://github.com/playgameservices/play-games-plugin-for-unity/issues/1432
+
+        public void Authenticate(ILocalUser unused, Action<bool, string> callback)
+        {
+            Authenticate(callback, false, "auth error");
+        }
+
+        public void Authenticate(Action<bool, string> callback)
+        {
+            Authenticate(callback, false, "auth error");
+        }
+
+        private void Authenticate(Action<bool, string> callback, bool silent, string message)
+        {
+            // make a platform-specific Play Games client
+            if (mClient == null)
+            {
+                GooglePlayGames.OurUtils.Logger.d(
+                    "Creating platform-specific Play Games client.");
+                mClient = PlayGamesClientFactory.GetPlatformPlayGamesClient(mConfiguration);
+            }
+
+            // authenticate!
+            Action<bool> c = (bool a) => callback(a, message);
+            mClient.Authenticate(c, silent);
+        }
     }
 }
 #endif

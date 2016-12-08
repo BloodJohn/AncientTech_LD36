@@ -271,6 +271,14 @@ namespace GooglePlayGames
                 callback(CommonStatusCodes.Success, mStats);
             }
         }
+
+        //https://github.com/playgameservices/play-games-plugin-for-unity/issues/1432
+
+        public void Authenticate(Action<bool, string> callback)
+        {
+            Action<bool> c = (bool a) => callback(a, string.Empty);
+            mPlatform.Authenticate(c);
+        }
     }
 }
 #endif
