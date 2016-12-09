@@ -92,7 +92,11 @@ public class CoreGame : MonoBehaviour
     /// <summary>Вместимость амбаров (сено+рыба)</summary>
     public int StorageCapacity { get { return (HouseCount / StonePerHouse) * 100; } }
 
+    /// <summary>всего сукна полученно, включая уже потраченное</summary>
     public  int TotalFelted { get { return FeltedCount + ScytheCount*200 + HayforkCount*500; } }
+
+    /// <summary>на второе лето после долгой зимы приходит мертвое море</summary>
+    public bool IsDeadSea { get { return LongWinterCount == 1 && WinterCount > EasyWinters; } }
     #endregion
 
     #region constructor
@@ -179,7 +183,7 @@ public class CoreGame : MonoBehaviour
 
         //короткое лето после долгой зимы
         if (LongWinterCount == 0) DayCount -= LongWinterTurns;
-        Debug.LogFormat("seaCount {0} longWinter {1}", SeaCount, LongWinterCount);
+        //Debug.LogFormat("seaCount {0} longWinter {1}", SeaCount, LongWinterCount);
     }
 
     private void TurnSummerDay()
@@ -207,12 +211,20 @@ public class CoreGame : MonoBehaviour
             }
         }
 
-
-        if (Random.Range(0, SealChanse) == 0)
+        if (IsDeadSea)
         {
-            SealCount++;
-            seal = 1;
+            production = 0;
+            seal = -1;
         }
+        else //если есть рыба - попадаются и тюлени
+        {
+            if (Random.Range(0, SealChanse) == 0)
+            {
+                SealCount++;
+                seal = 1;
+            }
+        }
+        
 
         FishCount += production;
         SeaCount -= production;
