@@ -129,6 +129,9 @@ Dried fish has a storage life of several years.</value>
 	<data name="autumn_description4" xml:space="preserve">
 		<value>In winter, the stones are transported to the build place. The barn holding 100 pieces of hay/fish. Now you have 3 barn with a total capacity of 300.</value>
 	</data>
+	<data name="autumn_description5" xml:space="preserve">
+		<value>The trade ship had arrived in the summer. And remained for the winter in one of the hamlets. In the spring the merchant sailed back to Norway.</value>
+	</data>
 	<data name="autumn_title" xml:space="preserve">
 		<value>Sheep are sheared in the autumn</value>
 	</data>
@@ -140,6 +143,9 @@ Dried fish has a storage life of several years.</value>
 	</data>
 	<data name="autumn_title4" xml:space="preserve">
 		<value>Build and storage</value>
+	</data>
+	<data name="autumn_title5" xml:space="preserve">
+		<value>Wintering merchants</value>
 	</data>
 	<data name="defeat_noFood" xml:space="preserve">
 		<value>Winter on the house run out of food. The Vikings began to die from hunger.</value>
@@ -203,6 +209,9 @@ Because of unreliable weather conditions, the hay had to be protected from dew a
 	<data name="spring_description4" xml:space="preserve">
 		<value>When the hay you may find rocks for buildings. While fishing meet seals to make boats. Now it is crucial to build four shed.</value>
 	</data>
+	<data name="spring_description5" xml:space="preserve">
+		<value>The first settlers had their own ships, which sailed to Iceland. By the end of XI century, almost all the ships are gone. Maritime trade was intercepted by Norway.</value>
+	</data>
 	<data name="spring_title" xml:space="preserve">
 		<value>Over the winter born lambs</value>
 	</data>
@@ -214,6 +223,9 @@ Because of unreliable weather conditions, the hay had to be protected from dew a
 	</data>
 	<data name="spring_title4" xml:space="preserve">
 		<value>Сollect resources</value>
+	</data>
+	<data name="spring_title5" xml:space="preserve">
+		<value>Ships of the settlers</value>
 	</data>
 	<data name="summer_button" xml:space="preserve">
 		<value>IceLand</value>

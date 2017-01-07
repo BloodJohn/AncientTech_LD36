@@ -198,32 +198,22 @@ public class CoreGame : MonoBehaviour
         TurnSummerDay();
 
         var seal = 0;
-        var production = SeaCount / SeaMin;
-        if (production < 1)
-        {
-            //до 10 зимовки минимум добычи - одна рыба
-            if (WinterCount < EasyWinters)
-                production = 2;
-            else
-            {
-                production = 0;
-                seal = -1; //нет рыбы - нет тюленей
-            }
-        }
+        var production = Mathf.Max(0, SeaCount / SeaMin);
+
+        //до 4го амбара кормим рыбой
+        if (HouseCount < StonePerHouse * 4) production = Mathf.Max(2, production);
 
         if (IsDeadSea)
         {
             production = 0;
             seal = -1;
         }
-        else //если есть рыба - попадаются и тюлени
-        {
-            if (Random.Range(0, SealChanse) == 0)
+        //если есть рыба - попадаются и тюлени
+        else if (seal==0 && Random.Range(0, SealChanse) == 0)
             {
                 SealCount++;
                 seal = 1;
             }
-        }
         
 
         FishCount += production;
@@ -369,7 +359,7 @@ public class CoreGame : MonoBehaviour
 
     public bool BuyScythe()
     {
-        if (FeltedCount >= 200)
+        if (FeltedCount >= 200 && ScytheCount==0)
         {
             Debug.LogFormat("buy item 200");
             FeltedCount -= 200;
@@ -383,7 +373,7 @@ public class CoreGame : MonoBehaviour
 
     public bool BuyHayfork()
     {
-        if (FeltedCount >= 500)
+        if (FeltedCount >= 500 && HayforkCount==0)
         {
             Debug.LogFormat("buy item 500");
             FeltedCount -= 500;
@@ -395,3 +385,6 @@ public class CoreGame : MonoBehaviour
     }
     #endregion
 }
+
+
+//https://habrahabr.ru/post/314416/

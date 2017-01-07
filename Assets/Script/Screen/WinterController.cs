@@ -120,6 +120,7 @@ public class WinterController : MonoBehaviour
         }
 
         ShowStats();
+        WareHouseAchievement();
 
         if (dayPrefab != null)
         {
@@ -230,6 +231,22 @@ public class WinterController : MonoBehaviour
     #endregion
 
     #region achievements
+
+    /// <summary>постройка 4 сарая</summary>
+    private void WareHouseAchievement()
+    {
+        if (CoreGame.Instance.HouseCount < CoreGame.StonePerHouse * 4) return;
+        if (PlayerPrefs.HasKey(GPGSIds.achievement_warehouse)) return;
+
+        Social.ReportProgress(GPGSIds.achievement_warehouse, 100.0f, (bool success) =>
+        {
+            // handle success or failure
+            if (success)
+            {
+                PlayerPrefs.SetInt(GPGSIds.achievement_warehouse, 100);
+            }
+        });
+    }
 
     /// <summary>партия из 50 шерсти</summary>
     private void FeltedWoolAchievement()

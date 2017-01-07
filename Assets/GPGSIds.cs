@@ -33,6 +33,7 @@ public static class GPGSIds
         public const string achievement_teenager = "CgkIp6SwmNsTEAIQCQ"; // <GPGSID>
         public const string achievement_seafood = "CgkIp6SwmNsTEAIQCg"; // <GPGSID>
         public const string achievement_long_winter = "CgkIp6SwmNsTEAIQAw"; // <GPGSID>
+        public const string achievement_warehouse = "CgkIp6SwmNsTEAIQDw"; // <GPGSID>
         public const string achievement_arnivore = "CgkIp6SwmNsTEAIQCw"; // <GPGSID>
         public const string leaderboard_woolen_fabric = "CgkIp6SwmNsTEAIQAQ"; // <GPGSID>
         public const string achievement_hayfork = "CgkIp6SwmNsTEAIQDg"; // <GPGSID>

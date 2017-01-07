@@ -129,6 +129,9 @@
 	<data name="autumn_description4" xml:space="preserve">
 		<value>Зимой камни перевозят на место строительства. Амбар хранит 100 штук сена/рыбы. Сейчас у тебя 3 амбара общей вместимостью 300.</value>
 	</data>
+	<data name="autumn_description5" xml:space="preserve">
+		<value>Торговый корабль приходил летом. И оставался на зиму в одном из хуторов. Весной купец отплывал обратно в Норвегию.</value>
+	</data>
 	<data name="autumn_title" xml:space="preserve">
 		<value>Осенью овец собирают и стригут</value>
 	</data>
@@ -140,6 +143,9 @@
 	</data>
 	<data name="autumn_title4" xml:space="preserve">
 		<value>Хранение и строительство</value>
+	</data>
+	<data name="autumn_title5" xml:space="preserve">
+		<value>Зимовка купцов</value>
 	</data>
 	<data name="defeat_noFood" xml:space="preserve">
 		<value>Еда закончилась. Люди начали умирать от голода.</value>
@@ -202,6 +208,9 @@
 	<data name="spring_description4" xml:space="preserve">
 		<value>Во время покоса попадаются камни для строительства зданий. Во время рыбалки встречаются тюлени для обработки лодок. Нужно быстрее построить 4 сарай.</value>
 	</data>
+	<data name="spring_description5" xml:space="preserve">
+		<value>Поселенцы имели корабли, на которых приплыли в Исландию. К концу XI века почти все корабли исчезли. Морскую торговлю перехватила Норвегия.</value>
+	</data>
 	<data name="spring_title" xml:space="preserve">
 		<value>Зимой родились ягнята</value>
 	</data>
@@ -213,6 +222,9 @@
 	</data>
 	<data name="spring_title4" xml:space="preserve">
 		<value>Сбор ресурсов</value>
+	</data>
+	<data name="spring_title5" xml:space="preserve">
+		<value>Корабли первых викингов</value>
 	</data>
 	<data name="summer_button" xml:space="preserve">
 		<value>Исландия</value>
