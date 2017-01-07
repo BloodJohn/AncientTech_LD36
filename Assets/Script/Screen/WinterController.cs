@@ -195,6 +195,16 @@ public class WinterController : MonoBehaviour
             sheepLabel.color = blackColor;
         }
 
+        //если сена не хватит до конца зимы..
+        if (CoreGame.Instance.HaylageCount < CoreGame.Instance.SheepCount * CoreGame.Instance.DayCount)
+        {
+            haylageLabel.color = redColor;
+        }
+        else
+        {
+            haylageLabel.color = blackColor;
+        }
+
         //предупреждение, если еды не хваатает
         if (CoreGame.Instance.DayCount > CoreGame.Instance.FishCount + CoreGame.Instance.MeatCount)
         {
