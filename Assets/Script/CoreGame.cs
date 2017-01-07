@@ -75,6 +75,9 @@ public class CoreGame : MonoBehaviour
     /// <summary>рыбы в море</summary>
     private int SeaCount = 200;
 
+
+    public GameObject WinterSound;
+    public GameObject SummerSound;
     #endregion
 
     #region function
@@ -125,16 +128,16 @@ public class CoreGame : MonoBehaviour
         HouseCount = StonePerHouse * 3;
         BoatCount = SealPerBoat * 2; //вначале у нас есть 2 лодки
 
-        //LandCount = LandMax;
         SeaCount = SeaFirst;
+        StopSound();
         SceneManager.LoadScene(SummerController.sceneName);
     }
 
     public void Save()
     {
+        StopSound();
         var json = JsonUtility.ToJson(this);
         PlayerPrefs.SetString(GameSaveKey, json);
-        //Debug.LogFormat("save: {0}", json);
     }
 
     public void LoadGame()
@@ -157,6 +160,12 @@ public class CoreGame : MonoBehaviour
         {
             SceneManager.LoadScene(SummerController.sceneName);
         }
+    }
+
+    private void StopSound()
+    {
+        WinterSound.SetActive(false);
+        SummerSound.SetActive(false);
     }
     #endregion
 
@@ -183,7 +192,8 @@ public class CoreGame : MonoBehaviour
 
         //короткое лето после долгой зимы
         if (LongWinterCount == 0) DayCount -= LongWinterTurns;
-        //Debug.LogFormat("seaCount {0} longWinter {1}", SeaCount, LongWinterCount);
+
+        SummerSound.SetActive(true);
     }
 
     private void TurnSummerDay()
@@ -270,19 +280,8 @@ public class CoreGame : MonoBehaviour
         }
 
         WoolCount = SheepCount;
-
-        /*
-        //каждую зиму достроенные амбары немного разрушаются
-        if (HouseCount >= StonePerHouse)
-        {
-            HouseCount -= Mathf.FloorToInt((float)HouseCount / StonePerHouse);
-        }
-
-        //каждую зиму достроенные лодки немного разрушаются
-        if (BoatCount >= SealPerBoat)
-        {
-            BoatCount -= Mathf.FloorToInt((float)BoatCount / SealPerBoat);
-        }*/
+        
+        WinterSound.SetActive(true);
     }
 
     public int TurnWinterDay()
