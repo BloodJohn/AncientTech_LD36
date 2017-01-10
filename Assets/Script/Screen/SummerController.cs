@@ -31,6 +31,9 @@ public class SummerController : MonoBehaviour
     public GameObject fishbonePrefab;
     public GameObject stonePrefab;
     public GameObject sealPrefab;
+
+    public Color blackColor;
+    public Color redColor;
     #endregion
 
     #region unity
@@ -105,6 +108,9 @@ public class SummerController : MonoBehaviour
         sheepLabel.text = string.Format("{0}", CoreGame.Instance.SheepCount);
         hayLabel.text = string.Format("{0}/{1}", CoreGame.Instance.HaylageCount,
             Mathf.Min(CoreGame.Instance.SheepCount * CoreGame.SeasonDays,CoreGame.Instance.StorageCapacity - CoreGame.Instance.FishCount));
+
+        fishLabel.color = CoreGame.Instance.IsDeadSea ? redColor : blackColor;
+
         fishLabel.text = string.Format("{0}/{1}", CoreGame.Instance.FishCount, 
             Mathf.Min(CoreGame.SeasonDays, CoreGame.Instance.StorageCapacity - CoreGame.Instance.HaylageCount));
         

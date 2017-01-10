@@ -74,10 +74,6 @@ public class CoreGame : MonoBehaviour
     //public int LandCount = 3000;
     /// <summary>рыбы в море</summary>
     private int SeaCount = 200;
-
-
-    public GameObject WinterSound;
-    public GameObject SummerSound;
     #endregion
 
     #region function
@@ -96,7 +92,7 @@ public class CoreGame : MonoBehaviour
     public int StorageCapacity { get { return (HouseCount / StonePerHouse) * 100; } }
 
     /// <summary>всего сукна полученно, включая уже потраченное</summary>
-    public  int TotalFelted { get { return FeltedCount + ScytheCount*200 + HayforkCount*500; } }
+    public int TotalFelted { get { return FeltedCount + ScytheCount * 200 + HayforkCount * 500; } }
 
     /// <summary>на второе лето после долгой зимы приходит мертвое море</summary>
     public bool IsDeadSea { get { return LongWinterCount == 1 && WinterCount > EasyWinters; } }
@@ -129,13 +125,13 @@ public class CoreGame : MonoBehaviour
         BoatCount = SealPerBoat * 2; //вначале у нас есть 2 лодки
 
         SeaCount = SeaFirst;
-        StopSound();
+        SoundManager.Instance.StopSound();
         SceneManager.LoadScene(SummerController.sceneName);
     }
 
     public void Save()
     {
-        StopSound();
+        SoundManager.Instance.StopSound();
         var json = JsonUtility.ToJson(this);
         PlayerPrefs.SetString(GameSaveKey, json);
     }
@@ -162,11 +158,6 @@ public class CoreGame : MonoBehaviour
         }
     }
 
-    private void StopSound()
-    {
-        WinterSound.SetActive(false);
-        SummerSound.SetActive(false);
-    }
     #endregion
 
     #region summer
@@ -193,7 +184,7 @@ public class CoreGame : MonoBehaviour
         //короткое лето после долгой зимы
         if (LongWinterCount == 0) DayCount -= LongWinterTurns;
 
-        SummerSound.SetActive(true);
+        SoundManager.Instance.PlaySummer();
     }
 
     private void TurnSummerDay()
@@ -219,19 +210,21 @@ public class CoreGame : MonoBehaviour
             seal = -1;
         }
         //если есть рыба - попадаются и тюлени
-        else if (seal==0 && Random.Range(0, SealChanse) == 0)
-            {
-                SealCount++;
-                seal = 1;
-            }
-        
+        else if (seal == 0 && Random.Range(0, SealChanse) == 0)
+        {
+            SealCount++;
+            seal = 1;
+        }
+
 
         FishCount += production;
         SeaCount -= production;
+        if (FishCount > StorageCapacity) FishCount = StorageCapacity;
 
         //отсечка по вместимости амбаров
-        if (FishCount > StorageCapacity - HaylageCount && HaylageCount <= StorageCapacity)
-            FishCount = StorageCapacity - HaylageCount;
+        if (FishCount + HaylageCount > StorageCapacity) //&& HaylageCount <= StorageCapacity
+            //FishCount = StorageCapacity - HaylageCount;
+            HaylageCount = StorageCapacity - FishCount; //если нет места для рыбы - выбрасываем сено!
 
         return seal;
     }
@@ -252,10 +245,10 @@ public class CoreGame : MonoBehaviour
         }
 
         HaylageCount += production;
-        //LandCount -= production;
+        if (HaylageCount > StorageCapacity) HaylageCount = StorageCapacity;
 
         //отсечка по вместимости амбаров
-        if (HaylageCount > StorageCapacity - FishCount && FishCount <= StorageCapacity)
+        if (HaylageCount + FishCount > StorageCapacity) //&& FishCount <= StorageCapacity
             HaylageCount = StorageCapacity - FishCount;
 
         return stone;
@@ -280,8 +273,8 @@ public class CoreGame : MonoBehaviour
         }
 
         WoolCount = SheepCount;
-        
-        WinterSound.SetActive(true);
+
+        SoundManager.Instance.PlayWinter();
     }
 
     public int TurnWinterDay()
@@ -358,7 +351,7 @@ public class CoreGame : MonoBehaviour
 
     public bool BuyScythe()
     {
-        if (FeltedCount >= 200 && ScytheCount==0)
+        if (FeltedCount >= 200 && ScytheCount == 0)
         {
             Debug.LogFormat("buy item 200");
             FeltedCount -= 200;
@@ -372,7 +365,7 @@ public class CoreGame : MonoBehaviour
 
     public bool BuyHayfork()
     {
-        if (FeltedCount >= 500 && HayforkCount==0)
+        if (FeltedCount >= 500 && HayforkCount == 0)
         {
             Debug.LogFormat("buy item 500");
             FeltedCount -= 500;
