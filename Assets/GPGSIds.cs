@@ -24,6 +24,7 @@
 
 public static class GPGSIds
 {
+        public const string achievement_drakkar = "CgkIp6SwmNsTEAIQEA"; // <GPGSID>
         public const string achievement_play_test = "CgkIp6SwmNsTEAIQCA"; // <GPGSID>
         public const string achievement_scythe = "CgkIp6SwmNsTEAIQDQ"; // <GPGSID>
         public const string achievement_big_fish = "CgkIp6SwmNsTEAIQBA"; // <GPGSID>

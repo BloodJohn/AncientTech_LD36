@@ -66,6 +66,8 @@ public class CoreGame : MonoBehaviour
     public int ScytheCount;
     /// <summary>Вилы для разбрасывания сена</summary>
     public int HayforkCount;
+    /// <summary>Драккар</summary>
+    public int DrakkarCount;
 
     /// <summary>рыбы в море</summary>
     private int SeaCount = 200;
@@ -198,6 +200,8 @@ public class CoreGame : MonoBehaviour
 
         //до 4го амбара кормим рыбой
         if (HouseCount < StonePerHouse * 4) production = Mathf.Max(2, production);
+        //драккар ловит большую рыбу
+        if (DrakkarCount > 0) production++;
 
         if (IsDeadSea)
         {
@@ -356,7 +360,7 @@ public class CoreGame : MonoBehaviour
             return true;
         }
 
-        Debug.LogFormat("heed more Felted 200/{0}", FeltedCount);
+        Debug.LogFormat("heed more Felted {0}/200", FeltedCount);
         return false;
     }
 
@@ -369,7 +373,20 @@ public class CoreGame : MonoBehaviour
             HayforkCount++;
             return true;
         }
-        Debug.LogFormat("heed more Felted 500/{0}", FeltedCount);
+        Debug.LogFormat("heed more Felted {0}/500", FeltedCount);
+        return false;
+    }
+
+    public bool BuyDrakkar()
+    {
+        if (FeltedCount >= 10000 && DrakkarCount == 0)
+        {
+            Debug.LogFormat("buy item 10k");
+            FeltedCount -= 10000;
+            DrakkarCount++;
+            return true;
+        }
+        Debug.LogFormat("heed more Felted {0}/10k", FeltedCount);
         return false;
     }
     #endregion

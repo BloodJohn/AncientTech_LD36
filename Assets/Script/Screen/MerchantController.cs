@@ -64,7 +64,21 @@ public class MerchantController : MonoBehaviour
             }
         }
 
-        icon10k.color = redColor;
+        if (CoreGame.Instance.DrakkarCount > 0)
+        {
+            icon10k.color = goldColor;
+        }
+        else
+        {
+            if (CoreGame.Instance.FeltedCount >= 10000)
+            {
+                icon10k.color = greenColor;
+            }
+            else
+            {
+                icon10k.color = redColor;
+            }
+        }
     }
 
     void Update()
@@ -95,10 +109,20 @@ public class MerchantController : MonoBehaviour
         }
     }
 
+    public void BuyItem10k()
+    {
+        if (CoreGame.Instance.BuyDrakkar())
+        {
+            icon10k.color = goldColor;
+            DrakkarAchievement();
+        }
+    }
+
     #region achievements
     /// <summary>Купить косу</summary>
     private void ScytheAchievement()
     {
+        description.text = string.Format(LanguageManager.Instance.GetTextValue("merchant_description"), CoreGame.Instance.FeltedCount);
         if (PlayerPrefs.HasKey(GPGSIds.achievement_scythe)) return;
 
         Social.ReportProgress(GPGSIds.achievement_scythe, 100.0f, (bool success) =>
@@ -114,6 +138,7 @@ public class MerchantController : MonoBehaviour
     /// <summary>Купить вилы</summary>
     private void HayforkAchievement()
     {
+        description.text = string.Format(LanguageManager.Instance.GetTextValue("merchant_description"), CoreGame.Instance.FeltedCount);
         if (PlayerPrefs.HasKey(GPGSIds.achievement_hayfork)) return;
 
         Social.ReportProgress(GPGSIds.achievement_hayfork, 100.0f, (bool success) =>
@@ -122,6 +147,22 @@ public class MerchantController : MonoBehaviour
             if (success)
             {
                 PlayerPrefs.SetInt(GPGSIds.achievement_hayfork, 100);
+            }
+        });
+    }
+
+    /// <summary>Купить драккар</summary>
+    private void DrakkarAchievement()
+    {
+        description.text = string.Format(LanguageManager.Instance.GetTextValue("merchant_description"), CoreGame.Instance.FeltedCount);
+        if (PlayerPrefs.HasKey(GPGSIds.achievement_drakkar)) return;
+
+        Social.ReportProgress(GPGSIds.achievement_drakkar, 100.0f, (bool success) =>
+        {
+            // handle success or failure
+            if (success)
+            {
+                PlayerPrefs.SetInt(GPGSIds.achievement_drakkar, 100);
             }
         });
     }

@@ -107,14 +107,27 @@ public class SummerController : MonoBehaviour
         title.text = string.Format(LanguageManager.Instance.GetTextValue("summer_title"), CoreGame.Instance.DayCount);
         if (CoreGame.Instance.LongWinterCount == 0) title.color = redColor;
         sheepLabel.text = string.Format("{0}", CoreGame.Instance.SheepCount);
-        hayLabel.text = string.Format("{0}/{1}", CoreGame.Instance.HaylageCount,
-            Mathf.Min(CoreGame.Instance.SheepCount * CoreGame.SeasonDays,CoreGame.Instance.StorageCapacity - CoreGame.Instance.FishCount));
 
-        fishLabel.color = CoreGame.Instance.IsDeadSea ? redColor : blackColor;
+        if (CoreGame.Instance.StorageCapacity > CoreGame.Instance.FishCount + CoreGame.Instance.HaylageCount)
+        {
+            hayLabel.color = blackColor;
+            hayLabel.text = string.Format("{0}/{1}", CoreGame.Instance.HaylageCount,
+                Mathf.Min(CoreGame.Instance.SheepCount * CoreGame.SeasonDays,
+                    CoreGame.Instance.StorageCapacity - CoreGame.Instance.FishCount));
 
-        fishLabel.text = string.Format("{0}/{1}", CoreGame.Instance.FishCount, 
-            Mathf.Min(CoreGame.SeasonDays, CoreGame.Instance.StorageCapacity - CoreGame.Instance.HaylageCount));
-        
+            fishLabel.color = CoreGame.Instance.IsDeadSea ? redColor : blackColor;
+            fishLabel.text = string.Format("{0}/{1}", CoreGame.Instance.FishCount,
+                Mathf.Min(CoreGame.SeasonDays, CoreGame.Instance.StorageCapacity - CoreGame.Instance.HaylageCount));
+        }
+        else
+        {
+            hayLabel.color = redColor;
+            hayLabel.text = string.Format("{0}", CoreGame.Instance.HaylageCount);
+
+            fishLabel.color = redColor;
+            fishLabel.text = string.Format("{0}", CoreGame.Instance.FishCount);
+        }
+
         longhouseButton.gameObject.SetActive(CoreGame.Instance.DayCount <= 0);
     }
 
