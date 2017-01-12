@@ -21,14 +21,12 @@ public class DefeatController : MonoBehaviour
     {
         feltedLabel.text = string.Format(LanguageManager.Instance.GetTextValue("defeat_result"), CoreGame.Instance.TotalFelted);
 
-        if (CoreGame.Instance.SheepCount > 0)
-        {
-            noFoodLabel.text = LanguageManager.Instance.GetTextValue("defeat_noFood");
-        }
-        else
-        {
+        if (CoreGame.Instance.SheepCount <= 0)
             noFoodLabel.text = LanguageManager.Instance.GetTextValue("defeat_noSheep");
-        }
+        else if (CoreGame.Instance.HaylageCount <= 0)
+            noFoodLabel.text = LanguageManager.Instance.GetTextValue("defeat_noHay");
+        else
+            noFoodLabel.text = LanguageManager.Instance.GetTextValue("defeat_noFood");
 
         restartButton.GetComponentInChildren<Text>().text = LanguageManager.Instance.GetTextValue("defeat_restart");
         voteButton.GetComponentInChildren<Text>().text = LanguageManager.Instance.GetTextValue("defeat_vote");

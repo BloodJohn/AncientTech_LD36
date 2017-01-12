@@ -150,6 +150,9 @@ Dried fish has a storage life of several years.</value>
 	<data name="defeat_noFood" xml:space="preserve">
 		<value>Winter on the house run out of food. The Vikings began to die from hunger.</value>
 	</data>
+	<data name="defeat_noHay" xml:space="preserve">
+		<value />
+	</data>
 	<data name="defeat_noSheep" xml:space="preserve">
 		<value>Hay ended. Sheep died of starvation. Without wool for trade, the village is doomed.</value>
 	</data>

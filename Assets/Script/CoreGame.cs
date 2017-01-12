@@ -11,8 +11,6 @@ public class CoreGame : MonoBehaviour
     public const int SheepStartCount = 12;
     /// <summary>дней в сезоне</summary>
     public const int SeasonDays = 24;
-    /// <summary>лугов</summary>
-    //public const int LandMax = 3000;
     /// <summary>рыбы в море</summary>
     public const int SeaFirst = 299;
     /// <summary>минимальный улов</summary>
@@ -31,9 +29,6 @@ public class CoreGame : MonoBehaviour
     public const int StoneChanse = 10;
     /// <summary>вероятность выпадения тюленя</summary>
     public const int SealChanse = 20;
-
-
-
     /// <summary>Ключ куда мы сохраним игру</summary>
     public const string GameSaveKey = "gameSave";
 
@@ -57,6 +52,8 @@ public class CoreGame : MonoBehaviour
     public int MeatCount;
     /// <summary>трески</summary>
     public int FishCount;
+    /// <summary>всю зиму жрал только рыбу</summary>
+    public bool WinterFishOnly;
     /// <summary>камня</summary>
     public int StoneCount;
     /// <summary>тюленей</summary>
@@ -70,8 +67,6 @@ public class CoreGame : MonoBehaviour
     /// <summary>Вилы для разбрасывания сена</summary>
     public int HayforkCount;
 
-    /// <summary>лугов</summary>
-    //public int LandCount = 3000;
     /// <summary>рыбы в море</summary>
     private int SeaCount = 200;
     #endregion
@@ -83,9 +78,11 @@ public class CoreGame : MonoBehaviour
     {
         get
         {
-            if (WinterCount < LongWinterCicle * 4) return 1;
+            //до 4го амбара зима не растет
+            if (HouseCount < StonePerHouse * 4) return 1;
 
-            return Mathf.Min(WinterCount / (2 * LongWinterCicle), 4);
+            //зима растет до 10 недель
+            return Mathf.Min(WinterCount / (2 * LongWinterCicle), 10); 
         }
     }
     /// <summary>Вместимость амбаров (сено+рыба)</summary>
@@ -109,7 +106,7 @@ public class CoreGame : MonoBehaviour
     {
         SummerCount = 0;
         WinterCount = 0;
-        LongWinterCount = 0;
+        LongWinterCount = 1;
         DayCount = 0;
         SheepCount = SheepStartCount;
         HaylageCount = 0;
@@ -165,18 +162,18 @@ public class CoreGame : MonoBehaviour
     public void StartSummer()
     {
         DayCount = SeasonDays;
-        //LandCount = LandMax;
         SummerCount++;
 
         //плодим овец
         if (WinterCount > 0 && SheepCount > 1) SheepCount += SheepCount / 2;
-
+        //портим рыбу
+        if (WinterFishOnly && FishCount > 3) FishCount -= FishCount / 3;
 
         if (WinterCount == 0)
             SeaCount = SeaFirst;
         else
         {
-            //после первой зимовки рыбы в море бывает разное количество (от 1 до 3 рыбин за улов + нужно иметь 4 лодки!)
+            //после первой зимовки рыбы в море бывает разное количество (от 1 до 3 рыбин за улов)
             SeaCount = Random.Range(SeaMin + BoatCount, SeaMax);
             Debug.LogFormat("Sea {0} [{1}+{2}, {3}] = {4}", SeaCount, SeaMin, BoatCount, SeaMax, SeaCount / SeaMin);
         }
@@ -189,8 +186,6 @@ public class CoreGame : MonoBehaviour
 
     private void TurnSummerDay()
     {
-        /*if (LandCount < SheepCount) SheepCount = LandCount;
-        LandCount -= SheepCount;*/
         DayCount--;
     }
 
@@ -273,6 +268,7 @@ public class CoreGame : MonoBehaviour
         }
 
         WoolCount = SheepCount;
+        WinterFishOnly = true;
 
         SoundManager.Instance.PlayWinter();
     }
@@ -295,6 +291,7 @@ public class CoreGame : MonoBehaviour
         if (MeatCount > 0)
         {
             MeatCount--;
+            WinterFishOnly = false;
             result = 1;
         }
         else if (FishCount > 0)

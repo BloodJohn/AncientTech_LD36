@@ -141,6 +141,7 @@ public class WinterController : MonoBehaviour
         summerButton.gameObject.SetActive(!isWinter);
 
         title.text = string.Format(LanguageManager.Instance.GetTextValue("winter_title"), CoreGame.Instance.WinterCount, CoreGame.Instance.DayCount);
+        if (CoreGame.Instance.LongWinterCount == 0) title.color = redColor;
         haylageLabel.text = string.Format("{0}", CoreGame.Instance.HaylageCount);
         sheepLabel.text = string.Format("{0}", CoreGame.Instance.SheepCount);
         woolLabel.text = string.Format("{0}", CoreGame.Instance.WoolCount);
@@ -180,7 +181,7 @@ public class WinterController : MonoBehaviour
         //все овцы подохли
         if (CoreGame.Instance.SheepCount <= 0)
         {
-            
+
             SceneManager.LoadScene(DefeatController.sceneName);
         }
 
@@ -228,7 +229,7 @@ public class WinterController : MonoBehaviour
     {
         CoreGame.Instance.Save();
         //SceneManager.LoadScene(MerchantController.sceneName);
-        if (CoreGame.Instance.LongWinterCount==0)
+        if (CoreGame.Instance.LongWinterCount == 0)
             SceneManager.LoadScene(MerchantController.sceneName);
         else
             SceneManager.LoadScene(SpringController.sceneName);

@@ -105,6 +105,7 @@ public class SummerController : MonoBehaviour
     private void ShowStats()
     {
         title.text = string.Format(LanguageManager.Instance.GetTextValue("summer_title"), CoreGame.Instance.DayCount);
+        if (CoreGame.Instance.LongWinterCount == 0) title.color = redColor;
         sheepLabel.text = string.Format("{0}", CoreGame.Instance.SheepCount);
         hayLabel.text = string.Format("{0}/{1}", CoreGame.Instance.HaylageCount,
             Mathf.Min(CoreGame.Instance.SheepCount * CoreGame.SeasonDays,CoreGame.Instance.StorageCapacity - CoreGame.Instance.FishCount));

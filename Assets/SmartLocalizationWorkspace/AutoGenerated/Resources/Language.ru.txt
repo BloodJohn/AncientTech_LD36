@@ -150,8 +150,11 @@
 	<data name="defeat_noFood" xml:space="preserve">
 		<value>Еда закончилась. Люди начали умирать от голода.</value>
 	</data>
-	<data name="defeat_noSheep" xml:space="preserve">
+	<data name="defeat_noHay" xml:space="preserve">
 		<value>Сено кончилось. Овцы погибли от голода. Нет сукна - нечем торговать. Хутор обречен.</value>
+	</data>
+	<data name="defeat_noSheep" xml:space="preserve">
+		<value>Овцы пошли под нож. Нет сукна - нечем торговать. Хутор обречен.</value>
 	</data>
 	<data name="defeat_restart" xml:space="preserve">
 		<value>Сыграть снова</value>
