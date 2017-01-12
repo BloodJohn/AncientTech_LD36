@@ -70,6 +70,7 @@ public class SummerController : MonoBehaviour
     {
         BigFlockAchievement();
         Game10Achievement();
+        LongWinterAchievement();
     }
 
     void Update()
@@ -191,6 +192,22 @@ public class SummerController : MonoBehaviour
     #endregion
 
     #region achievements
+    /// <summary>длинная зима</summary>
+    private void LongWinterAchievement()
+    {
+        if (CoreGame.Instance.LongWinterCount > 0) return;
+        if (PlayerPrefs.HasKey(GPGSIds.achievement_long_winter)) return;
+
+        // unlock achievement (achievement ID "Cfjewijawiu_QA")
+        Social.ReportProgress(GPGSIds.achievement_long_winter, 100.0f, (bool success) =>
+        {
+            // handle success or failure
+            if (success)
+            {
+                PlayerPrefs.SetInt(GPGSIds.achievement_long_winter, 100);
+            }
+        });
+    }
 
     /// <summary>большой улов</summary>
     private void BigFishAchievement(int fishing)

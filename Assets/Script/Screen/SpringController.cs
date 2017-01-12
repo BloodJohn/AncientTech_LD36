@@ -44,9 +44,7 @@ public class SpringController : MonoBehaviour
 
     void Start()
     {
-
         FirstWinterAchievement();
-        LongWinterAchievement();
     }
 
     void Update()
@@ -56,23 +54,6 @@ public class SpringController : MonoBehaviour
         {
             SceneManager.LoadScene(SummerController.sceneName);
         }
-    }
-
-    /// <summary>длинная зима</summary>
-    private void LongWinterAchievement()
-    {
-        if (CoreGame.Instance.LongWinterCount > 0) return;
-        if (PlayerPrefs.HasKey(GPGSIds.achievement_long_winter)) return;
-
-        // unlock achievement (achievement ID "Cfjewijawiu_QA")
-        Social.ReportProgress(GPGSIds.achievement_long_winter, 100.0f, (bool success) =>
-        {
-            // handle success or failure
-            if (success)
-            {
-                PlayerPrefs.SetInt(GPGSIds.achievement_long_winter, 100);
-            }
-        });
     }
 
     /// <summary>первая зима</summary>
