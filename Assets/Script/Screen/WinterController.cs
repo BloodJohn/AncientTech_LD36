@@ -40,8 +40,12 @@ public class WinterController : MonoBehaviour
     public Text houseLabel;
     /// <summary>сколько лодок</summary>
     public Text boatLabel;
-
+    /// <summary>иконка лодки</summary>
+    public Image boatIcon;
+    /// <summary>кнопка окончания зимы</summary>
     public Button summerButton;
+    /// <summary>картинка драккара</summary>
+    public Sprite drakkarSprite;
 
     public GameObject meatPrefab;
     public GameObject feltedPrefab;
@@ -165,7 +169,12 @@ public class WinterController : MonoBehaviour
 
         //лодки
         boatLabel.gameObject.SetActive(isWinter);
-        if (CoreGame.Instance.SealCount > 0)
+        if (CoreGame.Instance.DrakkarCount > 0)
+        {
+            boatIcon.sprite = drakkarSprite;
+            boatLabel.text = string.Format("{0}", (float)CoreGame.Instance.DrakkarCount);
+        }
+        else if (CoreGame.Instance.SealCount > 0)
         {
             boatLabel.text = string.Format("{0}+{1}", (float)CoreGame.Instance.BoatCount / CoreGame.SealPerBoat, (float)CoreGame.Instance.SealCount / CoreGame.SealPerBoat);
         }

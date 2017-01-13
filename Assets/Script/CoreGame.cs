@@ -31,6 +31,12 @@ public class CoreGame : MonoBehaviour
     public const int SealChanse = 20;
     /// <summary>Ключ куда мы сохраним игру</summary>
     public const string GameSaveKey = "gameSave";
+    /// <summary>цена сукна за серп</summary>
+    public const int PriceScythe = 200;
+    /// <summary>цена сукна за вилы</summary>
+    public const int PriceHayfork = 500;
+    /// <summary>цена сукна за драккар</summary>
+    public const int PriceDrakkar = 10000;
 
     /// <summary>сколько зим прошло</summary>
     public int WinterCount;
@@ -352,10 +358,10 @@ public class CoreGame : MonoBehaviour
 
     public bool BuyScythe()
     {
-        if (FeltedCount >= 200 && ScytheCount == 0)
+        if (FeltedCount >= PriceScythe && ScytheCount == 0)
         {
             Debug.LogFormat("buy item 200");
-            FeltedCount -= 200;
+            FeltedCount -= PriceScythe;
             ScytheCount++;
             return true;
         }
@@ -366,10 +372,10 @@ public class CoreGame : MonoBehaviour
 
     public bool BuyHayfork()
     {
-        if (FeltedCount >= 500 && HayforkCount == 0)
+        if (FeltedCount >= PriceHayfork && HayforkCount == 0)
         {
             Debug.LogFormat("buy item 500");
-            FeltedCount -= 500;
+            FeltedCount -= PriceHayfork;
             HayforkCount++;
             return true;
         }
@@ -379,10 +385,10 @@ public class CoreGame : MonoBehaviour
 
     public bool BuyDrakkar()
     {
-        if (FeltedCount >= 10000 && DrakkarCount == 0)
+        if (FeltedCount >= PriceDrakkar && DrakkarCount == 0)
         {
             Debug.LogFormat("buy item 10k");
-            FeltedCount -= 10000;
+            FeltedCount -= PriceDrakkar;
             DrakkarCount++;
             return true;
         }
@@ -392,5 +398,5 @@ public class CoreGame : MonoBehaviour
     #endregion
 }
 
-
+//Как решить проблему ограничения в 64К методов в Unity3D
 //https://habrahabr.ru/post/314416/

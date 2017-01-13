@@ -38,7 +38,7 @@ public class MerchantController : MonoBehaviour
         }
         else
         {
-            if (CoreGame.Instance.FeltedCount >= 200)
+            if (CoreGame.Instance.FeltedCount >= CoreGame.PriceScythe)
             {
                 icon200.color = greenColor;
             }
@@ -54,7 +54,7 @@ public class MerchantController : MonoBehaviour
         }
         else
         {
-            if (CoreGame.Instance.FeltedCount >= 500)
+            if (CoreGame.Instance.FeltedCount >= CoreGame.PriceHayfork)
             {
                 icon500.color = greenColor;
             }
@@ -70,7 +70,7 @@ public class MerchantController : MonoBehaviour
         }
         else
         {
-            if (CoreGame.Instance.FeltedCount >= 10000)
+            if (CoreGame.Instance.FeltedCount >= CoreGame.PriceDrakkar)
             {
                 icon10k.color = greenColor;
             }
