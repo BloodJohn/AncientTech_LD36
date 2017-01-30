@@ -101,6 +101,7 @@ public class WinterController : MonoBehaviour
     {
         if (!CoreGame.Instance.SlaughterWinter()) return;
 
+        SoundManager.Instance.PlaySheep();
         ShowStats();
 
         var item = (GameObject)Instantiate(meatPrefab, transform);

@@ -7,6 +7,8 @@ public class SoundManager : MonoBehaviour
     private GameObject WinterSound;
     [SerializeField]
     private GameObject SummerSound;
+    [SerializeField]
+    private AudioSource SheepSound;
 
     void Awake()
     {
@@ -30,5 +32,11 @@ public class SoundManager : MonoBehaviour
     public void PlayWinter()
     {
         WinterSound.SetActive(true);
+    }
+
+    public void PlaySheep()
+    {
+        SheepSound.pitch = Random.Range(0.4f, 0.6f);
+        SheepSound.Play();
     }
 }
