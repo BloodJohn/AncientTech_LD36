@@ -33,6 +33,11 @@ public class AutumnController : MonoBehaviour
             title.text = LanguageManager.Instance.GetTextValue("autumn_title3");
             description.text = LanguageManager.Instance.GetTextValue("autumn_description3");
         }
+        else if (CoreGame.Instance.WinterCount < 20)
+        {
+            title.text = LanguageManager.Instance.GetTextValue("autumn_title6");
+            description.text = LanguageManager.Instance.GetTextValue("autumn_description6");
+        }
         else
         {
             title.text = LanguageManager.Instance.GetTextValue("autumn_title5");

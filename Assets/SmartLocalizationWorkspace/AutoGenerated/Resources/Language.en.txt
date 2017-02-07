@@ -132,6 +132,9 @@ Dried fish has a storage life of several years.</value>
 	<data name="autumn_description5" xml:space="preserve">
 		<value>The trade ship had arrived in the summer. And remained for the winter in one of the hamlets. In the spring the merchant sailed back to Norway.</value>
 	</data>
+	<data name="autumn_description6" xml:space="preserve">
+		<value>For long winter short summer comes. During the short summer comes summer without cod - the dead sea. After a winter without meat part of the fish is lost.</value>
+	</data>
 	<data name="autumn_title" xml:space="preserve">
 		<value>Sheep are sheared in the autumn</value>
 	</data>
@@ -147,14 +150,17 @@ Dried fish has a storage life of several years.</value>
 	<data name="autumn_title5" xml:space="preserve">
 		<value>Wintering merchants</value>
 	</data>
+	<data name="autumn_title6" xml:space="preserve">
+		<value>Beggars can't be choosers</value>
+	</data>
 	<data name="defeat_noFood" xml:space="preserve">
 		<value>Winter on the house run out of food. The Vikings began to die from hunger.</value>
 	</data>
 	<data name="defeat_noHay" xml:space="preserve">
-		<value />
+		<value>Hay ended. Sheep died of starvation. Without wool for trade, the village is doomed.</value>
 	</data>
 	<data name="defeat_noSheep" xml:space="preserve">
-		<value>Hay ended. Sheep died of starvation. Without wool for trade, the village is doomed.</value>
+		<value>All the sheep went to the knife. No cloth - nothing to trade. The farm is doomed.</value>
 	</data>
 	<data name="defeat_restart" xml:space="preserve">
 		<value>Restart Game</value>
@@ -190,6 +196,9 @@ The first settlers, heads came on their own ships, with families, households and
 	<data name="merchant_item10k" xml:space="preserve">
 		<value>Long ship is worth a fortune. If you are willing to spend 10 thousand cloth, Drakkar will be yours.</value>
 	</data>
+	<data name="merchant_item1k" xml:space="preserve">
+		<value>The more I live, the more afraid to die. Thousands of cloth you will get a second chance. To return to this point after death in the future and replay it.</value>
+	</data>
 	<data name="merchant_item200" xml:space="preserve">
 		<value>For 200 cloth you will receive one hammer-forged for superior cutting of hay.
 +1 hay per turn! (click on the image to buy)</value>
@@ -215,6 +224,9 @@ Because of unreliable weather conditions, the hay had to be protected from dew a
 	<data name="spring_description5" xml:space="preserve">
 		<value>The first settlers had their own ships, which sailed to Iceland. By the end of XI century, almost all the ships are gone. Maritime trade was intercepted by Norway.</value>
 	</data>
+	<data name="spring_description6" xml:space="preserve">
+		<value>The best catch - 3 cod. The worst catch - 1 cod. The more boats, the less can sometimes be a bad catch.</value>
+	</data>
 	<data name="spring_title" xml:space="preserve">
 		<value>Over the winter born lambs</value>
 	</data>
@@ -229,6 +241,9 @@ Because of unreliable weather conditions, the hay had to be protected from dew a
 	</data>
 	<data name="spring_title5" xml:space="preserve">
 		<value>Ships of the settlers</value>
+	</data>
+	<data name="spring_title6" xml:space="preserve">
+		<value>Fishing for cod</value>
 	</data>
 	<data name="summer_button" xml:space="preserve">
 		<value>IceLand</value>

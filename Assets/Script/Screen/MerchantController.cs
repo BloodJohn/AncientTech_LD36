@@ -9,10 +9,12 @@ public class MerchantController : MonoBehaviour
     public Text description;
     public Text item200;
     public Text item500;
+    public Text item1k;
     public Text item10k;
 
     public Image icon200;
     public Image icon500;
+    public Image icon1k;
     public Image icon10k;
     public Button summerButton;
 
@@ -28,6 +30,7 @@ public class MerchantController : MonoBehaviour
         description.text = string.Format(LanguageManager.Instance.GetTextValue("merchant_description"), CoreGame.Instance.FeltedCount);
         item200.text = LanguageManager.Instance.GetTextValue("merchant_item200");
         item500.text = LanguageManager.Instance.GetTextValue("merchant_item500");
+        item1k.text = LanguageManager.Instance.GetTextValue("merchant_item1k");
         item10k.text = LanguageManager.Instance.GetTextValue("merchant_item10k");
 
         summerButton.GetComponentInChildren<Text>().text = LanguageManager.Instance.GetTextValue("summer_button");
@@ -61,6 +64,22 @@ public class MerchantController : MonoBehaviour
             else
             {
                 icon500.color = redColor;
+            }
+        }
+
+        if (CoreGame.Instance.SecondChanseCount > 0)
+        {
+            icon1k.color = goldColor;
+        }
+        else
+        {
+            if (CoreGame.Instance.FeltedCount >= CoreGame.PriceSecondChanse)
+            {
+                icon1k.color = greenColor;
+            }
+            else
+            {
+                icon1k.color = redColor;
             }
         }
 
@@ -106,6 +125,14 @@ public class MerchantController : MonoBehaviour
         {
             icon500.color = goldColor;
             HayforkAchievement();
+        }
+    }
+
+    public void BuyItem1k()
+    {
+        if (CoreGame.Instance.BuySecondChanse())
+        {
+            icon1k.color = goldColor;
         }
     }
 

@@ -33,6 +33,11 @@ public class SpringController : MonoBehaviour
             title.text = LanguageManager.Instance.GetTextValue("spring_title3");
             description.text = LanguageManager.Instance.GetTextValue("spring_description3");
         }
+        else if (CoreGame.Instance.WinterCount <= 20)
+        {
+            title.text = LanguageManager.Instance.GetTextValue("spring_title6");
+            description.text = LanguageManager.Instance.GetTextValue("spring_description6");
+        }
         else
         {
             title.text = LanguageManager.Instance.GetTextValue("spring_title5");

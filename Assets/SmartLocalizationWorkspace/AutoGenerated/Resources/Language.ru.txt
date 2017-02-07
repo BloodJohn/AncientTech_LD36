@@ -132,6 +132,9 @@
 	<data name="autumn_description5" xml:space="preserve">
 		<value>Торговый корабль приходил летом. И оставался на зиму в одном из хуторов. Весной купец отплывал обратно в Норвегию.</value>
 	</data>
+	<data name="autumn_description6" xml:space="preserve">
+		<value>За длинной зимой приходит короткое лето. За коротким летом приходит лето без трески - мертвое море. После зимы без мяса - часть рыбы пропадает.</value>
+	</data>
 	<data name="autumn_title" xml:space="preserve">
 		<value>Осенью овец собирают и стригут</value>
 	</data>
@@ -146,6 +149,9 @@
 	</data>
 	<data name="autumn_title5" xml:space="preserve">
 		<value>Зимовка купцов</value>
+	</data>
+	<data name="autumn_title6" xml:space="preserve">
+		<value>Безрыбье</value>
 	</data>
 	<data name="defeat_noFood" xml:space="preserve">
 		<value>Еда закончилась. Люди начали умирать от голода.</value>
@@ -189,6 +195,9 @@
 	<data name="merchant_item10k" xml:space="preserve">
 		<value>Длинный корабль стоит целое состояние. Если ты готов потратить 10 тысяч сукна, драккар станет твоим.</value>
 	</data>
+	<data name="merchant_item1k" xml:space="preserve">
+		<value>Чем больше живешь - тем страшнее умирать. За тысячу сукна ты получишь второй шанс. Вернуться к этому моменту после гибели в будущем и переиграть.</value>
+	</data>
 	<data name="merchant_item200" xml:space="preserve">
 		<value>Всего за 200 шт. сукна ты получишь один серп превосходной ковки для срезания травы. 
 +1 сено за ход! (жми на картинку, чтобы купить)</value>
@@ -214,6 +223,9 @@
 	<data name="spring_description5" xml:space="preserve">
 		<value>Поселенцы имели корабли, на которых приплыли в Исландию. К концу XI века почти все корабли исчезли. Морскую торговлю перехватила Норвегия.</value>
 	</data>
+	<data name="spring_description6" xml:space="preserve">
+		<value>Лучший улов - 3 трески за ход. Самый плохой - 1 треска. Чем больше лодок, тем реже случается плохой улов.</value>
+	</data>
 	<data name="spring_title" xml:space="preserve">
 		<value>Зимой родились ягнята</value>
 	</data>
@@ -228,6 +240,9 @@
 	</data>
 	<data name="spring_title5" xml:space="preserve">
 		<value>Корабли первых викингов</value>
+	</data>
+	<data name="spring_title6" xml:space="preserve">
+		<value>Ловля трески</value>
 	</data>
 	<data name="summer_button" xml:space="preserve">
 		<value>Исландия</value>

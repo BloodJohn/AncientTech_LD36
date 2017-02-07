@@ -35,6 +35,8 @@ public class CoreGame : MonoBehaviour
     public const int PriceScythe = 200;
     /// <summary>цена сукна за вилы</summary>
     public const int PriceHayfork = 500;
+    /// <summary>цена сукна за второй шанс</summary>
+    public const int PriceSecondChanse = 1000;
     /// <summary>цена сукна за драккар</summary>
     public const int PriceDrakkar = 10000;
 
@@ -72,6 +74,8 @@ public class CoreGame : MonoBehaviour
     public int ScytheCount;
     /// <summary>Вилы для разбрасывания сена</summary>
     public int HayforkCount;
+    /// <summary>Второй шанс</summary>
+    public int SecondChanseCount;
     /// <summary>Драккар</summary>
     public int DrakkarCount;
 
@@ -383,6 +387,19 @@ public class CoreGame : MonoBehaviour
         return false;
     }
 
+    public bool BuySecondChanse()
+    {
+        if (FeltedCount >= PriceSecondChanse && SecondChanseCount == 0)
+        {
+            Debug.LogFormat("buy item 1k");
+            FeltedCount -= PriceSecondChanse;
+            SecondChanseCount++;
+            return true;
+        }
+        Debug.LogFormat("heed more Felted {0}/1k", FeltedCount);
+        return false;
+    }
+
     public bool BuyDrakkar()
     {
         if (FeltedCount >= PriceDrakkar && DrakkarCount == 0)
@@ -397,6 +414,3 @@ public class CoreGame : MonoBehaviour
     }
     #endregion
 }
-
-//Как решить проблему ограничения в 64К методов в Unity3D
-//https://habrahabr.ru/post/314416/
