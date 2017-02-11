@@ -31,12 +31,14 @@ public class CoreGame : MonoBehaviour
     public const int SealChanse = 20;
     /// <summary>Ключ куда мы сохраним игру</summary>
     public const string GameSaveKey = "gameSave";
+    /// <summary>Ключ2 куда мы сохраним игру </summary>
+    public const string SecondChanseKey = "secondChanceSave";
     /// <summary>цена сукна за серп</summary>
     public const int PriceScythe = 200;
     /// <summary>цена сукна за вилы</summary>
     public const int PriceHayfork = 500;
     /// <summary>цена сукна за второй шанс</summary>
-    public const int PriceSecondChanse = 1000;
+    public const int PriceSecondChanse = 10; //1000
     /// <summary>цена сукна за драккар</summary>
     public const int PriceDrakkar = 10000;
 
@@ -128,21 +130,48 @@ public class CoreGame : MonoBehaviour
         FishCount = 0;
         StoneCount = 0;
         SealCount = 0;
-        ScytheCount = 0;
-        HayforkCount = 0;
+        
         HouseCount = StonePerHouse * 3;
         BoatCount = SealPerBoat * 2; //вначале у нас есть 2 лодки
+
+        ScytheCount = 0;
+        HayforkCount = 0;
+        SecondChanseCount = 0;
+        DrakkarCount = 0;
 
         SeaCount = SeaFirst;
         SoundManager.Instance.StopSound();
         SceneManager.LoadScene(SummerController.sceneName);
     }
 
-    public void Save()
+    public void Save(string saveKey)
     {
         SoundManager.Instance.StopSound();
         var json = JsonUtility.ToJson(this);
-        PlayerPrefs.SetString(GameSaveKey, json);
+        PlayerPrefs.SetString(saveKey, json);
+    }
+
+    public void LoadSecondChance()
+    {
+        if (SecondChanseCount <= 0)
+        {
+            RestartGame();
+        }
+        else
+        {
+            var json = PlayerPrefs.GetString(SecondChanseKey, string.Empty);
+            PlayerPrefs.DeleteKey(SecondChanseKey);
+
+            if (string.IsNullOrEmpty(json))
+            {
+                RestartGame();
+            }
+            else
+            {
+                PlayerPrefs.SetString(GameSaveKey, json);
+                LoadGame();
+            }
+        }
     }
 
     public void LoadGame()
@@ -393,7 +422,9 @@ public class CoreGame : MonoBehaviour
         {
             Debug.LogFormat("buy item 1k");
             FeltedCount -= PriceSecondChanse;
+            Save(SecondChanseKey);
             SecondChanseCount++;
+            Save(GameSaveKey);
             return true;
         }
         Debug.LogFormat("heed more Felted {0}/1k", FeltedCount);

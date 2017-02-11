@@ -168,6 +168,9 @@
 	<data name="defeat_result" xml:space="preserve">
 		<value>Твой результат: {0}шт. сукна.</value>
 	</data>
+	<data name="defeat_secondchance" xml:space="preserve">
+		<value>Вернуться к сохранению</value>
+	</data>
 	<data name="defeat_vote" xml:space="preserve">
 		<value>Что понравилось в игре?</value>
 	</data>

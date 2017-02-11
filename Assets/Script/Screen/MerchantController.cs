@@ -34,75 +34,35 @@ public class MerchantController : MonoBehaviour
         item10k.text = LanguageManager.Instance.GetTextValue("merchant_item10k");
 
         summerButton.GetComponentInChildren<Text>().text = LanguageManager.Instance.GetTextValue("summer_button");
-
-        if (CoreGame.Instance.ScytheCount > 0)
-        {
-            icon200.color = goldColor;
-        }
-        else
-        {
-            if (CoreGame.Instance.FeltedCount >= CoreGame.PriceScythe)
-            {
-                icon200.color = greenColor;
-            }
-            else
-            {
-                icon200.color = redColor;
-            }
-        }
-
-        if (CoreGame.Instance.HayforkCount > 0)
-        {
-            icon500.color = goldColor;
-        }
-        else
-        {
-            if (CoreGame.Instance.FeltedCount >= CoreGame.PriceHayfork)
-            {
-                icon500.color = greenColor;
-            }
-            else
-            {
-                icon500.color = redColor;
-            }
-        }
-
-        if (CoreGame.Instance.SecondChanseCount > 0)
-        {
-            icon1k.color = goldColor;
-        }
-        else
-        {
-            if (CoreGame.Instance.FeltedCount >= CoreGame.PriceSecondChanse)
-            {
-                icon1k.color = greenColor;
-            }
-            else
-            {
-                icon1k.color = redColor;
-            }
-        }
-
-        if (CoreGame.Instance.DrakkarCount > 0)
-        {
-            icon10k.color = goldColor;
-        }
-        else
-        {
-            if (CoreGame.Instance.FeltedCount >= CoreGame.PriceDrakkar)
-            {
-                icon10k.color = greenColor;
-            }
-            else
-            {
-                icon10k.color = redColor;
-            }
-        }
+        
+        SetIconColor(icon200, CoreGame.Instance.ScytheCount, CoreGame.PriceScythe);
+        SetIconColor(icon500, CoreGame.Instance.HayforkCount, CoreGame.PriceHayfork);
+        SetIconColor(icon1k, CoreGame.Instance.SecondChanseCount, CoreGame.PriceSecondChanse);
+        SetIconColor(icon10k, CoreGame.Instance.DrakkarCount, CoreGame.PriceDrakkar);
     }
 
     void Update()
     {
         if (Input.GetKeyUp(KeyCode.Escape)) Application.Quit();
+    }
+
+    private void SetIconColor(Image icon, int count, int price)
+    {
+        if (count > 0)
+        {
+            icon.color = goldColor;
+        }
+        else
+        {
+            if (CoreGame.Instance.FeltedCount >= price)
+            {
+                icon.color = greenColor;
+            }
+            else
+            {
+                icon.color = redColor;
+            }
+        }
     }
 
     public void LoadSummer()

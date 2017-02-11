@@ -168,6 +168,9 @@ Dried fish has a storage life of several years.</value>
 	<data name="defeat_result" xml:space="preserve">
 		<value>Your score: {0} Felted Wool</value>
 	</data>
+	<data name="defeat_secondchance" xml:space="preserve">
+		<value>Back To Save</value>
+	</data>
 	<data name="defeat_vote" xml:space="preserve">
 		<value>Comment in Store!</value>
 	</data>

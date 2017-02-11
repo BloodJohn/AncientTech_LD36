@@ -14,6 +14,7 @@ public class DefeatController : MonoBehaviour
 
     public Button restartButton;
     public Button voteButton;
+    public Button secondChanceButton;
     #endregion
 
     #region Unity
@@ -30,11 +31,24 @@ public class DefeatController : MonoBehaviour
 
         restartButton.GetComponentInChildren<Text>().text = LanguageManager.Instance.GetTextValue("defeat_restart");
         voteButton.GetComponentInChildren<Text>().text = LanguageManager.Instance.GetTextValue("defeat_vote");
+        secondChanceButton.GetComponentInChildren<Text>().text = LanguageManager.Instance.GetTextValue("defeat_secondchance");
 
-        var showVoteBtn = CoreGame.Instance.FeltedCount >= 100 && !PlayerPrefs.HasKey(voteCountKey);
+        restartButton.gameObject.SetActive(false);
+        voteButton.gameObject.SetActive(false);
+        secondChanceButton.gameObject.SetActive(false);
 
-        restartButton.gameObject.SetActive(!showVoteBtn);
-        voteButton.gameObject.SetActive(showVoteBtn);
+        if (CoreGame.Instance.SecondChanseCount > 0)
+        {
+            secondChanceButton.gameObject.SetActive(true);
+        }
+        else if (CoreGame.Instance.FeltedCount >= 100 && !PlayerPrefs.HasKey(voteCountKey))
+        {
+            voteButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            restartButton.gameObject.SetActive(true);
+        }
 
         PlayerPrefs.DeleteKey(CoreGame.GameSaveKey);
     }
@@ -51,6 +65,11 @@ public class DefeatController : MonoBehaviour
     #endregion
 
     #region buttons UI
+    public void SecondChanceClick()
+    {
+        CoreGame.Instance.LoadSecondChance();
+    }
+
     public void RestartClick()
     {
         CoreGame.Instance.RestartGame();

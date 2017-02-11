@@ -237,7 +237,7 @@ public class WinterController : MonoBehaviour
 
     public void SummerClick()
     {
-        CoreGame.Instance.Save();
+        CoreGame.Instance.Save(CoreGame.GameSaveKey);
         //SceneManager.LoadScene(MerchantController.sceneName);
         if (CoreGame.Instance.LongWinterCount == 0)
             SceneManager.LoadScene(MerchantController.sceneName);
