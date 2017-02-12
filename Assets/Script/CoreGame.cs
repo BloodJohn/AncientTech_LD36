@@ -38,7 +38,7 @@ public class CoreGame : MonoBehaviour
     /// <summary>цена сукна за вилы</summary>
     public const int PriceHayfork = 500;
     /// <summary>цена сукна за второй шанс</summary>
-    public const int PriceSecondChanse = 10; //1000
+    public const int PriceSecondChanse = 1000;
     /// <summary>цена сукна за драккар</summary>
     public const int PriceDrakkar = 10000;
 
@@ -307,7 +307,7 @@ public class CoreGame : MonoBehaviour
         }
         else if (LongWinterCount == 1)
         {
-            LongWinterCount = Random.Range(1, 3);
+            LongWinterCount = Random.Range(1, 4);
         }
 
         WoolCount = SheepCount;
