@@ -39,6 +39,8 @@ public class CoreGame : MonoBehaviour
     public const int PriceHayfork = 500;
     /// <summary>цена сукна за второй шанс</summary>
     public const int PriceSecondChanse = 1000;
+    /// <summary>цена сукна за топор</summary>
+    public const int PriceAxe = 2000;
     /// <summary>цена сукна за драккар</summary>
     public const int PriceDrakkar = 10000;
 
@@ -78,6 +80,8 @@ public class CoreGame : MonoBehaviour
     public int HayforkCount;
     /// <summary>Второй шанс</summary>
     public int SecondChanseCount;
+    /// <summary>Топор</summary>
+    public int AxeCount;
     /// <summary>Драккар</summary>
     public int DrakkarCount;
 
@@ -137,6 +141,7 @@ public class CoreGame : MonoBehaviour
         ScytheCount = 0;
         HayforkCount = 0;
         SecondChanseCount = 0;
+        AxeCount = 0;
         DrakkarCount = 0;
 
         SeaCount = SeaFirst;
@@ -215,7 +220,9 @@ public class CoreGame : MonoBehaviour
         else
         {
             //после первой зимовки рыбы в море бывает разное количество (от 1 до 3 рыбин за улов)
-            SeaCount = Random.Range(SeaMin + BoatCount, SeaMax);
+            SeaCount = SeaMax;
+            if (SeaMax > SeaMin + BoatCount)
+                SeaCount = Random.Range(SeaMin + BoatCount, SeaMax);
             Debug.LogFormat("Sea {0} [{1}+{2}, {3}] = {4}", SeaCount, SeaMin, BoatCount, SeaMax, SeaCount / SeaMin);
         }
 
@@ -399,7 +406,7 @@ public class CoreGame : MonoBehaviour
             return true;
         }
 
-        Debug.LogFormat("heed more Felted {0}/200", FeltedCount);
+        Debug.LogFormat("need more Felted {0}/200", FeltedCount);
         return false;
     }
 
@@ -412,7 +419,7 @@ public class CoreGame : MonoBehaviour
             HayforkCount++;
             return true;
         }
-        Debug.LogFormat("heed more Felted {0}/500", FeltedCount);
+        Debug.LogFormat("need more Felted {0}/500", FeltedCount);
         return false;
     }
 
@@ -427,7 +434,20 @@ public class CoreGame : MonoBehaviour
             Save(GameSaveKey);
             return true;
         }
-        Debug.LogFormat("heed more Felted {0}/1k", FeltedCount);
+        Debug.LogFormat("need more Felted {0}/1k", FeltedCount);
+        return false;
+    }
+
+    public bool BuyAxe()
+    {
+        if (FeltedCount >= PriceAxe && AxeCount == 0)
+        {
+            Debug.LogFormat("buy item 2k");
+            AxeCount -= PriceAxe;
+            AxeCount++;
+            return true;
+        }
+        Debug.LogFormat("need more Felted {0}/2k", FeltedCount);
         return false;
     }
 
@@ -440,7 +460,7 @@ public class CoreGame : MonoBehaviour
             DrakkarCount++;
             return true;
         }
-        Debug.LogFormat("heed more Felted {0}/10k", FeltedCount);
+        Debug.LogFormat("need more Felted {0}/10k", FeltedCount);
         return false;
     }
     #endregion

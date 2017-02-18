@@ -180,8 +180,7 @@ Dried fish has a storage life of several years.</value>
 	<data name="intro_description" xml:space="preserve">
 		<value>You're the head of the Viking village. 
 Catch fish to feed people. Mow hay to feed sheep in winter. Kill a few sheep if there is not enough hay or fish. Sheep provide wool, which need for cloth. 
-Shear more wool!
-</value>
+Shear more wool!</value>
 	</data>
 	<data name="intro_description2" xml:space="preserve">
 		<value>870. The Saga of the People of the Tattúín River Valley, Landnamabok. 
@@ -206,13 +205,15 @@ The first settlers, heads came on their own ships, with families, households and
 		<value>For 200 cloth you will receive one hammer-forged for superior cutting of hay.
 +1 hay per turn! (click on the image to buy)</value>
 	</data>
+	<data name="merchant_item2k" xml:space="preserve">
+		<value>The axe helps to reconcile feuds. Two thousand fabrics, so the price for the last word in the dispute.</value>
+	</data>
 	<data name="merchant_item500" xml:space="preserve">
 		<value>For 500 cloth you get good forks for spreading hay. 
 +2 to the Seine for the course! (until the end of this game)</value>
 	</data>
 	<data name="spring_description" xml:space="preserve">
-		<value>In the spring the sheep go to graze on the meadows. Made in winter fabric will be sold to the merchants in exchange for weapons and tools. Fishing is not always a lot of fish. Mow enough hay for the winter.
-</value>
+		<value>In the spring the sheep go to graze on the meadows. Made in winter fabric will be sold to the merchants in exchange for weapons and tools. Fishing is not always a lot of fish. Mow enough hay for the winter.</value>
 	</data>
 	<data name="spring_description2" xml:space="preserve">
 		<value>The treatment of the hay was a heavy and labour-consuming task. After mowing the windrows had to be tedded, spread and prepared for field-drying.

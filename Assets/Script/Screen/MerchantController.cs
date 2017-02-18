@@ -10,11 +10,13 @@ public class MerchantController : MonoBehaviour
     public Text item200;
     public Text item500;
     public Text item1k;
+    public Text item2k;
     public Text item10k;
 
     public Image icon200;
     public Image icon500;
     public Image icon1k;
+    public Image icon2k;
     public Image icon10k;
     public Button summerButton;
 
@@ -31,6 +33,7 @@ public class MerchantController : MonoBehaviour
         item200.text = LanguageManager.Instance.GetTextValue("merchant_item200");
         item500.text = LanguageManager.Instance.GetTextValue("merchant_item500");
         item1k.text = LanguageManager.Instance.GetTextValue("merchant_item1k");
+        item2k.text = LanguageManager.Instance.GetTextValue("merchant_item2k");
         item10k.text = LanguageManager.Instance.GetTextValue("merchant_item10k");
 
         summerButton.GetComponentInChildren<Text>().text = LanguageManager.Instance.GetTextValue("summer_button");
@@ -38,6 +41,7 @@ public class MerchantController : MonoBehaviour
         SetIconColor(icon200, CoreGame.Instance.ScytheCount, CoreGame.PriceScythe);
         SetIconColor(icon500, CoreGame.Instance.HayforkCount, CoreGame.PriceHayfork);
         SetIconColor(icon1k, CoreGame.Instance.SecondChanseCount, CoreGame.PriceSecondChanse);
+        SetIconColor(icon2k, CoreGame.Instance.AxeCount, CoreGame.PriceAxe);
         SetIconColor(icon10k, CoreGame.Instance.DrakkarCount, CoreGame.PriceDrakkar);
     }
 
@@ -93,6 +97,14 @@ public class MerchantController : MonoBehaviour
         if (CoreGame.Instance.BuySecondChanse())
         {
             icon1k.color = goldColor;
+        }
+    }
+
+    public void BuyItem2k()
+    {
+        if (CoreGame.Instance.BuyAxe())
+        {
+            icon2k.color = goldColor;
         }
     }
 
