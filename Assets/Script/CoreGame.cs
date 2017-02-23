@@ -40,7 +40,7 @@ public class CoreGame : MonoBehaviour
     /// <summary>цена сукна за второй шанс</summary>
     public const int PriceSecondChanse = 1000;
     /// <summary>цена сукна за топор</summary>
-    public const int PriceAxe = 2000;
+    public const int PriceAxe = 2000; //2000
     /// <summary>цена сукна за драккар</summary>
     public const int PriceDrakkar = 10000;
 
