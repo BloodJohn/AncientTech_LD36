@@ -12,9 +12,14 @@ public class DefeatController : MonoBehaviour
     public Text feltedLabel;
     public Text noFoodLabel;
 
+    /// <summary>новая игра</summary>
     public Button restartButton;
+    /// <summary>оценить игру в маркете</summary>
     public Button voteButton;
+    /// <summary>вернуться к сохранению</summary>
     public Button secondChanceButton;
+    /// <summary>пиво для разработчиков</summary>
+    public Button beerButton;
     #endregion
 
     #region Unity
@@ -51,6 +56,8 @@ public class DefeatController : MonoBehaviour
         }
 
         PlayerPrefs.DeleteKey(CoreGame.GameSaveKey);
+
+        beerButton.interactable = !CoreGame.Instance.HasBeer;
     }
 
     public void Start()
@@ -98,6 +105,14 @@ public class DefeatController : MonoBehaviour
                     Social.ShowLeaderboardUI();
                 }
             });
+    }
+
+    public void BeerClick()
+    {
+        //заплатить на пиво разработчикам
+        //Beer Click!
+        CoreGame.Instance.BuyBeer();
+        beerButton.interactable = false;
     }
     #endregion
 }

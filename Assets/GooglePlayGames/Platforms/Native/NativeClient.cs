@@ -57,7 +57,7 @@ namespace GooglePlayGames.Native
         private volatile IQuestsClient mQuestsClient;
         private volatile TokenClient mTokenClient;
         private volatile Action<Invitation, bool> mInvitationDelegate;
-        private volatile Dictionary<String, Achievement> mAchievements = null;
+        private volatile Dictionary<string, Achievement> mAchievements = null;
         private volatile Player mUser = null;
         private volatile List<Player> mFriends = null;
         private volatile Action<bool> mPendingAuthCallbacks;

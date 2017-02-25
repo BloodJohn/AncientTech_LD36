@@ -87,6 +87,8 @@ public class CoreGame : MonoBehaviour
 
     /// <summary>рыбы в море</summary>
     private int SeaCount = 200;
+    /// <summary>внутриигровые покупки</summary>
+    public Purchaser Purchase;
     #endregion
 
     #region function
@@ -111,6 +113,9 @@ public class CoreGame : MonoBehaviour
 
     /// <summary>на второе лето после долгой зимы приходит мертвое море</summary>
     public bool IsDeadSea { get { return LongWinterCount == 1 && WinterCount > EasyWinters; } }
+
+    /// <summary>пиво разработчикам уже куплено</summary>
+    public bool HasBeer { get { return PlayerPrefs.HasKey(Purchaser.beerKey); } }
     #endregion
 
     #region constructor
@@ -462,6 +467,14 @@ public class CoreGame : MonoBehaviour
         }
         Debug.LogFormat("need more Felted {0}/10k", FeltedCount);
         return false;
+    }
+
+    public void BuyBeer()
+    {
+        if (!HasBeer && Purchase != null)
+        {
+            Purchase.BuyBeer();
+        }
     }
     #endregion
 }

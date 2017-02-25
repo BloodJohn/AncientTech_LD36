@@ -269,7 +269,7 @@ namespace GooglePlayGames
             }
         }
 
-        public String title
+        public string title
         {
             get
             {

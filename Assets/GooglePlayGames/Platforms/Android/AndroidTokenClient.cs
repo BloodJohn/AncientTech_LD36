@@ -346,17 +346,17 @@ namespace GooglePlayGames.Android
 
         }
 
-        public String getAccessToken()
+        public string getAccessToken()
         {
             return InvokeCall<string>("getAccessToken", "()Ljava/lang/String;");
         }
 
-        public String getEmail()
+        public string getEmail()
         {
             return InvokeCall<string>("getEmail", "()Ljava/lang/String;");
         }
 
-        public String getIdToken()
+        public string getIdToken()
         {
             return InvokeCall<string>("getIdToken", "()Ljava/lang/String;");
         }

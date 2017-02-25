@@ -58,7 +58,7 @@ namespace GooglePlayGames.Native.PInvoke
 
         internal delegate UIntPtr OutStringMethod(StringBuilder out_string,UIntPtr out_size);
 
-        internal static String OutParamsToString(OutStringMethod outStringMethod)
+        internal static string OutParamsToString(OutStringMethod outStringMethod)
         {
             var requiredSize = outStringMethod(null, UIntPtr.Zero);
             if (requiredSize.Equals(UIntPtr.Zero))
