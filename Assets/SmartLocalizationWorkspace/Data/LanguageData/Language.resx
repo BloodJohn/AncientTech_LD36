@@ -178,13 +178,10 @@ Dried fish has a storage life of several years.</value>
 		<value>design by BloodJohn, art by Mebemory</value>
 	</data>
 	<data name="intro_description" xml:space="preserve">
-		<value>You're the head of the Viking village. 
-Catch fish to feed people. Mow hay to feed sheep in winter. Kill a few sheep if there is not enough hay or fish. Sheep provide wool, which need for cloth. 
-Shear more wool!</value>
+		<value>You're the head of the Viking village. Catch fish to feed people. Mow hay to feed sheep in winter. Kill a few sheep if there is not enough hay or fish. Sheep provide wool, which need for cloth. Shear more wool!</value>
 	</data>
 	<data name="intro_description2" xml:space="preserve">
-		<value>870. The Saga of the People of the Tattúín River Valley, Landnamabok. 
-The first settlers, heads came on their own ships, with families, households and slaves.</value>
+		<value>870. The Saga of the People of the Tattúín River Valley, Landnamabok. The first settlers, heads came on their own ships, with families, households and slaves.</value>
 	</data>
 	<data name="intro_title" xml:space="preserve">
 		<value>Ancient Iceland: survival economy</value>
