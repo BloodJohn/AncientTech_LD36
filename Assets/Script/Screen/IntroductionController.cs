@@ -6,12 +6,22 @@ using UnityEngine.UI;
 
 public class IntroductionController : MonoBehaviour
 {
+    #region variables
     public const string sceneName = "Introduction";
 
     public Text title;
     public Text description;
     public Text author;
 
+    [SerializeField]
+    private Sprite SoundOn;
+    [SerializeField]
+    private Sprite SoundOff;
+    [SerializeField]
+    private Image SoundSprite;
+    #endregion
+
+    #region unity
     void Awake()
     {
         if (Application.systemLanguage == SystemLanguage.Russian)
@@ -35,28 +45,43 @@ public class IntroductionController : MonoBehaviour
             title.text = LanguageManager.Instance.GetTextValue("intro_title");
             description.text = LanguageManager.Instance.GetTextValue("intro_description");
         }
-        
+
         author.text = LanguageManager.Instance.GetTextValue("intro_author");
     }
 
     void Start()
     {
         GooglePlayServices();
+
+        SoundSprite.sprite = SoundManager.Instance.IsSound ? SoundOn : SoundOff;
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        /*if (Input.GetMouseButtonDown(0))
         {
             CoreGame.Instance.LoadGame();
-        }
+        }*/
 
         if (Input.GetKeyUp(KeyCode.Escape)) Application.Quit();
+    }
+    #endregion
+
+    public void ClickBackgroud()
+    {
+        CoreGame.Instance.LoadGame();
+    }
+
+    public void ClickSound()
+    {
+        SoundManager.Instance.MuteSound();
+
+        SoundSprite.sprite = SoundManager.Instance.IsSound ? SoundOn : SoundOff;
     }
 
     private void GooglePlayServices()
     {
-        #if UNITY_ANDROID
+#if UNITY_ANDROID
         Debug.LogFormat("GooglePlayServices");
         var config = new PlayGamesClientConfiguration.Builder()
         // enables saving game progress.
@@ -87,6 +112,6 @@ public class IntroductionController : MonoBehaviour
                 //author.text = "Social.localUser.Authenticate - failed";
             }
         });
-        #endif
+#endif
     }
 }
