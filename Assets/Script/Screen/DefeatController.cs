@@ -58,6 +58,8 @@ public class DefeatController : MonoBehaviour
         PlayerPrefs.DeleteKey(CoreGame.GameSaveKey);
 
         beerButton.interactable = !CoreGame.Instance.HasBeer;
+
+        CoreGame.Instance.SetFontScene();
     }
 
     public void Start()

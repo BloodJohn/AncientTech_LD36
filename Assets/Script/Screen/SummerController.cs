@@ -64,6 +64,8 @@ public class SummerController : MonoBehaviour
         for (var i = 0; i < CoreGame.Instance.SheepCount; i++) CreateSheep();
 
         longhouseButton.GetComponentInChildren<Text>().text = LanguageManager.Instance.GetTextValue("winter_button");
+
+        CoreGame.Instance.SetFontScene();
     }
 
     void Start()

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CoreGame : MonoBehaviour
 {
@@ -88,7 +89,11 @@ public class CoreGame : MonoBehaviour
     /// <summary>рыбы в море</summary>
     private int SeaCount = 200;
     /// <summary>внутриигровые покупки</summary>
-    public Purchaser Purchase;
+    [SerializeField]
+    private Purchaser Purchase;
+    /// <summary>Фонт для всех текстовых полей в игре</summary>
+    [SerializeField] private Font TextFont;
+
     #endregion
 
     #region function
@@ -203,6 +208,14 @@ public class CoreGame : MonoBehaviour
         else
         {
             SceneManager.LoadScene(SummerController.sceneName);
+        }
+    }
+
+    public void SetFontScene()
+    {
+        foreach (var item in GameObject.FindObjectsOfType<Text>())
+        {
+            item.font = TextFont;
         }
     }
 

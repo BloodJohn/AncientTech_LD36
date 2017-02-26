@@ -17,6 +17,8 @@ public class ThingvellirController : MonoBehaviour
             description.text = LanguageManager.Instance.GetTextValue("thing_description");
 
         author.text = LanguageManager.Instance.GetTextValue("intro_author");
+
+        CoreGame.Instance.SetFontScene();
     }
 
     void Update()

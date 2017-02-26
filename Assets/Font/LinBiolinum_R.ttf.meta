@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 12d9b44f1de485048a20d2a1739216c6
+timeCreated: 1488108625
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Linux Biolinum
+  fontNames:
+  - Linux Biolinum
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

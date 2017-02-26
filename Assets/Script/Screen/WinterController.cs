@@ -75,6 +75,8 @@ public class WinterController : MonoBehaviour
             foodHelp.gameObject.SetActive(false);
             shipHelp.gameObject.SetActive(false);
         }
+
+        CoreGame.Instance.SetFontScene();
     }
 
     void Update()

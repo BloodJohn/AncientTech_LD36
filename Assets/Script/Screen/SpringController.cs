@@ -45,6 +45,8 @@ public class SpringController : MonoBehaviour
         }
 
         author.text = LanguageManager.Instance.GetTextValue("intro_author");
+
+        CoreGame.Instance.SetFontScene();
     }
 
     void Start()
