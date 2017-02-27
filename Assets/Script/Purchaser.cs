@@ -30,11 +30,13 @@ public class Purchaser : MonoBehaviour, IStoreListener
     private static string kProductNameGooglePlaySubscription = "com.unity3d.subscription.original";*/
 
     public static readonly string beerKey = "beer_for_developers_once";
+    public Action<string> OnPurchase;
+    public Action<string> OnFailed;
 
     #region init
-    void Start()
+    private void Start()
     {
-        //PlayerPrefs.DeleteKey(beerKey);
+        PlayerPrefs.DeleteKey(beerKey);
 
         // If we haven't set up the Unity Purchasing reference
         if (m_StoreController == null)
@@ -44,7 +46,7 @@ public class Purchaser : MonoBehaviour, IStoreListener
         }
     }
 
-    public void InitializePurchasing()
+    private void InitializePurchasing()
     {
         // If we have already connected to Purchasing ...
         if (IsInitialized())
@@ -214,6 +216,10 @@ public class Purchaser : MonoBehaviour, IStoreListener
 
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
     {
+        if (OnPurchase != null)
+            OnPurchase(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
+
+
         if (string.Equals(args.purchasedProduct.definition.id, beerKey))
         {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
@@ -255,6 +261,9 @@ public class Purchaser : MonoBehaviour, IStoreListener
         // A product purchase attempt did not succeed. Check failureReason for more detail. Consider sharing 
         // this reason with the user to guide their troubleshooting actions.
         Debug.Log(string.Format("OnPurchaseFailed: FAIL. Product: '{0}', PurchaseFailureReason: {1}", product.definition.storeSpecificId, failureReason));
+        if (OnFailed != null)
+            OnFailed(string.Format("OnPurchaseFailed: FAIL. Product: '{0}', PurchaseFailureReason: {1}",
+                product.definition.storeSpecificId, failureReason));
     }
     #endregion
 }

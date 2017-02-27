@@ -13,12 +13,12 @@ public class ThingvellirController : MonoBehaviour
 
     void Awake()
     {
-            title.text = LanguageManager.Instance.GetTextValue("thing_title");
-            description.text = LanguageManager.Instance.GetTextValue("thing_description");
+        title.text = LanguageManager.Instance.GetTextValue("thing_title");
+        description.text = LanguageManager.Instance.GetTextValue("thing_description");
 
         author.text = LanguageManager.Instance.GetTextValue("intro_author");
 
-        CoreGame.Instance.SetFontScene();
+        SoundManager.Instance.SetFontScene();
     }
 
     void Update()

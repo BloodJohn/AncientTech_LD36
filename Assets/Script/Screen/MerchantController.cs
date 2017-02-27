@@ -44,7 +44,7 @@ public class MerchantController : MonoBehaviour
         SetIconColor(icon2k, CoreGame.Instance.AxeCount, CoreGame.PriceAxe);
         SetIconColor(icon10k, CoreGame.Instance.DrakkarCount, CoreGame.PriceDrakkar);
 
-        CoreGame.Instance.SetFontScene();
+        SoundManager.Instance.SetFontScene();
     }
 
     void Update()

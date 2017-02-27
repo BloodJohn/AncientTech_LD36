@@ -59,7 +59,7 @@ public class DefeatController : MonoBehaviour
 
         beerButton.interactable = !CoreGame.Instance.HasBeer;
 
-        CoreGame.Instance.SetFontScene();
+        SoundManager.Instance.SetFontScene();
     }
 
     public void Start()
@@ -111,6 +111,16 @@ public class DefeatController : MonoBehaviour
 
     public void BeerClick()
     {
+        CoreGame.Instance.Purchase.OnPurchase = s =>
+        {
+            noFoodLabel.text = s;
+        };
+
+        CoreGame.Instance.Purchase.OnFailed = s =>
+        {
+            noFoodLabel.text = s;
+        };
+
         //заплатить на пиво разработчикам
         //Beer Click!
         CoreGame.Instance.BuyBeer();

@@ -53,7 +53,7 @@ public class IntroductionController : MonoBehaviour
     {
         GooglePlayServices();
 
-        CoreGame.Instance.SetFontScene();
+        SoundManager.Instance.SetFontScene();
         SoundSprite.sprite = SoundManager.Instance.IsSound ? SoundOn : SoundOff;
     }
 

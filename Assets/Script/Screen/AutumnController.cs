@@ -46,7 +46,7 @@ public class AutumnController : MonoBehaviour
 
         author.text = LanguageManager.Instance.GetTextValue("intro_author");
 
-        CoreGame.Instance.SetFontScene();
+        SoundManager.Instance.SetFontScene();
     }
 
     void Update()

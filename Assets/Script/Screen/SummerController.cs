@@ -65,7 +65,7 @@ public class SummerController : MonoBehaviour
 
         longhouseButton.GetComponentInChildren<Text>().text = LanguageManager.Instance.GetTextValue("winter_button");
 
-        CoreGame.Instance.SetFontScene();
+        SoundManager.Instance.SetFontScene();
     }
 
     void Start()

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class SoundManager : MonoBehaviour
     private GameObject SummerSound;
     [SerializeField]
     private AudioSource SheepSound;
+    /// <summary>Фонт для всех текстовых полей в игре</summary>
+    [SerializeField]
+    private Font TextFont;
 
     private static readonly string SoundKey = "muteSound";
 
@@ -22,6 +26,14 @@ public class SoundManager : MonoBehaviour
         Application.targetFrameRate = 10;
 
         IsSound = PlayerPrefs.GetInt(SoundKey, 100) > 0;
+    }
+
+    public void SetFontScene()
+    {
+        foreach (var item in GameObject.FindObjectsOfType<Text>())
+        {
+            item.font = TextFont;
+        }
     }
 
     public void MuteSound()
