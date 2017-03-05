@@ -64,12 +64,21 @@ public class DefeatController : MonoBehaviour
 
     public void Start()
     {
+        CoreGame.Instance.Purchase.OnDebug = s =>
+        {
+            noFoodLabel.text = s;
+        };
         LeaderBoard();
     }
 
     void Update()
     {
         if (Input.GetKeyUp(KeyCode.Escape)) Application.Quit();
+    }
+
+    void OnDestroy()
+    {
+        CoreGame.Instance.Purchase.OnDebug = null;
     }
     #endregion
 
@@ -111,16 +120,6 @@ public class DefeatController : MonoBehaviour
 
     public void BeerClick()
     {
-        CoreGame.Instance.Purchase.OnPurchase = s =>
-        {
-            noFoodLabel.text = s;
-        };
-
-        CoreGame.Instance.Purchase.OnFailed = s =>
-        {
-            noFoodLabel.text = s;
-        };
-
         //заплатить на пиво разработчикам
         //Beer Click!
         CoreGame.Instance.BuyBeer();

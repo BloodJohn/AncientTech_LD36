@@ -51,6 +51,11 @@ public class IntroductionController : MonoBehaviour
 
     void Start()
     {
+        CoreGame.Instance.Purchase.OnDebug = s =>
+        {
+            author.text = s;
+        };
+
         GooglePlayServices();
 
         SoundManager.Instance.SetFontScene();
@@ -59,12 +64,14 @@ public class IntroductionController : MonoBehaviour
 
     void Update()
     {
-        /*if (Input.GetMouseButtonDown(0))
-        {
-            CoreGame.Instance.LoadGame();
-        }*/
+        //if (Input.GetMouseButtonDown(0)) CoreGame.Instance.LoadGame();
 
         if (Input.GetKeyUp(KeyCode.Escape)) Application.Quit();
+    }
+
+    void OnDestroy()
+    {
+        CoreGame.Instance.Purchase.OnDebug = null;
     }
     #endregion
 

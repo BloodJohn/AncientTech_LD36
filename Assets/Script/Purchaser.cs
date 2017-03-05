@@ -29,9 +29,8 @@ public class Purchaser : MonoBehaviour, IStoreListener
     // Google Play Store-specific product identifier subscription product.
     private static string kProductNameGooglePlaySubscription = "com.unity3d.subscription.original";*/
 
-    public static readonly string beerKey = "beer_for_developers_once";
-    public Action<string> OnPurchase;
-    public Action<string> OnFailed;
+    public static readonly string beerKey = "beer_for_developer_once"; //beer_for_developer_once
+    public Action<string> OnDebug;
 
     #region init
     private void Start()
@@ -88,7 +87,7 @@ public class Purchaser : MonoBehaviour, IStoreListener
     #endregion
 
     #region buy
-    
+
     /// <summary>Купить расходуемый товар</summary>
     /*public void BuyConsumable()
     {
@@ -133,7 +132,7 @@ public class Purchaser : MonoBehaviour, IStoreListener
             // If the look up found a product for this device's store and that product is ready to be sold ... 
             if (product != null && product.availableToPurchase)
             {
-                Debug.Log(string.Format("Purchasing product asychronously: '{0}'", product.definition.id));
+                DebugMsg(string.Format("Purchasing product asychronously: '{0}'", product.definition.id));
                 // ... buy the product. Expect a response either through ProcessPurchase or OnPurchaseFailed 
                 // asynchronously.
                 m_StoreController.InitiatePurchase(product);
@@ -142,7 +141,7 @@ public class Purchaser : MonoBehaviour, IStoreListener
             else
             {
                 // ... report the product look-up failure situation  
-                Debug.Log("BuyProductID: FAIL. Not purchasing product, either is not found or is not available for purchase");
+                DebugMsg("BuyProductID: FAIL. Not purchasing product, either is not found or is not available for purchase");
             }
         }
         // Otherwise ...
@@ -150,7 +149,7 @@ public class Purchaser : MonoBehaviour, IStoreListener
         {
             // ... report the fact Purchasing has not succeeded initializing yet. Consider waiting longer or 
             // retrying initiailization.
-            Debug.Log("BuyProductID FAIL. Not initialized.");
+            DebugMsg("BuyProductID FAIL. Not initialized.");
         }
     }
     #endregion
@@ -200,7 +199,7 @@ public class Purchaser : MonoBehaviour, IStoreListener
     public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
     {
         // Purchasing has succeeded initializing. Collect our Purchasing references.
-        Debug.Log("OnInitialized: PASS");
+        DebugMsg("OnInitialized: PASS");
 
         // Overall Purchasing system, configured with products for this application.
         m_StoreController = controller;
@@ -211,19 +210,17 @@ public class Purchaser : MonoBehaviour, IStoreListener
     public void OnInitializeFailed(InitializationFailureReason error)
     {
         // Purchasing set-up has not succeeded. Check error for reason. Consider sharing this reason with the user.
-        Debug.Log("OnInitializeFailed InitializationFailureReason:" + error);
+        DebugMsg("OnInitializeFailed InitializationFailureReason:" + error);
     }
 
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
     {
-        if (OnPurchase != null)
-            OnPurchase(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
+        DebugMsg(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
 
 
-        if (string.Equals(args.purchasedProduct.definition.id, beerKey))
+        if (args.purchasedProduct.definition.id == beerKey)
         {
-            Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
-            PlayerPrefs.SetInt(beerKey,1);
+            PlayerPrefs.SetInt(beerKey, 1);
         }
 
         // A consumable product has been purchased by this user.
@@ -247,7 +244,7 @@ public class Purchaser : MonoBehaviour, IStoreListener
         // Or ... an unknown product has been purchased by this user. Fill in additional products here....
         else
         {
-            Debug.Log(string.Format("ProcessPurchase: FAIL. Unrecognized product: '{0}'", args.purchasedProduct.definition.id));
+            DebugMsg(string.Format("ProcessPurchase: FAIL. Unrecognized product: '{0}'", args.purchasedProduct.definition.id));
         }
 
         // Return a flag indicating whether this product has completely been received, or if the application needs 
@@ -260,10 +257,13 @@ public class Purchaser : MonoBehaviour, IStoreListener
     {
         // A product purchase attempt did not succeed. Check failureReason for more detail. Consider sharing 
         // this reason with the user to guide their troubleshooting actions.
-        Debug.Log(string.Format("OnPurchaseFailed: FAIL. Product: '{0}', PurchaseFailureReason: {1}", product.definition.storeSpecificId, failureReason));
-        if (OnFailed != null)
-            OnFailed(string.Format("OnPurchaseFailed: FAIL. Product: '{0}', PurchaseFailureReason: {1}",
-                product.definition.storeSpecificId, failureReason));
+        DebugMsg(string.Format("OnPurchaseFailed: FAIL. Product: '{0}', PurchaseFailureReason: {1}", product.definition.storeSpecificId, failureReason));
     }
     #endregion
+
+    private void DebugMsg(string msg)
+    {
+        Debug.Log(msg);
+        if (OnDebug != null) OnDebug(msg);
+    }
 }
