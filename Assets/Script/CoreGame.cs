@@ -116,7 +116,7 @@ public class CoreGame : MonoBehaviour
     public bool IsDeadSea { get { return LongWinterCount == 1 && WinterCount > EasyWinters; } }
 
     /// <summary>пиво разработчикам уже куплено</summary>
-    public bool HasBeer { get { return PlayerPrefs.HasKey(Purchaser.beerKey); } }
+    public static bool HasBeer { get { return PlayerPrefs.HasKey(Purchaser.beerKey); } }
     #endregion
 
     #region constructor

@@ -215,12 +215,10 @@ public class Purchaser : MonoBehaviour, IStoreListener
 
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
     {
-        DebugMsg(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
-
-
         if (args.purchasedProduct.definition.id == beerKey)
         {
             PlayerPrefs.SetInt(beerKey, 1);
+            DebugMsg(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
         }
 
         // A consumable product has been purchased by this user.

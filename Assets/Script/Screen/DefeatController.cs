@@ -20,6 +20,10 @@ public class DefeatController : MonoBehaviour
     public Button secondChanceButton;
     /// <summary>пиво для разработчиков</summary>
     public Button beerButton;
+    [SerializeField]
+    private Sprite BeerSale;
+    [SerializeField]
+    private Sprite BeerHappy;
     #endregion
 
     #region Unity
@@ -57,7 +61,7 @@ public class DefeatController : MonoBehaviour
 
         PlayerPrefs.DeleteKey(CoreGame.GameSaveKey);
 
-        beerButton.interactable = !CoreGame.Instance.HasBeer;
+        BeerCheck();
 
         SoundManager.Instance.SetFontScene();
     }
@@ -67,6 +71,7 @@ public class DefeatController : MonoBehaviour
         CoreGame.Instance.Purchase.OnDebug = s =>
         {
             noFoodLabel.text = s;
+            BeerCheck();
         };
         LeaderBoard();
     }
@@ -124,6 +129,12 @@ public class DefeatController : MonoBehaviour
         //Beer Click!
         CoreGame.Instance.BuyBeer();
         beerButton.interactable = false;
+    }
+
+    private void BeerCheck()
+    {
+        beerButton.GetComponent<Image>().sprite = CoreGame.HasBeer ? BeerHappy : BeerSale;
+        beerButton.interactable = !CoreGame.HasBeer;
     }
     #endregion
 }
