@@ -51,10 +51,12 @@ public class IntroductionController : MonoBehaviour
 
     void Start()
     {
+        #if DEBUG
         CoreGame.Instance.Purchase.OnDebug = s =>
         {
             author.text = s;
         };
+        #endif
 
         GooglePlayServices();
 

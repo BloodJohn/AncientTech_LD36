@@ -35,7 +35,9 @@ public class Purchaser : MonoBehaviour, IStoreListener
     #region init
     private void Start()
     {
+        #if DEBUG
         PlayerPrefs.DeleteKey(beerKey);
+        #endif
 
         // If we haven't set up the Unity Purchasing reference
         if (m_StoreController == null)
@@ -218,7 +220,7 @@ public class Purchaser : MonoBehaviour, IStoreListener
         if (args.purchasedProduct.definition.id == beerKey)
         {
             PlayerPrefs.SetInt(beerKey, 1);
-            DebugMsg(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
+            DebugMsg(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id)); 
         }
 
         // A consumable product has been purchased by this user.

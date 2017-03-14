@@ -199,22 +199,19 @@ Dried fish has a storage life of several years.</value>
 		<value>The more I live, the more afraid to die. Thousands of cloth you will get a second chance. To return to this point after death in the future and replay it.</value>
 	</data>
 	<data name="merchant_item200" xml:space="preserve">
-		<value>For 200 cloth you will receive one hammer-forged for superior cutting of hay.
-+1 hay per turn! (click on the image to buy)</value>
+		<value>For 200 cloth you will receive one hammer-forged for superior cutting of hay. +1 hay per turn! (click on the image to buy)</value>
 	</data>
 	<data name="merchant_item2k" xml:space="preserve">
-		<value>The axe helps to reconcile feuds. Two thousand fabrics, so the price for the last word in the dispute.</value>
+		<value>The axe helps to reconcile feuds. Two thousand fabrics, so the price for the last word in the dispute. (temp not working)</value>
 	</data>
 	<data name="merchant_item500" xml:space="preserve">
-		<value>For 500 cloth you get good forks for spreading hay. 
-+2 to the Seine for the course! (until the end of this game)</value>
+		<value>For 500 cloth you get good forks for spreading hay. +2 to the Seine for the course! (until the end of this game)</value>
 	</data>
 	<data name="spring_description" xml:space="preserve">
 		<value>In the spring the sheep go to graze on the meadows. Made in winter fabric will be sold to the merchants in exchange for weapons and tools. Fishing is not always a lot of fish. Mow enough hay for the winter.</value>
 	</data>
 	<data name="spring_description2" xml:space="preserve">
-		<value>The treatment of the hay was a heavy and labour-consuming task. After mowing the windrows had to be tedded, spread and prepared for field-drying.
-Because of unreliable weather conditions, the hay had to be protected from dew and rain, leading to rewetting and reduced quality.</value>
+		<value>The treatment of the hay was a heavy and labour-consuming task. After mowing the windrows had to be tedded, spread and prepared for field-drying. Because of unreliable weather conditions, the hay had to be protected from dew and rain, leading to rewetting and reduced quality.</value>
 	</data>
 	<data name="spring_description3" xml:space="preserve">
 		<value>The ship's boat smeared with tar made of seal blubber for protection from infesting by sea worms. The tall, straight trees needed for keels and masts would be in short supply.</value>

@@ -70,7 +70,9 @@ public class DefeatController : MonoBehaviour
     {
         CoreGame.Instance.Purchase.OnDebug = s =>
         {
+            #if DEBUG
             noFoodLabel.text = s;
+            #endif
             BeerCheck();
         };
         LeaderBoard();
